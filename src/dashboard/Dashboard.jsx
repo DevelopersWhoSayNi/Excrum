@@ -18,6 +18,9 @@ class MainDashboard extends Component {
         <br />
         <br />
         <Link to="/login">Login</Link>
+        <br />
+        <br />
+        <Link to="/CreateSprint">Create Sprint</Link>
       </div>
     );
   }
