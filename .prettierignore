@@ -1,0 +1,7 @@
+# system generated files
+yarn.lock
+package-lock.json
+
+*.svg
+*.jpg
+*.jpeg
