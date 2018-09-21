@@ -7,7 +7,7 @@ import Dashboard from '../dashboard/Dashboard';
 import Login from '../user/userLogin/Login';
 import UserCreateForm from '../user/userCreate/UserCreateForm';
 import Profile from '../user/userProfile/Profile';
-import CreateSprint from '../sprint/sprintCreate';
+import CreateSprintForm from '../sprint/sprintCreate/SprintCreateForm';
 
 const Routes = props => {
   return (
@@ -27,7 +27,7 @@ const Routes = props => {
           exact
           isAuthenticated={props.IsAuthenticated}
           path="/CreateSprint"
-          component={CreateSprint}
+          component={CreateSprintForm}
         />
       </div>
     </Router>
