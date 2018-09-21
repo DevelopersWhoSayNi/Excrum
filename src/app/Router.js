@@ -9,6 +9,7 @@ import UserCreateForm from '../user/userCreate/UserCreateForm';
 import Profile from '../user/userProfile/Profile';
 
 const Routes = props => {
+  console.log(props.Token);
   return (
     <Router>
       <div>
@@ -18,7 +19,8 @@ const Routes = props => {
         <Route path="/register" component={UserCreateForm} />
         <RouteProtected
           exact
-          isAuthenticated={props.IsAuthenticated}
+          // isAuthenticated={props.IsAuthenticated}
+          token={props.Token}
           path="/profile"
           component={Profile}
         />
@@ -30,6 +32,7 @@ const Routes = props => {
 const mapStateToProps = state => {
   return {
     IsAuthenticated: state.UserReducer.Authenticated,
+    Token: state.UserReducer.Token,
     UserRights: state.UserReducer.UserRights
   };
 };
