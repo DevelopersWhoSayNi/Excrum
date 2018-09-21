@@ -18,6 +18,8 @@ class MainDashboard extends Component {
         <br />
         <br />
         <Link to="/login">Login</Link>
+        <br />
+        <Link to="/logout">Logout</Link>
       </div>
     );
   }

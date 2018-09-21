@@ -15,7 +15,7 @@ export default function UserReducer(state = initialState, action) {
     case types.UpdateUserAuthStatus:
       return {
         ...state,
-        Authenticated: action.value,
+        Authenticated: action.value.Authenticated,
         Token: action.value.Token
       };
     case types.AddUser:

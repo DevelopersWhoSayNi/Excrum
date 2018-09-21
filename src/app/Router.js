@@ -5,6 +5,7 @@ import Header from './Header';
 import RouteProtected from './RouteProtected';
 import Dashboard from '../dashboard/Dashboard';
 import Login from '../user/userLogin/Login';
+import Logout from '../user/userLogin/Logout';
 import UserCreateForm from '../user/userCreate/UserCreateForm';
 import Profile from '../user/userProfile/Profile';
 
@@ -17,6 +18,7 @@ const Routes = props => {
         <Route exact path="/" component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={UserCreateForm} />
+        <Route path="/logout" component={Logout} />
         <RouteProtected
           exact
           // isAuthenticated={props.IsAuthenticated}
