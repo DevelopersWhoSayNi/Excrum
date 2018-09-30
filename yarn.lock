@@ -8,6 +8,10 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
+"@chenfengyuan/datepicker@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@chenfengyuan/datepicker/-/datepicker-1.0.0.tgz#41dc3c9ebb83b5b7c731ad985b22edb231daa24d"
+
 "@semantic-ui-react/event-stack@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@semantic-ui-react/event-stack/-/event-stack-2.0.0.tgz#d2d568a9fb0ee204b0e40d6b73ac2a2403c08451"
@@ -3978,6 +3982,10 @@ jest@20.0.4:
 js-base64@^2.1.9:
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.5.tgz#e293cd3c7c82f070d700fc7a1ca0a2e69f101f92"
+
+js-datepicker@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/js-datepicker/-/js-datepicker-3.3.2.tgz#2a75f1eb55252a7398d570ca5bd92f94263bf141"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"

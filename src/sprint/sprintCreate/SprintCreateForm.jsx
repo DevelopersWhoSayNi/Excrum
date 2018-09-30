@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Segment, Form, Input, Select, Tab } from 'semantic-ui-react';
-require('../Sprint.css');
+// require('../Sprint.css');
 
 const options = [
   { key: 'm', text: 'FinTech', value: 'FinTech' },
