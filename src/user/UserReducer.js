@@ -1,7 +1,7 @@
 import * as types from '../ActionTypes';
 
 let initialState = {
-  Authenticated: true,
+  Authenticated: false,
   UserName: 'HeWhoSays',
   UserPassword: 'Ni',
   UserRights: {
