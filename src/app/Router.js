@@ -10,7 +10,6 @@ import UserCreateForm from '../user/userCreate/UserCreateForm';
 import Profile from '../user/userProfile/Profile';
 
 const Routes = props => {
-  console.log(props.Token);
   return (
     <Router>
       <div>
