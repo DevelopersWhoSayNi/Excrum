@@ -11,8 +11,10 @@ const Authenticate = userInfo => {
   return Axios.post(url, body)
     .then(response => {
       if (response.data.message === 'Success') {
+        localStorage.setItem('token', response.data.token);
         return {
-          Authenticated: true
+          Authenticated: true,
+          Token: response.data.token
         };
       } else {
         return {

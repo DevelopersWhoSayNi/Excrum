@@ -25,8 +25,8 @@ class UserCreateForm extends Component {
     };
 
     CreateUser(userInfo)
-      .then(() => {
-        this.props.UpdateUserAuthStatus(true);
+      .then(Response => {
+        this.props.UpdateUserAuthStatus(Response);
         this.navigateTo('/profile');
       })
       .catch(response => {
