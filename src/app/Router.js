@@ -8,6 +8,7 @@ import Login from '../user/userLogin/Login';
 import Logout from '../user/userLogin/Logout';
 import UserCreateForm from '../user/userCreate/UserCreateForm';
 import Profile from '../user/userProfile/Profile';
+import CreateSprintForm from '../sprint/sprintCreate/SprintCreateForm';
 
 const Routes = props => {
   return (
@@ -24,6 +25,12 @@ const Routes = props => {
           token={props.Token}
           path="/profile"
           component={Profile}
+        />
+        <RouteProtected
+          exact
+          isAuthenticated={props.IsAuthenticated}
+          path="/CreateSprint"
+          component={CreateSprintForm}
         />
       </div>
     </Router>

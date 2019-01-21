@@ -13,7 +13,9 @@
     "test": "react-scripts test --env=jsdom"
   },
   "dependencies": {
+    "@chenfengyuan/datepicker": "^1.0.0",
     "axios": "^0.18.0",
+    "js-datepicker": "^3.3.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",

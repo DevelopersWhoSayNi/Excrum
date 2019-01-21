@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
-const CreateSprint = () => {
+const CreateTeam = () => {
   console.log('In progress');
 };
 
-export default CreateSprint;
+export default CreateTeam;

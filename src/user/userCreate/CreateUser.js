@@ -1,7 +1,8 @@
 import Axios from 'axios';
+import config from '../../ServerConfig.json';
 
 const CreateUser = userInfo => {
-  const url = `http://localhost:8000/signup`;
+  const url = `${config.Server}/signup`;
   const body = {
     userID: userInfo.userID,
     name: userInfo.name,
