@@ -1,0 +1,39 @@
+.AvailabilityInput {
+	padding-left: 5px;
+	width: 50px;
+}
+
+.TeamMember {
+	display: inline-block;
+	width: 130px;
+}
+
+.btnClose {
+	color: red;
+	position: absolute;
+	margin-top: -17px !important;
+	margin-left: 2px !important;
+}
+
+.Section {
+	padding: 3%;
+}
+
+.iterationSection {
+	display: flex;
+}
+
+.iterationBlock {
+	padding: 2%;
+	padding-left: 8%;
+}
+
+.iterationInput {
+	width: 300px;
+	padding-top: 4%;
+}
+
+.DateRangeInput {
+	width: 30%;
+	padding-top: 2%;
+}

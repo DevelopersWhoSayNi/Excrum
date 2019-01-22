@@ -1,91 +1,92 @@
 import React, { Component } from 'react';
-import { Segment, Form, Input, Select, Tab } from 'semantic-ui-react';
-// require('../Sprint.css');
-
-const options = [
-  { key: 'm', text: 'FinTech', value: 'FinTech' },
-  { key: 'f', text: 'Exact Finance', value: 'EF' }
-];
-
-const panes = func => {
-  function myFunc() {
-    console.log('Zaart!');
-  }
-
-  return [
-    {
-      menuItem: 'Dates and Title',
-      render: () => <DatesAndTitleForm Next={() => myFunc()} />
-    },
-    { menuItem: 'Capacity', render: () => <CapacityForm Next={func} /> },
-    { menuItem: 'Tasks', render: () => <TasksForm Next={func} /> }
-  ];
-};
+import { Form, Input, Segment, Divider, Icon } from 'semantic-ui-react';
+import { DatesRangeInput } from 'semantic-ui-calendar-react';
+import TeamMembersList from '../../team/teamCreate/TeamMembersList';
+require('../Sprint.css');
 
 class CreateSprintForm extends Component {
-  state = { activeIndex: 0 };
+  constructor(props) {
+    super(props);
 
-  handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex });
+    this.state = {
+      date: '',
+      time: '',
+      dateTime: '',
+      datesRange: ''
+    };
+  }
+
+  handleChange = (event, { name, value }) => {
+    if (this.state.hasOwnProperty(name)) {
+      this.setState({ [name]: value });
+    }
+  };
 
   render() {
-    const { activeIndex } = this.state;
-
     return (
-      <Segment compact className="CreateSprint">
-        {/* <Tab menu={{ secondary: true, pointing: true }} panes={panes} /> */}
-        <Tab
-          panes={panes(this.handleTabChange)}
-          activeIndex={activeIndex}
-          onTabChange={this.handleTabChange}
-          menu={{ secondary: true, pointing: true }}
-        />
-      </Segment>
+      <div className="MainForm">
+        <Segment padded>
+          <Form>
+            <label>Create Sprint: </label>
+            <Input transparent placeholder=" 2" />
+
+            <Divider />
+
+            <label>Number of weeks in sprint:</label>
+            <div className="Section">
+              <label>Team members: </label>
+              <TeamMembersList />
+            </div>
+
+            <Divider />
+
+            <div className="Section">
+              <div className="iterationSection">
+                <div className="iterationBlock">
+                  <label>Sprint number: </label>
+                  <br />
+                  <Input
+                    className="iterationInput"
+                    transparent
+                    placeholder="0102"
+                  />
+                </div>
+
+                <div className="iterationBlock">
+                  <label>iteration path: </label>
+                  <br />
+                  <Input
+                    className="iterationInput"
+                    transparent
+                    placeholder="ExactOnline\Fintech\Fintech\Sprint 2019-0405"
+                  />
+                </div>
+              </div>
+
+              <div className="iterationBlock">
+                <label>Start and End date </label>
+                <DatesRangeInput
+                  transparent
+                  className="DateRangeInput"
+                  clearable
+                  name="datesRange"
+                  placeholder="From - To"
+                  value={this.state.datesRange}
+                  iconPosition="left"
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <Divider />
+            <Form.Button>Create</Form.Button>
+          </Form>
+        </Segment>
+      </div>
     );
   }
 }
-
-const DatesAndTitleForm = Next => {
-  return (
-    <Form>
-      <Form.Field inline>
-        <label>Team</label>
-        <Select label="Team" options={options} />
-      </Form.Field>
-      <Form.Field inline>
-        <Input label="Sprint Number" placeholder="2018-0102" />
-      </Form.Field>
-      <Form.Field inline>
-        <Input label="Iteration :" placeholder="2018-0102" />
-      </Form.Field>
-      <Form.Field inline>
-        <Input type="date" label="Start" />
-        <Input type="date" label="End" />
-      </Form.Field>
-      <Form.Button onClick={() => Next()}>Next</Form.Button>
-    </Form>
-  );
-};
-
-const CapacityForm = () => {
-  return (
-    <Form>
-      <Form.Field inline>
-        <label>Team members availability</label>
-      </Form.Field>
-      <Form.Button>Next</Form.Button>
-    </Form>
-  );
-};
-
-const TasksForm = () => {
-  return (
-    <Form>
-      <Form.Field inline>
-        <label>Tasks from TFS</label>
-      </Form.Field>
-      <Form.Button>Done</Form.Button>
-    </Form>
-  );
-};
 
 export default CreateSprintForm;
