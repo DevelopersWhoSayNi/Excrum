@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const validateToken = token => {
+const IsTokenValid = token => {
   return token !== 'undefined' && token !== null;
 };
 
@@ -9,7 +9,7 @@ const RouteProtected = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      validateToken(rest.token) ? (
+      IsTokenValid(rest.accessToken) ? (
         <Component {...props} />
       ) : (
         <Redirect

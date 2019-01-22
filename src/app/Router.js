@@ -21,14 +21,13 @@ const Routes = props => {
         <Route path="/logout" component={Logout} />
         <RouteProtected
           exact
-          // isAuthenticated={props.IsAuthenticated}
-          token={props.Token}
+          accessToken={props.Token}
           path="/profile"
           component={Profile}
         />
         <RouteProtected
           exact
-          isAuthenticated={props.IsAuthenticated}
+          accessToken={props.Token}
           path="/CreateSprint"
           component={CreateSprintForm}
         />
