@@ -66,6 +66,9 @@ class MainDashboard extends Component {
         <br />
         <br />
         <Link to="/logout">Logout</Link>
+        <br />
+        <br />
+        <Link to="/createTeam">Create Team</Link>
       </div>
     );
   }
