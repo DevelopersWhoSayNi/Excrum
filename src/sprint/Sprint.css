@@ -2,3 +2,27 @@
 	width: 25%;
 	margin-left: 37% !important;
 }
+
+.CalendarDays {
+	display: inline-table;
+	padding: 1%;
+	padding-right: 3%;
+}
+
+.CalendarBox {
+	width: 230px;
+}
+
+.WeekDayNames {
+	padding-block-end: 10%;
+	padding-block-start: 10%;
+}
+
+.day-of-week,
+.days {
+	padding: 3%;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-column-gap: 5%;
+	grid-row-gap: 5%;
+}

@@ -1,29 +1,87 @@
 import React, { Component } from 'react';
 import { Segment, Tab } from 'semantic-ui-react';
-import DatesAndTitle from './DatesAndTitle';
-import CapacityForm from './CapacityForm';
+import SprintDetails from './SprintDetails';
+import CapacityDetails from './CapacityDetails';
 import TasksForm from './TasksForm';
-
+import GetInitialSprintSetup from './GetInitialSprintSetup';
 require('../Sprint.css');
 
-const panes = func => {
-  function myFunc() {
+class CreateSprintForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeIndex: 1,
+      sprintData: GetInitialSprintSetup()
+    };
+
+    this.handleSprintDetailsChange = this.handleSprintDetailsChange.bind(this);
+    this.handleBackButton = this.handleBackButton.bind(this);
+  }
+
+  stepsTab = () => {
+    return [
+      {
+        menuItem: 'Sprint Details',
+        render: () => (
+          <SprintDetails
+            Next={this.handleSprintDetailsChange}
+            teamDetails={this.state.sprintData.teamDetails}
+          />
+        )
+      },
+      {
+        menuItem: 'Capacity',
+        render: () => (
+          <CapacityDetails
+            CapacityDetails={this.state.sprintData.capacityDetails}
+            Next={this.handleCapacityChange}
+            Back={this.handleBackButton}
+          />
+        )
+      },
+      {
+        menuItem: 'Tasks',
+        render: () => <TasksForm Next={() => this.myFunc()} />
+      }
+    ];
+  };
+
+  myFunc() {
+    debugger;
     console.log('Zaaart!');
   }
 
-  const iterationPath = "Iteration : Customer Intelligence / Sprint #";
+  handleBackButton = () => {
+    const newIndex = this.state.activeIndex - 1;
+    this.setState({ activeIndex: newIndex });
+  };
 
-  return [
-    { menuItem: 'Dates and Title', render: () => <DatesAndTitle Next={() => myFunc()} iterationPath={iterationPath}/> },
-    { menuItem: 'Capacity', render: () => <CapacityForm Next={func} /> },
-    { menuItem: 'Tasks', render: () => <TasksForm Next={func} /> }
-  ];
-}
+  handleSprintDetailsChange = teamDetails => {
+    const newIndex = this.state.activeIndex + 1;
+    const newSprintData = {
+      ...this.state.sprintData,
+      teamDetails: teamDetails
+    };
 
-class CreateSprintForm extends Component {
-  state = { activeIndex: 0};
+    this.setState({
+      sprintData: newSprintData,
+      activeIndex: newIndex
+    });
+  };
 
-  handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex });
+  handleCapacityChange = capacity => {
+    const newIndex = this.state.activeIndex + 1;
+    const newSprintData = {
+      ...this.state.sprintData,
+      capacity: capacity
+    };
+
+    this.setState({
+      sprintData: newSprintData,
+      activeIndex: newIndex
+    });
+  };
 
   render() {
     const { activeIndex } = this.state;
@@ -31,7 +89,7 @@ class CreateSprintForm extends Component {
     return (
       <Segment compact className="CreateSprint">
         <Tab
-          panes={panes(this.handleTabChange)}
+          panes={this.stepsTab()}
           activeIndex={activeIndex}
           onTabChange={this.handleTabChange}
           menu={{ secondary: true, pointing: true }}
