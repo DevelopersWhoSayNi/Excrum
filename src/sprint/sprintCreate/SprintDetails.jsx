@@ -28,21 +28,25 @@ class SprintDetails extends Component {
   handleSprintNumberChange(value) {
     const newTeamDetails = { ...this.state.teamDetails, sprintNumber: value };
     this.setState({ teamDetails: newTeamDetails });
+    this.props.updateSprintDetails(this.state.teamDetails);
   }
 
   handleTeamNameChange(e) {
     const newTeamDetails = { ...this.state.teamDetails, team: e.value };
     this.setState({ teamDetails: newTeamDetails });
+    this.props.updateSprintDetails(this.state.teamDetails);
   }
 
   handleStartDateChange(date) {
     const newTeamDetails = { ...this.state.teamDetails, startDate: date };
     this.setState({ teamDetails: newTeamDetails });
+    this.props.updateSprintDetails(this.state.teamDetails);
   }
 
   handleEndDateChange(date) {
     const newTeamDetails = { ...this.state.teamDetails, endDate: date };
     this.setState({ teamDetails: newTeamDetails });
+    this.props.updateSprintDetails(this.state.teamDetails);
   }
 
   render() {
@@ -83,9 +87,7 @@ class SprintDetails extends Component {
 
         <br />
 
-        <Button onClick={() => this.props.Next(this.state.teamDetails)}>
-          Next
-        </Button>
+        <Button onClick={() => this.props.handleNavigateTabs(1)}>Next</Button>
       </Segment>
     );
   }

@@ -15,8 +15,9 @@ class CreateSprintForm extends Component {
       sprintData: GetInitialSprintSetup()
     };
 
-    this.handleSprintDetailsChange = this.handleSprintDetailsChange.bind(this);
-    this.handleBackButton = this.handleBackButton.bind(this);
+    this.handleNavigateTabs = this.handleNavigateTabs.bind(this);
+    this.updateSprintDetails = this.updateSprintDetails.bind(this);
+    this.updateCapacityDetail = this.updateCapacityDetail.bind(this);
   }
 
   stepsTab = () => {
@@ -25,8 +26,9 @@ class CreateSprintForm extends Component {
         menuItem: 'Sprint Details',
         render: () => (
           <SprintDetails
-            Next={this.handleSprintDetailsChange}
             teamDetails={this.state.sprintData.teamDetails}
+            updateSprintDetails={this.updateSprintDetails}
+            handleNavigateTabs={this.handleNavigateTabs}
           />
         )
       },
@@ -35,51 +37,41 @@ class CreateSprintForm extends Component {
         render: () => (
           <CapacityDetails
             CapacityDetails={this.state.sprintData.capacityDetails}
-            Next={this.handleCapacityChange}
-            Back={this.handleBackButton}
+            updateCapacityDetail={this.updateCapacityDetail}
+            handleNavigateTabs={this.handleNavigateTabs}
           />
         )
       },
       {
         menuItem: 'Tasks',
-        render: () => <TasksForm Next={() => this.myFunc()} />
+        render: () => <TasksForm handleNavigateTabs={this.handleNavigateTabs} />
       }
     ];
   };
 
-  myFunc() {
-    debugger;
-    console.log('Zaaart!');
-  }
-
-  handleBackButton = () => {
-    const newIndex = this.state.activeIndex - 1;
-    this.setState({ activeIndex: newIndex });
+  handleNavigateTabs = activeIndex => {
+    this.setState({ activeIndex: activeIndex });
   };
 
-  handleSprintDetailsChange = teamDetails => {
-    const newIndex = this.state.activeIndex + 1;
+  updateSprintDetails = teamDetails => {
     const newSprintData = {
       ...this.state.sprintData,
       teamDetails: teamDetails
     };
 
     this.setState({
-      sprintData: newSprintData,
-      activeIndex: newIndex
+      sprintData: newSprintData
     });
   };
 
-  handleCapacityChange = capacity => {
-    const newIndex = this.state.activeIndex + 1;
+  updateCapacityDetail = capacity => {
     const newSprintData = {
       ...this.state.sprintData,
       capacity: capacity
     };
 
     this.setState({
-      sprintData: newSprintData,
-      activeIndex: newIndex
+      sprintData: newSprintData
     });
   };
 
@@ -91,7 +83,7 @@ class CreateSprintForm extends Component {
         <Tab
           panes={this.stepsTab()}
           activeIndex={activeIndex}
-          onTabChange={this.handleTabChange}
+          onTabChange={(e, v) => this.handleNavigateTabs(v.activeIndex)}
           menu={{ secondary: true, pointing: true }}
         />
       </Segment>

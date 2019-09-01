@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "js-datepicker": "^3.3.2",
     "react": "^16.5.2",
+    "react-addons-update": "^15.6.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
