@@ -18,8 +18,10 @@ const MonthNames = () => {
 };
 
 export const FormatDate = date => {
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
+  // var day = date.getDate();
+  // var monthIndex = date.getMonth();
 
-  return day + ' ' + MonthNames[monthIndex];
+  // return day + ' ' + MonthNames[monthIndex];
+
+  return date;
 };
