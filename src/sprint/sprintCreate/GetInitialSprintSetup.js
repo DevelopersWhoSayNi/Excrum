@@ -17,13 +17,13 @@ const GetInitialSprintSetup = () => {
           photoSrc: 'Zeus.png',
           capacityHours: [
             { date: '01-09-2019', hours: 8 },
-            { date: '02-09-2019', hours: 7 },
-            { date: '03-09-2019', hours: 6 },
-            { date: '04-09-2019', hours: 5 },
-            { date: '05-09-2019', hours: 4 },
-            { date: '08-09-2019', hours: 3 },
-            { date: '09-09-2019', hours: 2 },
-            { date: '10-09-2019', hours: 1 }
+            { date: '02-09-2019', hours: 8 },
+            { date: '03-09-2019', hours: 8 },
+            { date: '04-09-2019', hours: 8 },
+            { date: '05-09-2019', hours: 8 },
+            { date: '08-09-2019', hours: 8 },
+            { date: '09-09-2019', hours: 8 },
+            { date: '10-09-2019', hours: 8 }
           ]
         },
         {
@@ -32,13 +32,13 @@ const GetInitialSprintSetup = () => {
           photoSrc: 'Mariane.png',
           capacityHours: [
             { date: '01-09-2019', hours: 8 },
-            { date: '02-09-2019', hours: 7 },
-            { date: '03-09-2019', hours: 6 },
-            { date: '04-09-2019', hours: 5 },
-            { date: '05-09-2019', hours: 4 },
-            { date: '08-09-2019', hours: 3 },
-            { date: '09-09-2019', hours: 2 },
-            { date: '10-09-2019', hours: 1 }
+            { date: '02-09-2019', hours: 8 },
+            { date: '03-09-2019', hours: 8 },
+            { date: '04-09-2019', hours: 8 },
+            { date: '05-09-2019', hours: 8 },
+            { date: '08-09-2019', hours: 8 },
+            { date: '09-09-2019', hours: 8 },
+            { date: '10-09-2019', hours: 8 }
           ]
         },
         {
@@ -47,28 +47,28 @@ const GetInitialSprintSetup = () => {
           photoSrc: 'Bijan.jpg',
           capacityHours: [
             { date: '01-09-2019', hours: 8 },
-            { date: '02-09-2019', hours: 7 },
-            { date: '03-09-2019', hours: 6 },
-            { date: '04-09-2019', hours: 5 },
-            { date: '05-09-2019', hours: 4 },
-            { date: '08-09-2019', hours: 3 },
-            { date: '09-09-2019', hours: 2 },
-            { date: '10-09-2019', hours: 1 }
+            { date: '02-09-2019', hours: 8 },
+            { date: '03-09-2019', hours: 8 },
+            { date: '04-09-2019', hours: 8 },
+            { date: '05-09-2019', hours: 8 },
+            { date: '08-09-2019', hours: 8 },
+            { date: '09-09-2019', hours: 8 },
+            { date: '10-09-2019', hours: 8 }
           ]
         },
         {
           id: '04',
-          name: 'Naim',
+          name: 'Bikash',
           photoSrc: 'Base64.png',
           capacityHours: [
             { date: '01-09-2019', hours: 8 },
-            { date: '02-09-2019', hours: 7 },
-            { date: '03-09-2019', hours: 6 },
-            { date: '04-09-2019', hours: 5 },
-            { date: '05-09-2019', hours: 4 },
-            { date: '08-09-2019', hours: 3 },
-            { date: '09-09-2019', hours: 2 },
-            { date: '10-09-2019', hours: 1 }
+            { date: '02-09-2019', hours: 8 },
+            { date: '03-09-2019', hours: 8 },
+            { date: '04-09-2019', hours: 8 },
+            { date: '05-09-2019', hours: 8 },
+            { date: '08-09-2019', hours: 8 },
+            { date: '09-09-2019', hours: 8 },
+            { date: '10-09-2019', hours: 8 }
           ]
         }
       ],

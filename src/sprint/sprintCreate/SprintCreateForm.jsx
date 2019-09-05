@@ -45,6 +45,10 @@ class CreateSprintForm extends Component {
       {
         menuItem: 'Tasks',
         render: () => <TasksForm handleNavigateTabs={this.handleNavigateTabs} />
+      },
+      {
+        menuItem: 'Summery',
+        render: () => <TasksForm />
       }
     ];
   };

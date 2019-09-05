@@ -14,7 +14,8 @@ class CapacityDetails extends Component {
       updateHours: {
         memberId: 0,
         DayToBeModified: 0,
-        CurrentValue: 0
+        CurrentValue: 0,
+        UpdatedValue: 0
       }
     };
   }
@@ -40,7 +41,9 @@ class CapacityDetails extends Component {
             newMembers[i].capacityHours[j].date ===
             this.state.updateHours.DayToBeModified
           ) {
-            newMembers[i].capacityHours[j].hours = 0;
+            newMembers[i].capacityHours[
+              j
+            ].hours = this.state.updateHours.UpdatedValue;
             //break;
           }
         }
@@ -55,6 +58,22 @@ class CapacityDetails extends Component {
 
   closeModal = () => this.setState({ OpenModal: false });
 
+  handleHoursValueUpdate = value => {
+    debugger;
+    if (value > 24) {
+      return;
+    }
+
+    const newUpdatedHourValue = {
+      ...this.state.updateHours,
+      UpdatedValue: value
+    };
+
+    this.setState({
+      updateHours: newUpdatedHourValue
+    });
+  };
+
   render() {
     return (
       <div>
@@ -66,7 +85,10 @@ class CapacityDetails extends Component {
           <Modal.Header>Update Hours</Modal.Header>
           <Modal.Content>
             <p>Adjust the hours for {this.state.updateHours.DayToBeModified}</p>
-            <Input placeholder={FormatDate(this.state.updateHours.CurrentValue)} />
+            <Input
+              placeholder={FormatDate(this.state.updateHours.CurrentValue)}
+              onChange={e => this.handleHoursValueUpdate(e.target.value)}
+            />
           </Modal.Content>
           <Modal.Actions>
             <Button negative content="Cancel" onClick={this.closeModal} />
@@ -79,11 +101,25 @@ class CapacityDetails extends Component {
         </Modal>
 
         <Segment>
-          <List selection verticalAlign="middle">
-            <MemberCapacityCalendar
-              members={this.state.CapacityDetails.members}
-              modifyDayHours={this.modifyDayHours}
-            />
+          <List horizontal selection>
+            <List.Item>
+              <h1>DE</h1>
+              <List selection verticalAlign="middle">
+                <MemberCapacityCalendar
+                  members={this.state.CapacityDetails.members}
+                  modifyDayHours={this.modifyDayHours}
+                />
+              </List>
+            </List.Item>
+            <List.Item>
+            <h1>DS</h1>
+              <List selection verticalAlign="middle">
+                <MemberCapacityCalendar
+                  members={this.state.CapacityDetails.members}
+                  modifyDayHours={this.modifyDayHours}
+                />
+              </List>
+            </List.Item>
           </List>
 
           <label>Team members availability</label>
