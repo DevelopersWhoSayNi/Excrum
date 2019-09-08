@@ -1,7 +1,18 @@
-import React, { Component } from 'react';
-import { Button, Segment, List, Modal, Input } from 'semantic-ui-react';
+import React, { Component, createRef } from 'react';
+import {
+  Button,
+  Segment,
+  List,
+  Modal,
+  Input,
+  Ref,
+  Rail,
+  Sticky
+} from 'semantic-ui-react';
 import { FormatDate } from './DateFormat';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
+import CapacitySummery from './CapacitySummery';
+
 require('../Sprint.css');
 
 class CapacityDetails extends Component {
@@ -31,27 +42,35 @@ class CapacityDetails extends Component {
     });
   };
 
-  updateDayHours = props => {
-    const newMembers = this.state.CapacityDetails.members;
+  updateDayHours = () => {
+    const newGroups = this.state.CapacityDetails.groups;
 
-    for (let i = 0; i < newMembers.length; i++) {
-      if (newMembers[i].id === this.state.updateHours.memberId) {
-        for (let j = 0; j < newMembers[i].capacityHours.length; j++) {
-          if (
-            newMembers[i].capacityHours[j].date ===
-            this.state.updateHours.DayToBeModified
-          ) {
-            newMembers[i].capacityHours[
-              j
-            ].hours = this.state.updateHours.UpdatedValue;
-            //break;
+    for (let g = 0; g < newGroups.length; g++) {
+      const newMembers = newGroups[g].members;
+
+      for (let i = 0; i < newMembers.length; i++) {
+        if (newMembers[i].id === this.state.updateHours.memberId) {
+          for (let j = 0; j < newMembers[i].capacityHours.length; j++) {
+            if (
+              newMembers[i].capacityHours[j].date ===
+              this.state.updateHours.DayToBeModified
+            ) {
+              newMembers[i].capacityHours[
+                j
+              ].hours = this.state.updateHours.UpdatedValue;
+              newGroups[g].members = newMembers;
+              break;
+            }
           }
+          break;
         }
-        //break;
       }
     }
 
-    const newState = { ...this.state.capacityHours, members: newMembers };
+    const newState = {
+      ...this.state.capacityHours,
+      groups: newGroups
+    };
     this.setState({ newState });
     this.setState({ OpenModal: false });
   };
@@ -59,7 +78,6 @@ class CapacityDetails extends Component {
   closeModal = () => this.setState({ OpenModal: false });
 
   handleHoursValueUpdate = value => {
-    debugger;
     if (value > 24) {
       return;
     }
@@ -73,6 +91,8 @@ class CapacityDetails extends Component {
       updateHours: newUpdatedHourValue
     });
   };
+
+  contextRef = createRef();
 
   render() {
     return (
@@ -92,39 +112,59 @@ class CapacityDetails extends Component {
           </Modal.Content>
           <Modal.Actions>
             <Button negative content="Cancel" onClick={this.closeModal} />
-            <Button
-              positive
-              content="Update"
-              onClick={e => this.updateDayHours(e)}
-            />
+            <Button positive content="Update" onClick={this.updateDayHours} />
           </Modal.Actions>
         </Modal>
+
+        <Ref innerRef={this.contextRef}>
+          <Rail position="right">
+            <Sticky
+              bottomOffset={50}
+              context={this.contextRef}
+              offset={50}
+              pushing
+            >
+              <Segment className="TotalCapacityDialog">
+                <CapacitySummery title="Team total Capacity" value={200} />
+              </Segment>
+            </Sticky>
+          </Rail>
+        </Ref>
 
         <Segment>
           <List horizontal selection>
             <List.Item>
-              <h1>DE</h1>
+              <h1>Group:</h1>
+              <h3>{this.state.CapacityDetails.groups[0].groupName}</h3>
               <List selection verticalAlign="middle">
                 <MemberCapacityCalendar
-                  members={this.state.CapacityDetails.members}
+                  groupName={this.state.CapacityDetails.groups[0].groupName}
+                  members={this.state.CapacityDetails.groups[0].members}
                   modifyDayHours={this.modifyDayHours}
                 />
               </List>
             </List.Item>
             <List.Item>
-            <h1>DS</h1>
+              <h1>Group:</h1>
+              <h3>{this.state.CapacityDetails.groups[1].groupName}</h3>
               <List selection verticalAlign="middle">
                 <MemberCapacityCalendar
-                  members={this.state.CapacityDetails.members}
+                  groupName={this.state.CapacityDetails.groups[1].groupName}
+                  members={this.state.CapacityDetails.groups[1].members}
                   modifyDayHours={this.modifyDayHours}
                 />
               </List>
             </List.Item>
           </List>
 
-          <label>Team members availability</label>
-          <Button>Next</Button>
+          {/* <DragDropList
+            members={this.state.CapacityDetails.members}
+            modifyDayHours={this.modifyDayHours}
+          /> */}
+
+          <h4>Team members availability</h4>
           <Button onClick={() => this.props.handleNavigateTabs(0)}>Back</Button>
+          <Button onClick={() => this.props.handleNavigateTabs(2)}>Next</Button>
         </Segment>
       </div>
     );

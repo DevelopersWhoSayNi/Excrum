@@ -3,6 +3,7 @@ import { Segment, Tab } from 'semantic-ui-react';
 import SprintDetails from './SprintDetails';
 import CapacityDetails from './CapacityDetails';
 import TasksForm from './TasksForm';
+import SprintSummary from './SprintSummary';
 import GetInitialSprintSetup from './GetInitialSprintSetup';
 require('../Sprint.css');
 
@@ -48,7 +49,9 @@ class CreateSprintForm extends Component {
       },
       {
         menuItem: 'Summery',
-        render: () => <TasksForm />
+        render: () => (
+          <SprintSummary handleNavigateTabs={this.handleNavigateTabs} />
+        )
       }
     ];
   };

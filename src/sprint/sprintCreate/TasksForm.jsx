@@ -1,15 +1,19 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
+import DragDropList from './DragDropList';
 
-const TasksForm = () => {
+const TasksForm = props => {
   return (
-    <Form>
-      <Form.Field inline>
-        <label>Tasks from TFS</label>
-      </Form.Field>
-      <Form.Button>Done</Form.Button>
-    </Form>
+    <div>
+      <div style={{ display: 'inline-flex' }}>
+        <DragDropList />
+      </div>
+      <div>
+        <Button onClick={() => props.handleNavigateTabs(1)}>Back</Button>
+        <Button onClick={() => props.handleNavigateTabs(3)}>Next</Button>
+      </div>
+    </div>
   );
-}
+};
 
 export default TasksForm;

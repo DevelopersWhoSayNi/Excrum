@@ -1,6 +1,8 @@
 import React from 'react';
 import { Segment, List, Image, Label } from 'semantic-ui-react';
 import { WeekdayNames } from './DateFormat';
+import CapacitySummery from './CapacitySummery';
+
 require('../Sprint.css');
 
 const Day = props => {
@@ -46,7 +48,7 @@ const Calendar = props => {
   );
 };
 
-const Member = props => {
+export const Member = props => {
   function modifyDayHours(selectedNode) {
     const modificationData = {
       date: selectedNode.day.date,
@@ -75,9 +77,22 @@ const Member = props => {
 };
 
 const MemberCapacityCalendar = props => {
-  return props.members.map((member, index) => (
-    <Member key={index} member={member} modifyDayHours={props.modifyDayHours} />
-  ));
+  return (
+    <div>
+      {props.members.map((member, index) => (
+        <Member
+          key={index}
+          member={member}
+          modifyDayHours={props.modifyDayHours}
+        />
+      ))}
+      <br />
+      <CapacitySummery
+        title={'Group ' + props.groupName + ' total capacity'}
+        value={100}
+      />
+    </div>
+  );
 };
 
 export default MemberCapacityCalendar;
