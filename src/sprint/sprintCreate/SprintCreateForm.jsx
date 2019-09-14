@@ -12,7 +12,7 @@ class CreateSprintForm extends Component {
     super(props);
 
     this.state = {
-      activeIndex: 1,
+      activeIndex: 2,
       sprintData: GetInitialSprintSetup()
     };
 
