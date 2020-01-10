@@ -6,7 +6,7 @@ class Logout extends Component {
   componentDidMount() {
     const auth = {
       Authenticated: false,
-      Token: ''
+      Token: null
     };
     localStorage.removeItem('token');
     this.props.UpdateUserAuthStatus(auth);
