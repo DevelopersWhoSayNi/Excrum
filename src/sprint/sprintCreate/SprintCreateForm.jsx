@@ -12,7 +12,7 @@ class CreateSprintForm extends Component {
     super(props);
 
     this.state = {
-      activeIndex: 2,
+      activeIndex: 3,
       sprintData: GetInitialSprintSetup()
     };
 
@@ -50,7 +50,10 @@ class CreateSprintForm extends Component {
       {
         menuItem: 'Summery',
         render: () => (
-          <SprintSummary handleNavigateTabs={this.handleNavigateTabs} />
+          <SprintSummary
+            CapacityDetails={this.state.sprintData.capacityDetails}
+            handleNavigateTabs={this.handleNavigateTabs}
+          />
         )
       }
     ];

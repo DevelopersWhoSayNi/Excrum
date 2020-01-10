@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Input,
-  Segment,
-  Dropdown
-} from 'semantic-ui-react';
+import { Button, Input, Segment, Dropdown } from 'semantic-ui-react';
 
 const options = [
   { key: 'm', text: 'FinTech', value: 'FinTech' },
@@ -59,7 +54,7 @@ class SprintDetails extends Component {
       <Segment>
         {/* <label>Team</label> */}
 
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '50%', marginBottom: '2%' }}>
           <Dropdown
             placeholder="Select your team"
             search
@@ -73,7 +68,7 @@ class SprintDetails extends Component {
             // defaultValue={this.state.teamDetails.team}
           />
         </div>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '50%', marginBottom: '2%' }}>
           <Input
             label="Sprint Number"
             placeholder="#"
@@ -86,17 +81,17 @@ class SprintDetails extends Component {
             {this.iterationPath()}
           </Label> */}
         </div>
-        <div style={{ width: '50%' }}>
+        <div style={{ width: '50%', marginBottom: '2%' }}>
           <Input
             type="date"
-            label="Start"
+            label="Start Date"
             fluid
             defaultValue={this.state.teamDetails.startDate}
             onChange={e => this.handleStartDateChange(e.target.value)}
           />
           <Input
             type="date"
-            label="End"
+            label="End  Date:"
             fluid
             defaultValue={this.state.teamDetails.endDate}
             onChange={e => this.handleEndDateChange(e.target.value)}

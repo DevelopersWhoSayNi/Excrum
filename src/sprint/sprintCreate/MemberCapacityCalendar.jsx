@@ -89,7 +89,7 @@ const MemberCapacityCalendar = props => {
       <br />
       <CapacitySummery
         title={'Group ' + props.groupName + ' total capacity'}
-        value={100}
+        value={props.teamTotalHours}
       />
     </div>
   );

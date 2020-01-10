@@ -12,7 +12,7 @@ import {
 import { FormatDate } from './DateFormat';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
-
+import { GetTotalHours } from './Tools';
 require('../Sprint.css');
 
 class CapacityDetails extends Component {
@@ -55,9 +55,9 @@ class CapacityDetails extends Component {
               newMembers[i].capacityHours[j].date ===
               this.state.updateHours.DayToBeModified
             ) {
-              newMembers[i].capacityHours[
-                j
-              ].hours = this.state.updateHours.UpdatedValue;
+              newMembers[i].capacityHours[j].hours = Number(
+                this.state.updateHours.UpdatedValue
+              );
               newGroups[g].members = newMembers;
               break;
             }
@@ -125,7 +125,13 @@ class CapacityDetails extends Component {
               pushing
             >
               <Segment className="TotalCapacityDialog">
-                <CapacitySummery title="Team total Capacity" value={200} />
+                <CapacitySummery
+                  title="Team total Capacity"
+                  value={GetTotalHours(
+                    this.state.CapacityDetails.groups,
+                    'total'
+                  )}
+                />
               </Segment>
             </Sticky>
           </Rail>
@@ -133,7 +139,7 @@ class CapacityDetails extends Component {
 
         <Segment>
           <List horizontal selection>
-            <List.Item>
+            <List.Item style={{ verticalAlign: 'top' }}>
               <h1>Group:</h1>
               <h3>{this.state.CapacityDetails.groups[0].groupName}</h3>
               <List selection verticalAlign="middle">
@@ -141,6 +147,10 @@ class CapacityDetails extends Component {
                   groupName={this.state.CapacityDetails.groups[0].groupName}
                   members={this.state.CapacityDetails.groups[0].members}
                   modifyDayHours={this.modifyDayHours}
+                  teamTotalHours={GetTotalHours(
+                    this.state.CapacityDetails.groups,
+                    this.state.CapacityDetails.groups[0].groupName
+                  )}
                 />
               </List>
             </List.Item>
@@ -152,6 +162,10 @@ class CapacityDetails extends Component {
                   groupName={this.state.CapacityDetails.groups[1].groupName}
                   members={this.state.CapacityDetails.groups[1].members}
                   modifyDayHours={this.modifyDayHours}
+                  teamTotalHours={GetTotalHours(
+                    this.state.CapacityDetails.groups,
+                    this.state.CapacityDetails.groups[1].groupName
+                  )}
                 />
               </List>
             </List.Item>
