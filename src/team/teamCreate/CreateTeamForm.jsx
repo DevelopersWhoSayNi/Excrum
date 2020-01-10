@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Segment, Divider, Icon } from 'semantic-ui-react';
+import { Form, Input, Segment, Divider } from 'semantic-ui-react';
 import TeamMembersList from '../../team/teamCreate/TeamMembersList';
 require('../Team.css');
 

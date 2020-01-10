@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Segment, Divider, Label, Icon } from 'semantic-ui-react';
+import { Input, Label, Icon } from 'semantic-ui-react';
 require('../Team.css');
 
 const TeamMember = props => {
@@ -21,7 +21,7 @@ const TeamMember = props => {
   return (
     <div className="TeamMember">
       <Label as="a" color={colors[props.index]} image>
-        <img src={profilePictures[props.index]} />
+        <img src={profilePictures[props.index]} alt="" />
         {props.member.name}
         <Label.Detail>{props.member.role}</Label.Detail>
         <Icon name="delete" className="btnClose" />
