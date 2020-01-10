@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Label, Select, Input, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Input,
+  Segment,
+  Dropdown
+} from 'semantic-ui-react';
 
 const options = [
   { key: 'm', text: 'FinTech', value: 'FinTech' },
@@ -52,39 +57,51 @@ class SprintDetails extends Component {
   render() {
     return (
       <Segment>
-        <label>Team</label>
-        <Select
-          label="Team"
-          options={options}
-          onChange={(value, e) => {
-            this.handleTeamNameChange(e);
-          }}
-          defaultValue={this.state.teamDetails.team}
-        />
+        {/* <label>Team</label> */}
 
-        <Input
-          label="Sprint Number"
-          placeholder="#"
-          defaultValue={this.state.teamDetails.sprintNumber}
-          onChange={e => this.handleSprintNumberChange(e.target.value)}
-        />
-        <Label style={{ marginTop: '4px', marginLeft: '-0.5px' }}>
-          {this.iterationPath()}
-        </Label>
+        <div style={{ width: '50%' }}>
+          <Dropdown
+            placeholder="Select your team"
+            search
+            selection
+            fluid
+            options={options}
+            onChange={(value, e) => {
+              this.handleTeamNameChange(e);
+            }}
 
-        <Input
-          type="date"
-          label="Start"
-          defaultValue={this.state.teamDetails.startDate}
-          onChange={e => this.handleStartDateChange(e.target.value)}
-        />
-        <Input
-          type="date"
-          label="End"
-          defaultValue={this.state.teamDetails.endDate}
-          onChange={e => this.handleEndDateChange(e.target.value)}
-        />
+            // defaultValue={this.state.teamDetails.team}
+          />
+        </div>
+        <div style={{ width: '50%' }}>
+          <Input
+            label="Sprint Number"
+            placeholder="#"
+            fluid
+            defaultValue={this.state.teamDetails.sprintNumber}
+            onChange={e => this.handleSprintNumberChange(e.target.value)}
+          />
 
+          {/* <Label style={{ marginTop: '4px', marginLeft: '-0.5px' }}>
+            {this.iterationPath()}
+          </Label> */}
+        </div>
+        <div style={{ width: '50%' }}>
+          <Input
+            type="date"
+            label="Start"
+            fluid
+            defaultValue={this.state.teamDetails.startDate}
+            onChange={e => this.handleStartDateChange(e.target.value)}
+          />
+          <Input
+            type="date"
+            label="End"
+            fluid
+            defaultValue={this.state.teamDetails.endDate}
+            onChange={e => this.handleEndDateChange(e.target.value)}
+          />
+        </div>
         <br />
 
         <Button onClick={() => this.props.handleNavigateTabs(1)}>Next</Button>

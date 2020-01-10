@@ -9,6 +9,7 @@ import Dashboard from '../dashboard/Dashboard';
 // import UserCreateForm from '../user/userCreate/UserCreateForm';
 import Profile from '../user/userProfile/Profile';
 import CreateSprintForm from '../sprint/sprintCreate/SprintCreateForm';
+import CreateTeamForm from '../team/teamCreate/CreateTeamForm';
 
 const Routes = props => {
   return (
@@ -28,9 +29,15 @@ const Routes = props => {
         />
         <RouteProtected
           exact
-          isAuthenticated={props.IsAuthenticated}
+          accessToken={props.Token}
           path="/CreateSprint"
           component={CreateSprintForm}
+        />
+        <RouteProtected
+          exact
+          accessToken={props.Token}
+          path="/CreateTeam"
+          component={CreateTeamForm}
         />
       </div>
     </Router>

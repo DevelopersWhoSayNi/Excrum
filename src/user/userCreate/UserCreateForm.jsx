@@ -2,18 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { UpdateUserAuthStatus } from '../UserActions';
-import { Modal, Header, Button, Form } from 'semantic-ui-react';
+import { Modal, Header, Button, Form, Image } from 'semantic-ui-react';
 import BackgroundImage from '../ExactOfficeBG.jpg';
 import CreateUser from './CreateUser';
+import UserImageModal from './UserImageModal';
 
 class UserCreateForm extends Component {
-  state = {
-    navigateTo: false,
-    userID: null,
-    name: null,
-    email: null,
-    password: null
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      navigateTo: false,
+      userID: null,
+      name: null,
+      email: null,
+      password: null,
+      userImage: null
+    };
+
+    this.SaveNewUserProfilePhoto = this.SaveNewUserProfilePhoto.bind(this);
+  }
 
   register = () => {
     this.validateInput();
@@ -21,7 +29,8 @@ class UserCreateForm extends Component {
       userID: this.state.userID,
       name: this.state.name,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      photo: this.state.userImage
     };
 
     CreateUser(userInfo)
@@ -47,6 +56,12 @@ class UserCreateForm extends Component {
   emailInput = e => this.setState({ email: e.target.value });
   passwordInput = e => this.setState({ password: e.target.value });
 
+  SaveNewUserProfilePhoto(photo) {
+    if (photo) {
+      this.setState({ userImage: photo });
+    }
+  }
+
   render() {
     const { navigateTo } = this.state;
     if (navigateTo) {
@@ -66,6 +81,21 @@ class UserCreateForm extends Component {
           <Modal.Content>
             <Form>
               <Header>Register new user</Header>
+              <Image
+                height={150}
+                src={this.state.userImage}
+                label={
+                  <UserImageModal
+                    handleSave={this.SaveNewUserProfilePhoto}
+                    currentImage={this.state.userImage}
+                    headerMessage="Select a new profile pictuer"
+                  />
+                }
+              />
+              <br />
+              <br />
+              <br />
+              <br />
               <Form.Field>
                 <label>Email</label>
                 <input

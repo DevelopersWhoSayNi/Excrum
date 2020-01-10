@@ -1,13 +1,13 @@
 import Axios from 'axios';
 import config from '../../ServerConfig.json';
 
-const CreateSprint = async userInfo => {
+const CreateSprint = async sprintInfo => {
   const url = `${config.Server}/newsprint`;
   const body = {
-    userID: userInfo.userID,
-    name: userInfo.name,
-    email: userInfo.email,
-    password: userInfo.password
+    userID: sprintInfo.userID,
+    name: sprintInfo.name,
+    email: sprintInfo.email,
+    password: sprintInfo.password
   };
 
   try {

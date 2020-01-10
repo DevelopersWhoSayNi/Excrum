@@ -7,7 +7,8 @@ const CreateUser = userInfo => {
     userID: userInfo.userID,
     name: userInfo.name,
     email: userInfo.email,
-    password: userInfo.password
+    password: userInfo.password,
+    photo: userInfo.photo
   };
 
   return Axios.post(url, body)
