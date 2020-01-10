@@ -2,7 +2,7 @@ const GetInitialSprintSetup = () => {
   return {
     teamDetails: {
       team: 'DSCI',
-      sprintNumber: '#',
+      sprintNumber: ' ',
       iterationPath: 'Iteration : Customer Intelligence / Sprint ',
       lastSprintEndDate: '2019-01-01',
       startDate: '2019-01-01',
