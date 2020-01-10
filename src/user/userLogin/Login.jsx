@@ -22,7 +22,7 @@ class Login extends Component {
     Authenticate(userInfo)
       .then(Response => {
         if (Response.Authenticated === true) {
-          this.props.UpdateUserAuthStatus(true);
+          this.props.UpdateUserAuthStatus(Response);
           this.navigateTo(this.getReturnPathName());
         } else {
           this.setState({ error: 'Wrong credentials' });

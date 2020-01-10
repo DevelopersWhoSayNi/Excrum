@@ -1,7 +1,8 @@
 import Axios from 'axios';
+import config from '../../ServerConfig.json';
 
 const Authenticate = userInfo => {
-  const url = `http://localhost:8000/login`;
+  const url = `${config.Server}/login`;
   const body = {
     email: userInfo.email,
     password: userInfo.password
@@ -10,8 +11,10 @@ const Authenticate = userInfo => {
   return Axios.post(url, body)
     .then(response => {
       if (response.data.message === 'Success') {
+        localStorage.setItem('token', response.data.token);
         return {
-          Authenticated: true
+          Authenticated: true,
+          Token: response.data.token
         };
       } else {
         return {

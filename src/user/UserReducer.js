@@ -1,7 +1,8 @@
 import * as types from '../ActionTypes';
 
 let initialState = {
-  Authenticated: false,
+  // Authenticated: false,
+  Token: localStorage.getItem('token'),
   UserName: 'HeWhoSays',
   UserPassword: 'Ni',
   UserRights: {
@@ -14,7 +15,8 @@ export default function UserReducer(state = initialState, action) {
     case types.UpdateUserAuthStatus:
       return {
         ...state,
-        Authenticated: action.value
+        Authenticated: action.value.Authenticated,
+        Token: action.value.Token
       };
     case types.AddUser:
       return {
