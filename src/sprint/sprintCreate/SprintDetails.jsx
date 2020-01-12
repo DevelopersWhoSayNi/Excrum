@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input, Segment, Dropdown } from 'semantic-ui-react';
+import GetTeamDefaultSprintData from './GetSprintData';
 
 const options = [
   { key: 'm', text: 'FinTech', value: 'FinTech' },
@@ -12,41 +13,45 @@ class SprintDetails extends Component {
     super(props);
 
     this.state = {
-      teamDetails: this.props.teamDetails
+      sprintData: this.props.sprintData
     };
 
     this.iterationPath = this.iterationPath.bind(this);
   }
 
+  async componentDidMount() {
+    this.setDefaultStartDate();
+    // this.setDefaultEndDate();
+  }
+
   iterationPath() {
     const path =
-      this.state.teamDetails.iterationPath +
-      this.state.teamDetails.sprintNumber;
+      this.state.sprintData.iterationPath + this.state.sprintData.sprintNumber;
     return path;
   }
 
-  handleSprintNumberChange(value) {
-    const newTeamDetails = { ...this.state.teamDetails, sprintNumber: value };
-    this.setState({ teamDetails: newTeamDetails });
-    this.props.updateSprintDetails(this.state.teamDetails);
+  handleTeamChange(e) {
+    const selectedTeamSprintData = GetTeamDefaultSprintData(e);
+    this.setState({ sprintData: selectedTeamSprintData });
+    this.props.updateSprintDetails(selectedTeamSprintData);
   }
 
-  handleTeamNameChange(e) {
-    const newTeamDetails = { ...this.state.teamDetails, team: e.value };
-    this.setState({ teamDetails: newTeamDetails });
-    this.props.updateSprintDetails(this.state.teamDetails);
+  handleSprintNumberChange(value) {
+    const newSprintDetails = { ...this.state.sprintData, sprintNumber: value };
+    this.setState({ sprintData: newSprintDetails });
+    this.props.updateSprintDetails(this.state.sprintData);
   }
 
   handleStartDateChange(date) {
-    const newTeamDetails = { ...this.state.teamDetails, startDate: date };
-    this.setState({ teamDetails: newTeamDetails });
-    this.props.updateSprintDetails(this.state.teamDetails);
+    const newSprintDetails = { ...this.state.sprintData, startDate: date };
+    this.setState({ sprintData: newSprintDetails });
+    this.props.updateSprintDetails(this.state.sprintData);
   }
 
   handleEndDateChange(date) {
-    const newTeamDetails = { ...this.state.teamDetails, endDate: date };
-    this.setState({ teamDetails: newTeamDetails });
-    this.props.updateSprintDetails(this.state.teamDetails);
+    const newSprintDetails = { ...this.state.sprintData, endDate: date };
+    this.setState({ sprintData: newSprintDetails });
+    this.props.updateSprintDetails(this.state.sprintData);
   }
 
   AddZero(num) {
@@ -56,7 +61,10 @@ class SprintDetails extends Component {
   getCurrentDate(daysToAdd) {
     var now = new Date();
     if (daysToAdd) {
+      console.log({ daysToAdd });
+      console.log({ now });
       now.setDate(now.getDate() + daysToAdd);
+      console.log({ now });
     }
 
     var strDateTime = [
@@ -67,19 +75,26 @@ class SprintDetails extends Component {
       ].join('-')
     ].join(' ');
 
+    console.log({ strDateTime });
     return strDateTime;
   }
 
-  getDefaultStartDate() {
+  setDefaultStartDate() {
     if (this.props.sprintData.startDate) {
-      return this.props.sprintData.startDate;
+      this.handleStartDateChange(this.props.sprintData.startDate);
     } else {
-      return this.getCurrentDate();
+      this.handleStartDateChange(this.getCurrentDate());
     }
   }
 
-  getDefaultEndDate() {
-    return this.getCurrentDate(this.props.sprintData.sprintLength);
+  setDefaultEndDate() {
+    if (this.props.sprintData.endDate) {
+      this.handleEndDateChange(this.props.sprintData.endDate);
+    } else {
+      this.handleEndDateChange(
+        this.getCurrentDate(this.props.sprintData.sprintLength)
+      );
+    }
   }
 
   render() {
@@ -93,7 +108,7 @@ class SprintDetails extends Component {
             fluid
             options={options}
             onChange={(value, e) => {
-              this.handleTeamNameChange(e);
+              this.handleTeamChange(e);
             }}
           />
         </div>
@@ -111,14 +126,14 @@ class SprintDetails extends Component {
             type="date"
             label="Start Date"
             fluid
-            defaultValue={this.getDefaultStartDate()}
+            defaultValue={this.state.sprintData.startDate}
             onChange={e => this.handleStartDateChange(e.target.value)}
           />
           <Input
             type="date"
             label="End  Date:"
             fluid
-            defaultValue={this.getDefaultEndDate()}
+            defaultValue={this.state.sprintData.endDate}
             onChange={e => this.handleEndDateChange(e.target.value)}
           />
         </div>

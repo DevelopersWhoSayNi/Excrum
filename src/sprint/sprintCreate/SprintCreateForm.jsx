@@ -68,14 +68,9 @@ class CreateSprintForm extends Component {
     this.setState({ activeIndex: activeIndex });
   };
 
-  updateSprintDetails = teamDetails => {
-    const newSprintData = {
-      ...this.state.sprintData,
-      teamDetails: teamDetails
-    };
-
+  updateSprintDetails = sprintDetails => {
     this.setState({
-      sprintData: newSprintData
+      sprintData: sprintDetails
     });
   };
 
