@@ -124,7 +124,24 @@ class CapacityDetails extends Component {
               offset={50}
               pushing
             >
-              <Segment className="TotalCapacityDialog">
+              <Segment>
+                <h4>
+                  {this.state.CapacityDetails.groups[0].groupName} :
+                  {GetTotalHours(
+                    this.state.CapacityDetails.groups,
+                    this.state.CapacityDetails.groups[0].groupName
+                  )}
+                </h4>
+                <h4>
+                  {this.state.CapacityDetails.groups[1].groupName} :
+                  {GetTotalHours(
+                    this.state.CapacityDetails.groups,
+                    this.state.CapacityDetails.groups[1].groupName
+                  )}
+                </h4>
+                <br />
+                ------------------------------------
+                <br />
                 <CapacitySummery
                   title="Team total Capacity"
                   value={GetTotalHours(
@@ -139,42 +156,12 @@ class CapacityDetails extends Component {
 
         <Segment>
           <List horizontal selection>
-            <List.Item style={{ verticalAlign: 'top' }}>
-              <h1>Group:</h1>
-              <h3>{this.state.CapacityDetails.groups[0].groupName}</h3>
-              <List selection verticalAlign="middle">
-                <MemberCapacityCalendar
-                  groupName={this.state.CapacityDetails.groups[0].groupName}
-                  members={this.state.CapacityDetails.groups[0].members}
-                  modifyDayHours={this.modifyDayHours}
-                  teamTotalHours={GetTotalHours(
-                    this.state.CapacityDetails.groups,
-                    this.state.CapacityDetails.groups[0].groupName
-                  )}
-                />
-              </List>
-            </List.Item>
-            <List.Item>
-              <h1>Group:</h1>
-              <h3>{this.state.CapacityDetails.groups[1].groupName}</h3>
-              <List selection verticalAlign="middle">
-                <MemberCapacityCalendar
-                  groupName={this.state.CapacityDetails.groups[1].groupName}
-                  members={this.state.CapacityDetails.groups[1].members}
-                  modifyDayHours={this.modifyDayHours}
-                  teamTotalHours={GetTotalHours(
-                    this.state.CapacityDetails.groups,
-                    this.state.CapacityDetails.groups[1].groupName
-                  )}
-                />
-              </List>
-            </List.Item>
+            <MemberCapacityCalendar
+              groupName={this.state.CapacityDetails.groups[0].groupName}
+              members={this.state.CapacityDetails.groups[0].members}
+              modifyDayHours={this.modifyDayHours}
+            />
           </List>
-
-          {/* <DragDropList
-            members={this.state.CapacityDetails.members}
-            modifyDayHours={this.modifyDayHours}
-          /> */}
 
           <h4>Team members availability</h4>
           <Button onClick={() => this.props.handleNavigateTabs(0)}>Back</Button>

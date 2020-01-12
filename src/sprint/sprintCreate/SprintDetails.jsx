@@ -51,7 +51,7 @@ class SprintDetails extends Component {
 
   render() {
     return (
-      <Segment>
+      <Segment style={{ width: '50%', marginLeft: '0.5%' }}>
         {/* <label>Team</label> */}
 
         <div style={{ width: '50%', marginBottom: '2%' }}>

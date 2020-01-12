@@ -1,16 +1,24 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Segment } from 'semantic-ui-react';
 import { GetTotalHours } from './Tools';
+
+export const SummaryStats = props => {
+  return (
+    <Segment>
+      <h3>Total Capacity</h3>
+      <h3>{GetTotalHours(props.CapacityDetails.groups, 'total')} hours</h3>
+
+      <h4>Capacity:</h4>
+      <h4>Estimated Effort:</h4>
+      <h4>Efforts planned:</h4>
+    </Segment>
+  );
+};
 
 const SprintSummary = props => {
   return (
     <div>
-      <h1>Two Sprints ago:</h1>
-      <h1>Last Sprint:</h1>
-      <h2>New Sprint</h2>
-
-      <h3>Total Capacity hours</h3>
-      <h3>{GetTotalHours(props.CapacityDetails.groups, 'total')}</h3>
+      <SummaryStats {...props} />
 
       <Button onClick={() => props.handleNavigateTabs(2)}>Back</Button>
       <Button>Done</Button>
