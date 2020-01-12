@@ -6,7 +6,7 @@ export const SummaryStats = props => {
   return (
     <Segment>
       <h3>Total Capacity</h3>
-      <h3>{GetTotalHours(props.CapacityDetails.groups, 'total')} hours</h3>
+      <h3>{GetTotalHours(props.sprintData.members)} hours</h3>
 
       <h4>Capacity:</h4>
       <h4>Estimated Effort:</h4>

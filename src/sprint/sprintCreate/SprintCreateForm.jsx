@@ -27,7 +27,7 @@ class CreateSprintForm extends Component {
         menuItem: 'Sprint Details',
         render: () => (
           <SprintDetails
-            teamDetails={this.state.sprintData.teamDetails}
+            sprintData={this.state.sprintData}
             updateSprintDetails={this.updateSprintDetails}
             handleNavigateTabs={this.handleNavigateTabs}
           />
@@ -37,7 +37,7 @@ class CreateSprintForm extends Component {
         menuItem: 'Capacity',
         render: () => (
           <CapacityDetails
-            CapacityDetails={this.state.sprintData.capacityDetails}
+            sprintData={this.state.sprintData}
             updateCapacityDetail={this.updateCapacityDetail}
             handleNavigateTabs={this.handleNavigateTabs}
           />
@@ -47,8 +47,8 @@ class CreateSprintForm extends Component {
         menuItem: 'Tasks',
         render: () => (
           <TasksForm
+            sprintData={this.state.sprintData}
             handleNavigateTabs={this.handleNavigateTabs}
-            CapacityDetails={this.state.sprintData.capacityDetails}
           />
         )
       },
@@ -56,7 +56,7 @@ class CreateSprintForm extends Component {
         menuItem: 'Summery',
         render: () => (
           <SprintSummary
-            CapacityDetails={this.state.sprintData.capacityDetails}
+            sprintData={this.state.sprintData}
             handleNavigateTabs={this.handleNavigateTabs}
           />
         )

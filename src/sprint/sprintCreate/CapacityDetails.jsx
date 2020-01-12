@@ -20,7 +20,7 @@ class CapacityDetails extends Component {
     super(props);
 
     this.state = {
-      CapacityDetails: this.props.CapacityDetails,
+      sprintData: this.props.sprintData,
       OpenModal: false,
       updateHours: {
         memberId: 0,
@@ -43,33 +43,28 @@ class CapacityDetails extends Component {
   };
 
   updateDayHours = () => {
-    const newGroups = this.state.CapacityDetails.groups;
+    const newMembers = this.state.sprintData.members;
 
-    for (let g = 0; g < newGroups.length; g++) {
-      const newMembers = newGroups[g].members;
-
-      for (let i = 0; i < newMembers.length; i++) {
-        if (newMembers[i].id === this.state.updateHours.memberId) {
-          for (let j = 0; j < newMembers[i].capacityHours.length; j++) {
-            if (
-              newMembers[i].capacityHours[j].date ===
-              this.state.updateHours.DayToBeModified
-            ) {
-              newMembers[i].capacityHours[j].hours = Number(
-                this.state.updateHours.UpdatedValue
-              );
-              newGroups[g].members = newMembers;
-              break;
-            }
+    for (let i = 0; i < newMembers.length; i++) {
+      if (newMembers[i].id === this.state.updateHours.memberId) {
+        for (let j = 0; j < newMembers[i].capacityHours.length; j++) {
+          if (
+            newMembers[i].capacityHours[j].date ===
+            this.state.updateHours.DayToBeModified
+          ) {
+            newMembers[i].capacityHours[j].hours = Number(
+              this.state.updateHours.UpdatedValue
+            );
+            break;
           }
-          break;
         }
+        break;
       }
     }
 
     const newState = {
-      ...this.state.capacityHours,
-      groups: newGroups
+      ...this.state.sprintData,
+      members: newMembers
     };
     this.setState({ newState });
     this.setState({ OpenModal: false });
@@ -125,7 +120,7 @@ class CapacityDetails extends Component {
               pushing
             >
               <Segment>
-                <h4>
+                {/* <h4>
                   {this.state.CapacityDetails.groups[0].groupName} :
                   {GetTotalHours(
                     this.state.CapacityDetails.groups,
@@ -138,16 +133,13 @@ class CapacityDetails extends Component {
                     this.state.CapacityDetails.groups,
                     this.state.CapacityDetails.groups[1].groupName
                   )}
-                </h4>
+                </h4> */}
                 <br />
                 ------------------------------------
                 <br />
                 <CapacitySummery
                   title="Team total Capacity"
-                  value={GetTotalHours(
-                    this.state.CapacityDetails.groups,
-                    'total'
-                  )}
+                  value={GetTotalHours(this.state.sprintData.members)}
                 />
               </Segment>
             </Sticky>
@@ -157,8 +149,8 @@ class CapacityDetails extends Component {
         <Segment>
           <List horizontal selection>
             <MemberCapacityCalendar
-              groupName={this.state.CapacityDetails.groups[0].groupName}
-              members={this.state.CapacityDetails.groups[0].members}
+              groupName={'DSCI'}
+              members={this.state.sprintData.members}
               modifyDayHours={this.modifyDayHours}
             />
           </List>

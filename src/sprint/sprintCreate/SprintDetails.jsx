@@ -49,11 +49,42 @@ class SprintDetails extends Component {
     this.props.updateSprintDetails(this.state.teamDetails);
   }
 
+  AddZero(num) {
+    return num >= 0 && num < 10 ? '0' + num : num + '';
+  }
+
+  getCurrentDate(daysToAdd) {
+    var now = new Date();
+    if (daysToAdd) {
+      now.setDate(now.getDate() + daysToAdd);
+    }
+
+    var strDateTime = [
+      [
+        now.getFullYear(),
+        this.AddZero(now.getMonth() + 1),
+        this.AddZero(now.getDate())
+      ].join('-')
+    ].join(' ');
+
+    return strDateTime;
+  }
+
+  getDefaultStartDate() {
+    if (this.props.sprintData.startDate) {
+      return this.props.sprintData.startDate;
+    } else {
+      return this.getCurrentDate();
+    }
+  }
+
+  getDefaultEndDate() {
+    return this.getCurrentDate(this.props.sprintData.sprintLength);
+  }
+
   render() {
     return (
       <Segment style={{ width: '50%', marginLeft: '0.5%' }}>
-        {/* <label>Team</label> */}
-
         <div style={{ width: '50%', marginBottom: '2%' }}>
           <Dropdown
             placeholder="Select your team"
@@ -64,8 +95,6 @@ class SprintDetails extends Component {
             onChange={(value, e) => {
               this.handleTeamNameChange(e);
             }}
-
-            // defaultValue={this.state.teamDetails.team}
           />
         </div>
         <div style={{ width: '50%', marginBottom: '2%' }}>
@@ -73,27 +102,23 @@ class SprintDetails extends Component {
             label="Sprint Number"
             placeholder="#"
             fluid
-            defaultValue={this.state.teamDetails.sprintNumber}
+            defaultValue={this.state.sprintNumber}
             onChange={e => this.handleSprintNumberChange(e.target.value)}
           />
-
-          {/* <Label style={{ marginTop: '4px', marginLeft: '-0.5px' }}>
-            {this.iterationPath()}
-          </Label> */}
         </div>
         <div style={{ width: '50%', marginBottom: '2%' }}>
           <Input
             type="date"
             label="Start Date"
             fluid
-            defaultValue={this.state.teamDetails.startDate}
+            defaultValue={this.getDefaultStartDate()}
             onChange={e => this.handleStartDateChange(e.target.value)}
           />
           <Input
             type="date"
             label="End  Date:"
             fluid
-            defaultValue={this.state.teamDetails.endDate}
+            defaultValue={this.getDefaultEndDate()}
             onChange={e => this.handleEndDateChange(e.target.value)}
           />
         </div>
