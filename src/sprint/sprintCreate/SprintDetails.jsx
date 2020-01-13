@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Input, Segment, Dropdown } from 'semantic-ui-react';
 import GetTeamDefaultSprintData from './GetSprintData';
+import { FormatDate } from './Tools';
 
 const options = [
-  { key: 'm', text: 'FinTech', value: 'FinTech' },
-  { key: 'f', text: 'Exact Finance', value: 'EF' },
-  { key: 'c', text: 'Customer Intelligence', value: 'DSCI' }
+  { key: 'a', text: 'Team 001', value: 'T001' },
+  { key: 'f', text: 'Exact Finance', value: 'T002' },
+  { key: 'c', text: 'Customer Intelligence', value: 'T003' }
 ];
 
 class SprintDetails extends Component {
@@ -19,9 +20,8 @@ class SprintDetails extends Component {
     this.iterationPath = this.iterationPath.bind(this);
   }
 
-  async componentDidMount() {
-    this.setDefaultStartDate();
-    // this.setDefaultEndDate();
+  componentDidMount() {
+    this.setDefaultDates();
   }
 
   iterationPath() {
@@ -31,69 +31,66 @@ class SprintDetails extends Component {
   }
 
   handleTeamChange(e) {
-    const selectedTeamSprintData = GetTeamDefaultSprintData(e);
-    this.setState({ sprintData: selectedTeamSprintData });
-    this.props.updateSprintDetails(selectedTeamSprintData);
+    GetTeamDefaultSprintData(e.value).then(response => {
+      const newSprintDetails = { ...this.state.sprintData, team: response };
+      this.setState({ sprintData: newSprintDetails });
+      this.props.updateSprintDetails(newSprintDetails);
+    });
   }
 
   handleSprintNumberChange(value) {
     const newSprintDetails = { ...this.state.sprintData, sprintNumber: value };
     this.setState({ sprintData: newSprintDetails });
-    this.props.updateSprintDetails(this.state.sprintData);
+    this.props.updateSprintDetails(newSprintDetails);
   }
 
   handleStartDateChange(date) {
     const newSprintDetails = { ...this.state.sprintData, startDate: date };
     this.setState({ sprintData: newSprintDetails });
-    this.props.updateSprintDetails(this.state.sprintData);
+    this.props.updateSprintDetails(newSprintDetails);
   }
 
   handleEndDateChange(date) {
     const newSprintDetails = { ...this.state.sprintData, endDate: date };
     this.setState({ sprintData: newSprintDetails });
-    this.props.updateSprintDetails(this.state.sprintData);
+    this.props.updateSprintDetails(newSprintDetails);
   }
 
-  AddZero(num) {
-    return num >= 0 && num < 10 ? '0' + num : num + '';
-  }
+  setDefaultDates() {
+    let now = new Date();
+    let startDate = '';
+    let endDate = '';
 
-  getCurrentDate(daysToAdd) {
-    var now = new Date();
-    if (daysToAdd) {
-      console.log({ daysToAdd });
-      console.log({ now });
-      now.setDate(now.getDate() + daysToAdd);
-      console.log({ now });
-    }
-
-    var strDateTime = [
-      [
-        now.getFullYear(),
-        this.AddZero(now.getMonth() + 1),
-        this.AddZero(now.getDate())
-      ].join('-')
-    ].join(' ');
-
-    console.log({ strDateTime });
-    return strDateTime;
-  }
-
-  setDefaultStartDate() {
     if (this.props.sprintData.startDate) {
-      this.handleStartDateChange(this.props.sprintData.startDate);
+      startDate = this.props.sprintData.startDate;
     } else {
-      this.handleStartDateChange(this.getCurrentDate());
+      startDate = FormatDate(now);
     }
+
+    if (this.props.sprintData.endDate) {
+      endDate = this.props.sprintData.endDate;
+    } else {
+      now.setDate(now.getDate() + this.props.sprintData.sprintLength);
+      endDate = FormatDate(now);
+    }
+
+    const newSprintDetails = {
+      ...this.state.sprintData,
+      startDate: startDate,
+      endDate: endDate
+    };
+    this.setState({ sprintData: newSprintDetails });
+    this.props.updateSprintDetails(newSprintDetails);
   }
 
-  setDefaultEndDate() {
-    if (this.props.sprintData.endDate) {
-      this.handleEndDateChange(this.props.sprintData.endDate);
-    } else {
-      this.handleEndDateChange(
-        this.getCurrentDate(this.props.sprintData.sprintLength)
+  getSelectedTeam() {
+    if (this.state.sprintData.team.teamID) {
+      const selectedValue = options.find(
+        o => o.value === this.state.sprintData.team.teamID
       );
+      if (selectedValue !== 'undefined') {
+        return selectedValue.value;
+      }
     }
   }
 
@@ -107,6 +104,7 @@ class SprintDetails extends Component {
             selection
             fluid
             options={options}
+            defaultValue={this.getSelectedTeam()}
             onChange={(value, e) => {
               this.handleTeamChange(e);
             }}
@@ -117,7 +115,7 @@ class SprintDetails extends Component {
             label="Sprint Number"
             placeholder="#"
             fluid
-            defaultValue={this.state.sprintNumber}
+            defaultValue={this.state.sprintData.sprintNumber}
             onChange={e => this.handleSprintNumberChange(e.target.value)}
           />
         </div>

@@ -63,7 +63,7 @@ export const Member = props => {
       <Image
         size="tiny"
         avatar
-        src={require('../../resources/' + props.member.photoSrc)}
+        src={props.member.photoSrc}
       />
       <List.Content>
         <Segment>

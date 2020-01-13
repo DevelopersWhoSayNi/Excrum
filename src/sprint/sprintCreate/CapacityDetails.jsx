@@ -43,7 +43,7 @@ class CapacityDetails extends Component {
   };
 
   updateDayHours = () => {
-    const newMembers = this.state.sprintData.members;
+    const newMembers = this.state.sprintData.team.members;
 
     for (let i = 0; i < newMembers.length; i++) {
       if (newMembers[i].id === this.state.updateHours.memberId) {
@@ -139,7 +139,7 @@ class CapacityDetails extends Component {
                 <br />
                 <CapacitySummery
                   title="Team total Capacity"
-                  value={GetTotalHours(this.state.sprintData.members)}
+                  value={GetTotalHours(this.state.sprintData.team.members)}
                 />
               </Segment>
             </Sticky>
@@ -150,7 +150,7 @@ class CapacityDetails extends Component {
           <List horizontal selection>
             <MemberCapacityCalendar
               groupName={'DSCI'}
-              members={this.state.sprintData.members}
+              members={this.state.sprintData.team.members}
               modifyDayHours={this.modifyDayHours}
             />
           </List>

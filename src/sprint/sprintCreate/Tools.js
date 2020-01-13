@@ -9,3 +9,19 @@ export const GetTotalHours = membersList => {
 
   return totalHours;
 };
+
+const AddZero = num => {
+  return num >= 0 && num < 10 ? '0' + num : num + '';
+};
+
+export const FormatDate = date => {
+  var strDateTime = [
+    [
+      date.getFullYear(),
+      AddZero(date.getMonth() + 1),
+      AddZero(date.getDate())
+    ].join('-')
+  ].join(' ');
+
+  return strDateTime;
+};

@@ -1,8 +1,6 @@
 const GetInitialSprintSetup = () => {
   return {
     id: null,
-    teamID: null,
-    teamName: null,
     sprintNumber: null,
     startDate: null,
     endDate: null,
@@ -14,7 +12,11 @@ const GetInitialSprintSetup = () => {
     effortDelivered: 0,
     effortAdded: 0,
     velocity: 0,
-    members: []
+    team:{
+      teamID: null,
+      teamName: null,
+      members: []
+    },
   };
 };
 
