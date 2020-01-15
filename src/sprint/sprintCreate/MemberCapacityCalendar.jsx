@@ -5,9 +5,19 @@ import { WeekdayNames } from './Tools';
 require('../Sprint.css');
 
 const Day = props => {
+  const dayColor = () => {
+    if (props.hours === 0) {
+      return 'red';
+    } else if (props.hours < 8) {
+      return 'yellow';
+    } else {
+      return 'green';
+    }
+  };
+
   return (
     <div className="CalendarDays">
-      <Label circular size="big" color="green">
+      <Label circular size="big" color={dayColor()}>
         <h4 onClick={() => props.modifyDayHours(props)}>{props.hours}</h4>
       </Label>
     </div>

@@ -3,6 +3,7 @@ import {
   Button,
   Segment,
   List,
+  Message,
   Modal,
   Input,
   Ref,
@@ -20,6 +21,7 @@ class CapacityDetails extends Component {
     super(props);
 
     this.state = {
+      showValidationError: true,
       sprintData: this.props.sprintData,
       OpenModal: false,
       updateHours: {
@@ -43,6 +45,14 @@ class CapacityDetails extends Component {
   };
 
   updateDayHours = () => {
+    if (
+      this.state.updateHours.UpdatedValue === '' ||
+      this.state.updateHours.UpdatedValue === undefined
+    ) {
+      this.setState({ showValidationError: false });
+      return;
+    }
+
     const newMembers = this.state.sprintData.team.members;
 
     for (let i = 0; i < newMembers.length; i++) {
@@ -73,23 +83,27 @@ class CapacityDetails extends Component {
   closeModal = () => this.setState({ OpenModal: false });
 
   handleHoursValueUpdate = value => {
-    if (value > 24) {
-      return;
+    if (value > 24 || isNaN(value)) {
+      this.setState({ showValidationError: false });
+    } else {
+      this.setState({ showValidationError: true });
+
+      const newUpdatedHourValue = {
+        ...this.state.updateHours,
+        UpdatedValue: value
+      };
+
+      this.setState({
+        updateHours: newUpdatedHourValue
+      });
     }
-
-    const newUpdatedHourValue = {
-      ...this.state.updateHours,
-      UpdatedValue: value
-    };
-
-    this.setState({
-      updateHours: newUpdatedHourValue
-    });
   };
 
   contextRef = createRef();
 
   render() {
+    const validationErrorMessage =
+      'Entered must be at leas one digit less than 24';
     return (
       <div>
         <Modal
@@ -101,15 +115,24 @@ class CapacityDetails extends Component {
           <Modal.Content>
             <p>Adjust the hours for {this.state.updateHours.DayToBeModified}</p>
             <Input
+              id="hoursInput"
               placeholder={FormatDateCalendar(
                 this.state.updateHours.CurrentValue
               )}
               onChange={e => this.handleHoursValueUpdate(e.target.value)}
             />
+            <Message color={'red'} hidden={this.state.showValidationError}>
+              {validationErrorMessage}
+            </Message>
           </Modal.Content>
           <Modal.Actions>
             <Button negative content="Cancel" onClick={this.closeModal} />
-            <Button positive content="Update" onClick={this.updateDayHours} />
+            <Button
+              disabled={!this.state.showValidationError}
+              positive
+              content="Update"
+              onClick={this.updateDayHours}
+            />
           </Modal.Actions>
         </Modal>
 
@@ -151,7 +174,7 @@ class CapacityDetails extends Component {
         <Segment>
           <List horizontal selection>
             <MemberCapacityCalendar
-              groupName={'DSCI'}
+              // groupName={'DSCI'}
               members={this.state.sprintData.team.members}
               modifyDayHours={this.modifyDayHours}
             />
