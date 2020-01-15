@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Task from './Task';
-import TasksList from './GetTasksList';
+import TasksList from './api/GetTasksList';
 import { Segment } from 'semantic-ui-react';
 require('../Sprint.css');
 

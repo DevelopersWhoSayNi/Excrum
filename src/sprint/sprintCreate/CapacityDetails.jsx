@@ -9,7 +9,7 @@ import {
   Rail,
   Sticky
 } from 'semantic-ui-react';
-import { FormatDate } from './DateFormat';
+import { FormatDateCalendar } from './Tools';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
 import { GetTotalHours } from './Tools';
@@ -101,7 +101,9 @@ class CapacityDetails extends Component {
           <Modal.Content>
             <p>Adjust the hours for {this.state.updateHours.DayToBeModified}</p>
             <Input
-              placeholder={FormatDate(this.state.updateHours.CurrentValue)}
+              placeholder={FormatDateCalendar(
+                this.state.updateHours.CurrentValue
+              )}
               onChange={e => this.handleHoursValueUpdate(e.target.value)}
             />
           </Modal.Content>

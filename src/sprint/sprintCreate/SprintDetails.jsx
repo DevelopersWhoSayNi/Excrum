@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { Button, Input, Segment, Dropdown } from 'semantic-ui-react';
-import GetTeamDefaultSprintData from './GetSprintData';
+import GetTeamDefaultSprintData from './api/GetSprintData';
 import { FormatDate } from './Tools';
-
-const options = [
-  { key: 'a', text: 'Team 001', value: 'T001' },
-  { key: 'f', text: 'Exact Finance', value: 'T002' },
-  { key: 'c', text: 'Customer Intelligence', value: 'T003' }
-];
+import GetTeamsList from './api/GetTeamsList';
 
 class SprintDetails extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      sprintData: this.props.sprintData
+      sprintData: this.props.sprintData,
+      selectedTeam: null,
+      teamsList: []
     };
 
     this.iterationPath = this.iterationPath.bind(this);
@@ -22,6 +19,15 @@ class SprintDetails extends Component {
 
   componentDidMount() {
     this.setDefaultDates();
+    GetTeamsList('U001').then(res => {
+      if (res !== null) {
+        const selectedTeam = this.getSelectedTeam(res);
+        this.setState({
+          teamsList: res,
+          selectedTeam: selectedTeam
+        });
+      }
+    });
   }
 
   iterationPath() {
@@ -83,12 +89,12 @@ class SprintDetails extends Component {
     this.props.updateSprintDetails(newSprintDetails);
   }
 
-  getSelectedTeam() {
+  getSelectedTeam(teamsList) {
     if (this.state.sprintData.team.teamID) {
-      const selectedValue = options.find(
+      const selectedValue = teamsList.find(
         o => o.value === this.state.sprintData.team.teamID
       );
-      if (selectedValue !== 'undefined') {
+      if (selectedValue !== 'undefined' && selectedValue !== undefined) {
         return selectedValue.value;
       }
     }
@@ -103,8 +109,8 @@ class SprintDetails extends Component {
             search
             selection
             fluid
-            options={options}
-            defaultValue={this.getSelectedTeam()}
+            options={this.state.teamsList}
+            value={this.state.selectedTeam}
             onChange={(value, e) => {
               this.handleTeamChange(e);
             }}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Segment, List, Image, Label } from 'semantic-ui-react';
-import { WeekdayNames } from './DateFormat';
+import { WeekdayNames } from './Tools';
 
 require('../Sprint.css');
 
@@ -60,11 +60,7 @@ export const Member = props => {
 
   return (
     <List.Item>
-      <Image
-        size="tiny"
-        avatar
-        src={props.member.photoSrc}
-      />
+      <Image size="tiny" avatar src={props.member.photoSrc} />
       <List.Content>
         <Segment>
           <List.Header>{props.member.name}</List.Header>
