@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Input, Segment, Dropdown } from 'semantic-ui-react';
+import { Button, Input, Segment, Dropdown, Message } from 'semantic-ui-react';
 import GetTeamDefaultSprintData from './api/GetSprintData';
 import { FormatDate } from './Tools';
 import GetTeamsList from './api/GetTeamsList';
@@ -10,6 +10,7 @@ class SprintDetails extends Component {
 
     this.state = {
       sprintData: this.props.sprintData,
+      errorMessage: [],
       selectedTeam: null,
       teamsList: []
     };
@@ -100,6 +101,49 @@ class SprintDetails extends Component {
     }
   }
 
+  validateInput() {
+    let errorMessage = [];
+    let validInput = true;
+
+    if (
+      this.state.sprintData.team.teamID === null ||
+      this.state.sprintData.team.teamID === ''
+    ) {
+      errorMessage.push('Choose a team');
+      validInput = false;
+    }
+
+    if (
+      this.state.sprintData.sprintNumber === null ||
+      this.state.sprintData.sprintNumber === ''
+    ) {
+      errorMessage.push('Enter the sprint number');
+      validInput = false;
+    }
+
+    if (
+      this.state.sprintData.startDate === null ||
+      document.getElementById('startDateInput').value === ''
+    ) {
+      errorMessage.push('Start date is mandatory');
+      validInput = false;
+    }
+
+    if (
+      this.state.sprintData.endDate === null ||
+      document.getElementById('endDateInput').value === ''
+    ) {
+      errorMessage.push('End date is mandatory');
+      validInput = false;
+    }
+
+    if (validInput) {
+      this.props.handleNavigateTabs(1);
+    } else {
+      this.setState({ errorMessage: errorMessage });
+    }
+  }
+
   render() {
     return (
       <Segment style={{ width: '50%', marginLeft: '0.5%' }}>
@@ -127,6 +171,7 @@ class SprintDetails extends Component {
         </div>
         <div style={{ width: '50%', marginBottom: '2%' }}>
           <Input
+            id="startDateInput"
             type="date"
             label="Start Date"
             fluid
@@ -134,6 +179,7 @@ class SprintDetails extends Component {
             onChange={e => this.handleStartDateChange(e.target.value)}
           />
           <Input
+            id="endDateInput"
             type="date"
             label="End  Date:"
             fluid
@@ -143,7 +189,12 @@ class SprintDetails extends Component {
         </div>
         <br />
 
-        <Button onClick={() => this.props.handleNavigateTabs(1)}>Next</Button>
+        <Message
+          color="red"
+          list={this.state.errorMessage}
+          hidden={this.state.errorMessage.length > 0 ? false : true}
+        />
+        <Button onClick={() => this.validateInput()}>Next</Button>
       </Segment>
     );
   }
