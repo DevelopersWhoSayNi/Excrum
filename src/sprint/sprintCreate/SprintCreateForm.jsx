@@ -38,6 +38,7 @@ class CreateSprintForm extends Component {
         render: () => (
           <CapacityDetails
             sprintData={this.state.sprintData}
+            updateSprintDetails={this.updateSprintDetails}
             updateCapacityDetail={this.updateCapacityDetail}
             handleNavigateTabs={this.handleNavigateTabs}
           />

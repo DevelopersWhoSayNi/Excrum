@@ -14,6 +14,7 @@ import { FormatDateCalendar } from './Tools';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
 import { GetTotalHours } from './Tools';
+import GetMembersCapacityList from './api/GetMembersCapacityList';
 require('../Sprint.css');
 
 class CapacityDetails extends Component {
@@ -21,6 +22,8 @@ class CapacityDetails extends Component {
     super(props);
 
     this.state = {
+      loading: true,
+      totalHours: 0,
       showValidationError: true,
       sprintData: this.props.sprintData,
       OpenModal: false,
@@ -31,6 +34,30 @@ class CapacityDetails extends Component {
         UpdatedValue: 0
       }
     };
+  }
+
+  componentDidMount() {
+    GetMembersCapacityList(this.state.sprintData.team.members).then(
+      response => {
+        const totalHours = GetTotalHours(response);
+        let newSprintDetails = {
+          ...this.state.sprintData.team,
+          members: response
+        };
+
+        newSprintDetails = {
+          ...this.state.sprintData,
+          team: newSprintDetails
+        };
+
+        this.setState({
+          sprintData: newSprintDetails,
+          totalHours: totalHours,
+          loading: false
+        });
+        this.props.updateSprintDetails(newSprintDetails);
+      }
+    );
   }
 
   modifyDayHours = props => {
@@ -99,6 +126,22 @@ class CapacityDetails extends Component {
     }
   };
 
+  capacityList() {
+    if (this.state.loading) {
+      return <div>loading...</div>;
+    } else {
+      return (
+        <List horizontal selection>
+          <MemberCapacityCalendar
+            // groupName={'DSCI'}
+            members={this.state.sprintData.team.members}
+            modifyDayHours={this.modifyDayHours}
+          />
+        </List>
+      );
+    }
+  }
+
   contextRef = createRef();
 
   render() {
@@ -164,7 +207,7 @@ class CapacityDetails extends Component {
                 <br />
                 <CapacitySummery
                   title="Team total Capacity"
-                  value={GetTotalHours(this.state.sprintData.team.members)}
+                  value={this.state.totalHours}
                 />
               </Segment>
             </Sticky>
@@ -172,13 +215,7 @@ class CapacityDetails extends Component {
         </Ref>
 
         <Segment>
-          <List horizontal selection>
-            <MemberCapacityCalendar
-              // groupName={'DSCI'}
-              members={this.state.sprintData.team.members}
-              modifyDayHours={this.modifyDayHours}
-            />
-          </List>
+          {this.capacityList()}
 
           <h4>Team members availability</h4>
           <Button onClick={() => this.props.handleNavigateTabs(0)}>Back</Button>
