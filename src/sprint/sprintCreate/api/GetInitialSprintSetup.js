@@ -12,11 +12,11 @@ const GetInitialSprintSetup = () => {
     effortDelivered: 0,
     effortAdded: 0,
     velocity: 0,
-    team:{
+    team: {
       teamID: null,
       teamName: null,
       members: []
-    },
+    }
   };
 };
 

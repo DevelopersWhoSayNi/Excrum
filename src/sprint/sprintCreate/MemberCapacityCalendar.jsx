@@ -1,37 +1,35 @@
 import React from 'react';
 import { Segment, List, Image, Label } from 'semantic-ui-react';
 import { WeekdayNames } from './Tools';
-
 require('../Sprint.css');
 
 const Day = props => {
   const dayColor = () => {
-    if (props.hours === 0) {
+    if (props.day.hours === 0) {
       return 'red';
-    } else if (props.hours < 8) {
+    } else if (props.day.hours < 8) {
       return 'yellow';
     } else {
       return 'green';
     }
   };
 
-  return (
-    <div className="CalendarDays">
-      <Label circular size="big" color={dayColor()}>
-        <h4 onClick={() => props.modifyDayHours(props)}>{props.hours}</h4>
-      </Label>
-    </div>
-  );
+  if (props.day.type === 0) {
+    return <div></div>;
+  } else {
+    return (
+      <div className="CalendarDays">
+        <Label circular size="big" color={dayColor()}>
+          <h4 onClick={() => props.modifyDayHours(props)}>{props.day.hours}</h4>
+        </Label>
+      </div>
+    );
+  }
 };
 
 const Days = props => {
   return props.member.capacityHours.map((day, index) => (
-    <Day
-      key={index}
-      day={day}
-      hours={props.member.capacityHours[index].hours}
-      modifyDayHours={props.modifyDayHours}
-    />
+    <Day key={index} day={day} modifyDayHours={props.modifyDayHours} />
   ));
 };
 

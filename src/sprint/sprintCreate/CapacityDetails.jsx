@@ -10,10 +10,9 @@ import {
   Rail,
   Sticky
 } from 'semantic-ui-react';
-import { FormatDateCalendar } from './Tools';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
-import { GetTotalHours } from './Tools';
+import { GetTotalHours, CreateMembersCapacityList } from './Tools';
 import GetMembersCapacityList from './api/GetMembersCapacityList';
 require('../Sprint.css');
 
@@ -29,7 +28,7 @@ class CapacityDetails extends Component {
       OpenModal: false,
       updateHours: {
         memberId: 0,
-        DayToBeModified: 0,
+        DayToBeModified: null,
         CurrentValue: 0,
         UpdatedValue: 0
       }
@@ -39,10 +38,17 @@ class CapacityDetails extends Component {
   componentDidMount() {
     GetMembersCapacityList(this.state.sprintData.team.members).then(
       response => {
+        const workDaysList = CreateMembersCapacityList(
+          response,
+          this.state.sprintData.startDate,
+          this.state.sprintData.endDate
+        );
+
         const totalHours = GetTotalHours(response);
+
         let newSprintDetails = {
           ...this.state.sprintData.team,
-          members: response
+          members: workDaysList
         };
 
         newSprintDetails = {
@@ -99,12 +105,14 @@ class CapacityDetails extends Component {
       }
     }
 
+    const totalHours = GetTotalHours(this.state.sprintData.team.members);
+
     const newState = {
       ...this.state.sprintData,
       members: newMembers
     };
     this.setState({ newState });
-    this.setState({ OpenModal: false });
+    this.setState({ OpenModal: false, totalHours: totalHours });
   };
 
   closeModal = () => this.setState({ OpenModal: false });
@@ -136,6 +144,8 @@ class CapacityDetails extends Component {
             // groupName={'DSCI'}
             members={this.state.sprintData.team.members}
             modifyDayHours={this.modifyDayHours}
+            startDate={this.state.sprintData.startDate}
+            endDate={this.state.sprintData.endDate}
           />
         </List>
       );
@@ -159,9 +169,7 @@ class CapacityDetails extends Component {
             <p>Adjust the hours for {this.state.updateHours.DayToBeModified}</p>
             <Input
               id="hoursInput"
-              placeholder={FormatDateCalendar(
-                this.state.updateHours.CurrentValue
-              )}
+              placeholder={this.state.updateHours.CurrentValue}
               onChange={e => this.handleHoursValueUpdate(e.target.value)}
             />
             <Message color={'red'} hidden={this.state.showValidationError}>
