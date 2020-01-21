@@ -196,23 +196,6 @@ class CapacityDetails extends Component {
               pushing
             >
               <Segment>
-                {/* <h4>
-                  {this.state.CapacityDetails.groups[0].groupName} :
-                  {GetTotalHours(
-                    this.state.CapacityDetails.groups,
-                    this.state.CapacityDetails.groups[0].groupName
-                  )}
-                </h4>
-                <h4>
-                  {this.state.CapacityDetails.groups[1].groupName} :
-                  {GetTotalHours(
-                    this.state.CapacityDetails.groups,
-                    this.state.CapacityDetails.groups[1].groupName
-                  )}
-                </h4> */}
-                <br />
-                ------------------------------------
-                <br />
                 <CapacitySummery
                   title="Team total Capacity"
                   value={this.state.totalHours}

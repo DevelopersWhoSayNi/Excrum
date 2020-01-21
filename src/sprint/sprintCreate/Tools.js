@@ -104,6 +104,12 @@ const createCalendarDays = (workDaysList, startDate, endDate) => {
 };
 
 export const CreateMembersCapacityList = (membersList, startDate, endDate) => {
+  if(typeof(props.sprintData.team.members[0].role) !== "undefined"){
+    // split list to groups,
+    // loop the list and do as normal:
+    // append all together 
+  }
+
   membersList.map((member, index) => {
     const updatedCapacityList = createCalendarDays(
       member.capacityHours,
