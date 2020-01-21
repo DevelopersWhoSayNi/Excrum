@@ -54,7 +54,7 @@ class CreateSprintForm extends Component {
         )
       },
       {
-        menuItem: 'Summery',
+        menuItem: 'Summary',
         render: () => (
           <SprintSummary
             sprintData={this.state.sprintData}
