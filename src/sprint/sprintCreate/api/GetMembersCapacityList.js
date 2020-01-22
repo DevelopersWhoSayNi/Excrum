@@ -21,6 +21,21 @@ const GetMemberDefaultInfo = memberId => {
 };
 
 const GetTeamDefaultMembers = membersList => {
+  debugger;
+  if (typeof membersList[0].role !== 'undefined') {
+    //
+  }
+
+  let newMembersList = [];
+
+  const roles = [...new Set(membersList.map(x => x.role))];
+
+  roles.forEach(role => {
+    let newList = membersList.filter(m => m.role === role);
+
+    newMembersList.push({ role: role, members: newList });
+  });
+
   let updatedMembersList = [];
 
   let myPromises = [];
