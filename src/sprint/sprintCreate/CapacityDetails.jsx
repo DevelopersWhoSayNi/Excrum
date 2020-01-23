@@ -12,8 +12,10 @@ import {
 } from 'semantic-ui-react';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
-import { GetTotalHours, CreateMembersCapacityList } from './Tools';
-import GetMembersCapacityList from './api/GetMembersCapacityList';
+import { CreateMembersCapacityList } from './Tools';
+import GetMembersCapacityList, {
+  GroupMembersByRole
+} from './api/GetMembersCapacityList';
 require('../Sprint.css');
 
 class CapacityDetails extends Component {
@@ -22,7 +24,6 @@ class CapacityDetails extends Component {
 
     this.state = {
       loading: true,
-      totalHours: 0,
       showValidationError: true,
       sprintData: this.props.sprintData,
       OpenModal: false,
@@ -44,8 +45,6 @@ class CapacityDetails extends Component {
           this.state.sprintData.endDate
         );
 
-        const totalHours = GetTotalHours(response);
-
         let newSprintDetails = {
           ...this.state.sprintData.team,
           members: workDaysList
@@ -58,7 +57,6 @@ class CapacityDetails extends Component {
 
         this.setState({
           sprintData: newSprintDetails,
-          totalHours: totalHours,
           loading: false
         });
         this.props.updateSprintDetails(newSprintDetails);
@@ -105,14 +103,12 @@ class CapacityDetails extends Component {
       }
     }
 
-    const totalHours = GetTotalHours(this.state.sprintData.team.members);
-
     const newState = {
       ...this.state.sprintData,
       members: newMembers
     };
     this.setState({ newState });
-    this.setState({ OpenModal: false, totalHours: totalHours });
+    this.setState({ OpenModal: false });
   };
 
   closeModal = () => this.setState({ OpenModal: false });
@@ -138,17 +134,29 @@ class CapacityDetails extends Component {
     if (this.state.loading) {
       return <div>loading...</div>;
     } else {
-      return (
-        <List horizontal selection>
-          <MemberCapacityCalendar
-            // groupName={'DSCI'}
-            members={this.state.sprintData.team.members}
-            modifyDayHours={this.modifyDayHours}
-            startDate={this.state.sprintData.startDate}
-            endDate={this.state.sprintData.endDate}
-          />
-        </List>
+      let result = [];
+      const membersGroupedByRole = GroupMembersByRole(
+        this.state.sprintData.team.members
       );
+
+      membersGroupedByRole.forEach(group => {
+        result.push(
+          <div key={group.role === undefined ? 1 : group.role}>
+            {group.role === undefined ? null : <h3>{group.role}</h3>}
+            <List horizontal selection>
+              <MemberCapacityCalendar
+                groupName={group.role}
+                members={group.members}
+                modifyDayHours={this.modifyDayHours}
+                startDate={this.state.sprintData.startDate}
+                endDate={this.state.sprintData.endDate}
+              />
+            </List>
+          </div>
+        );
+      });
+
+      return result;
     }
   }
 
@@ -196,10 +204,7 @@ class CapacityDetails extends Component {
               pushing
             >
               <Segment>
-                <CapacitySummery
-                  title="Team total Capacity"
-                  value={this.state.totalHours}
-                />
+                <CapacitySummery membersList={this.state.sprintData.team.members} />
               </Segment>
             </Sticky>
           </Rail>

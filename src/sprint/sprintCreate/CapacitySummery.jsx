@@ -1,19 +1,30 @@
 import React from 'react';
+import { GroupMembersByRole } from './api/GetMembersCapacityList';
+import { GetTotalHours } from './Tools';
+import { Segment } from 'semantic-ui-react';
 
-class CapacitySummery extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const showCapacitySummary = membersList => {
+  if (membersList[0].capacityHours === undefined) {
+    return 0;
+  } else {
+    return GetTotalHours(membersList);
   }
+};
 
-  render() {
-    return (
-      <div>
-        <h3>{this.props.title} :</h3>
-        <h4>{this.props.value}</h4>
-      </div>
+export const CapacitySummery = props => {
+  const membersGroupedByRole = GroupMembersByRole(props.membersList);
+  let result = [];
+
+  membersGroupedByRole.forEach(group => {
+    result.push(
+      <Segment key={group.role === undefined ? 1 : group.role}>
+        <h3>{group.role === undefined ? 'Team' : group.role} Capacity:</h3>
+        <h3>{showCapacitySummary(group.members)} hours</h3>
+      </Segment>
     );
-  }
-}
+  });
+
+  return result;
+};
 
 export default CapacitySummery;

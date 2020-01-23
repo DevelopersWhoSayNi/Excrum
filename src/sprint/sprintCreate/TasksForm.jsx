@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import { Button, Ref, Rail, Sticky } from 'semantic-ui-react';
 import DragDropList from './DragDropList';
-import { SummaryStats } from './SprintSummary';
+import CapacitySummery from './CapacitySummery';
 
 const TasksForm = props => {
   let contextRef = createRef();
@@ -10,7 +10,7 @@ const TasksForm = props => {
       <Ref innerRef={contextRef}>
         <Rail position="right">
           <Sticky bottomOffset={50} context={contextRef} offset={50} pushing>
-            <SummaryStats {...props} />
+            <CapacitySummery membersList={props.sprintData.team.members} />
           </Sticky>
         </Rail>
       </Ref>

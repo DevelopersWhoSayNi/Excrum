@@ -20,31 +20,33 @@ const GetMemberDefaultInfo = memberId => {
     });
 };
 
-const GetTeamDefaultMembers = membersList => {
-  debugger;
-  if (typeof membersList[0].role !== 'undefined') {
-    //
-  }
-
-  let newMembersList = [];
-
+export const GroupMembersByRole = membersList => {
+  let groupedByRole = [];
   const roles = [...new Set(membersList.map(x => x.role))];
 
   roles.forEach(role => {
     let newList = membersList.filter(m => m.role === role);
 
-    newMembersList.push({ role: role, members: newList });
+    groupedByRole.push({ role: role, members: newList });
   });
 
-  let updatedMembersList = [];
+  return groupedByRole;
+};
 
+const GetTeamDefaultMembers = membersList => {
+  let groupedByRole = GroupMembersByRole(membersList);
+  let updatedMembersList = [];
   let myPromises = [];
-  membersList.forEach(member => {
-    myPromises.push(
-      GetMemberDefaultInfo(member.id).then(res => {
-        updatedMembersList.push(res);
-      })
-    );
+
+  groupedByRole.forEach(group => {
+    group.members.forEach(member => {
+      myPromises.push(
+        GetMemberDefaultInfo(member.id).then(res => {
+          res.role = group.role;
+          updatedMembersList.push(res);
+        })
+      );
+    });
   });
 
   return Promise.all(myPromises).then(() => {
