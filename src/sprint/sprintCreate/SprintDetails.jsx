@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Input, Segment, Dropdown, Message } from 'semantic-ui-react';
 import GetTeamDefaultSprintData from './api/GetSprintData';
-import { FormatDate } from './Tools';
+import { FormatDate } from '../Tools';
 import GetTeamsList from './api/GetTeamsList';
 
 class SprintDetails extends Component {

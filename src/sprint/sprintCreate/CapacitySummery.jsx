@@ -1,6 +1,6 @@
 import React from 'react';
 import { GroupMembersByRole } from './api/GetMembersCapacityList';
-import { GetTotalHours } from './Tools';
+import { GetTotalHours } from '../Tools';
 import { Segment } from 'semantic-ui-react';
 
 const showCapacitySummary = membersList => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Message } from 'semantic-ui-react';
 import CapacitySummery from './CapacitySummery';
-import { RemoveMembersPhoto } from './Tools';
+import { RemoveMembersPhoto } from '../Tools';
 import Axios from 'axios';
 
 const CreateSprint = props => {

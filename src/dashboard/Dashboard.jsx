@@ -56,19 +56,20 @@ class MainDashboard extends Component {
         <br />
         <h2 className="text">{this.props.UserName}</h2>
         <h2 className="text">{this.props.UserPassword}</h2>
-        <Link to="/profile">Profile (Protected)</Link>
+        {/* <Link to="/profile">Profile (Protected)</Link> */}
         <br />
         <br />
-        <Link to="/login">Login</Link>
+        {/* <Link to="/login">Login</Link> */}
+        <Link to="/Sprints">Sprints overview</Link>
         <br />
         <br />
         <Link to="/CreateSprint">Create Sprint</Link>
         <br />
         <br />
-        <Link to="/logout">Logout</Link>
-        <br />
-        <br />
         <Link to="/createTeam">Create Team</Link>
+        <br />
+        <br />
+        {/* <Link to="/logout">Logout</Link> */}
       </div>
     );
   }
@@ -87,7 +88,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(MainDashboard);

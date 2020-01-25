@@ -10,6 +10,7 @@ import Dashboard from '../dashboard/Dashboard';
 import Profile from '../user/userProfile/Profile';
 import CreateSprintForm from '../sprint/sprintCreate/SprintCreateForm';
 import CreateTeamForm from '../team/teamCreate/CreateTeamForm';
+import SprintsOverview from '../sprint/dashboards/SprintsOverview';
 
 const Routes = props => {
   return (
@@ -26,6 +27,12 @@ const Routes = props => {
           token={props.Token}
           path="/profile"
           component={Profile}
+        />
+        <RouteProtected
+          exact
+          accessToken={props.Token}
+          path="/Sprints"
+          component={SprintsOverview}
         />
         <RouteProtected
           exact

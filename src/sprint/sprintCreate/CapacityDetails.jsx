@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
-import { CreateMembersCapacityList } from './Tools';
+import { CreateMembersCapacityList } from '../Tools';
 import GetMembersCapacityList, {
   GroupMembersByRole
 } from './api/GetMembersCapacityList';
@@ -204,7 +204,9 @@ class CapacityDetails extends Component {
               pushing
             >
               <Segment>
-                <CapacitySummery membersList={this.state.sprintData.team.members} />
+                <CapacitySummery
+                  membersList={this.state.sprintData.team.members}
+                />
               </Segment>
             </Sticky>
           </Rail>

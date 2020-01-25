@@ -1,6 +1,6 @@
 import React from 'react';
 import { Segment, List, Image, Label } from 'semantic-ui-react';
-import { WeekdayNames } from './Tools';
+import { WeekdayNames } from '../Tools';
 require('../Sprint.css');
 
 const Day = props => {
