@@ -39,7 +39,12 @@ class SprintDetails extends Component {
 
   handleTeamChange(e) {
     GetTeamDefaultSprintData(e.value).then(response => {
-      const newSprintDetails = { ...this.state.sprintData, team: response };
+      let newSprintDetails = {
+        ...this.state.sprintData,
+        team: response.team,
+        lastSprintId: response.lastSprintId
+      };
+
       this.setState({ sprintData: newSprintDetails });
       this.props.updateSprintDetails(newSprintDetails);
     });

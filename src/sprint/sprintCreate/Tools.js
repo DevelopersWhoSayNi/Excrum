@@ -1,3 +1,11 @@
+export const RemoveMembersPhoto = sprintData => {
+  sprintData.team.members.forEach(member => {
+    member.photoSrc = null;
+  });
+
+  return sprintData;
+};
+
 export const GetTotalHours = membersList => {
   let totalHours = 0;
 

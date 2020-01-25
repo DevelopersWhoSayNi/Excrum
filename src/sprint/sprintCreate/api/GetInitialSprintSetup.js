@@ -1,6 +1,5 @@
 const GetInitialSprintSetup = () => {
   return {
-    id: null,
     sprintNumber: null,
     startDate: null,
     endDate: null,

@@ -4,7 +4,8 @@ const GetTeamDefaultInfo = teamId => {
   const url =
     'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/teams';
   const body = {
-    id: teamId
+    id: teamId,
+    action: 'GetTeamDetails'
   };
 
   return Axios.post(url, body)
@@ -37,7 +38,14 @@ const GetSprintData = teamId => {
   return GetTeamDefaultInfo(teamId)
     .then(teamResponse => {
       if (teamResponse !== null) {
-        return teamResponse;
+        return {
+          lastSprintId: teamResponse.lastSprintId,
+          team: {
+            teamID: teamResponse.teamID,
+            teamName: teamResponse.teamName,
+            members: teamResponse.members
+          }
+        };
 
         // return GetTeamDefaultMembers(teamResponse.members).then(
         //   memberResponse => {
