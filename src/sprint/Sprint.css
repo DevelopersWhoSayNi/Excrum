@@ -26,7 +26,15 @@
 	background-color: teal;
 }
 
-.CreateSprint {
+.MainForm {
 	width: 80%;
 	margin-left: 3% !important;
+}
+
+.SprintCards,
+.SprintCard {
+	display: grid;
+	grid-template-areas: 'a a';
+	grid-gap: 10px;
+	grid-auto-columns: 200px;
 }

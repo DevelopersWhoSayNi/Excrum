@@ -20,6 +20,7 @@ class SprintDetails extends Component {
 
   componentDidMount() {
     this.setDefaultDates();
+
     GetTeamsList('U001').then(res => {
       if (res !== null) {
         const selectedTeam = this.getSelectedTeam(res);
@@ -139,6 +140,11 @@ class SprintDetails extends Component {
       document.getElementById('endDateInput').value === ''
     ) {
       errorMessage.push('End date is mandatory');
+      validInput = false;
+    }
+
+    if (this.state.sprintData.startDate < this.state.sprintData.endDate) {
+      errorMessage.push("End date can't be before Start date");
       validInput = false;
     }
 

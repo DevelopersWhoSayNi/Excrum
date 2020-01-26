@@ -1,14 +1,15 @@
 import React, { Component, createRef } from 'react';
 import {
   Button,
-  Segment,
   List,
   Message,
   Modal,
   Input,
   Ref,
   Rail,
-  Sticky
+  Sticky,
+  Dimmer,
+  Loader
 } from 'semantic-ui-react';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
@@ -18,7 +19,7 @@ import GetMembersCapacityList, {
 } from './api/GetMembersCapacityList';
 require('../Sprint.css');
 
-class CapacityDetails extends Component {
+export class CapacityDetails extends Component {
   constructor(props) {
     super(props);
 
@@ -36,32 +37,46 @@ class CapacityDetails extends Component {
     };
   }
 
+  componentDidUpdate() {
+    this.props.updateSprintData(this.state.sprintData);
+  }
+
   componentDidMount() {
-    GetMembersCapacityList(this.state.sprintData.team.members).then(
-      response => {
-        const workDaysList = CreateMembersCapacityList(
-          response,
-          this.state.sprintData.startDate,
-          this.state.sprintData.endDate
-        );
+    if (this.refreshCapacityCalendar()) {
+      GetMembersCapacityList(this.state.sprintData.team.members).then(
+        response => {
+          const workDaysList = CreateMembersCapacityList(
+            response,
+            this.state.sprintData.startDate,
+            this.state.sprintData.endDate
+          );
 
-        let newSprintDetails = {
-          ...this.state.sprintData.team,
-          members: workDaysList
-        };
+          let newSprintDetails = {
+            ...this.state.sprintData.team,
+            members: workDaysList
+          };
 
-        newSprintDetails = {
-          ...this.state.sprintData,
-          team: newSprintDetails
-        };
+          newSprintDetails = {
+            ...this.state.sprintData,
+            team: newSprintDetails
+          };
 
-        this.setState({
-          sprintData: newSprintDetails,
-          loading: false
-        });
-        this.props.updateSprintDetails(newSprintDetails);
-      }
-    );
+          this.setState({
+            sprintData: newSprintDetails,
+            loading: false
+          });
+        }
+      );
+    } else {
+      this.setState({ sprintData: this.props.sprintData, loading: false });
+    }
+  }
+
+  refreshCapacityCalendar() {
+    if (this.state.sprintData.team.members[0].capacityHours === undefined) {
+      return true;
+    }
+    return false;
   }
 
   modifyDayHours = props => {
@@ -132,7 +147,11 @@ class CapacityDetails extends Component {
 
   capacityList() {
     if (this.state.loading) {
-      return <div>loading...</div>;
+      return (
+        <Dimmer active={this.state.loading} inverted>
+          <Loader inverted>Loading</Loader>
+        </Dimmer>
+      );
     } else {
       let result = [];
       const membersGroupedByRole = GroupMembersByRole(
@@ -203,25 +222,39 @@ class CapacityDetails extends Component {
               offset={50}
               pushing
             >
-              <Segment>
-                <CapacitySummery
-                  membersList={this.state.sprintData.team.members}
-                />
-              </Segment>
+              <CapacitySummery
+                membersList={this.state.sprintData.team.members}
+              />
             </Sticky>
           </Rail>
         </Ref>
 
-        <Segment>
-          {this.capacityList()}
-
-          <h4>Team members availability</h4>
-          <Button onClick={() => this.props.handleNavigateTabs(0)}>Back</Button>
-          <Button onClick={() => this.props.handleNavigateTabs(2)}>Next</Button>
-        </Segment>
+        {this.capacityList()}
       </div>
     );
   }
 }
 
-export default CapacityDetails;
+const CapacityDetailsStep = props => {
+  let newSprintData = null;
+  const updateSprintData = sprintData => {
+    newSprintData = sprintData;
+  };
+
+  return (
+    <div>
+      <CapacityDetails {...props} updateSprintData={updateSprintData} />
+      <Button onClick={() => props.handleNavigateTabs(0)}>Back</Button>
+      <Button
+        onClick={() => {
+          props.updateCapacityDetail(newSprintData.team);
+          props.handleNavigateTabs(2);
+        }}
+      >
+        Next
+      </Button>
+    </div>
+  );
+};
+
+export default CapacityDetailsStep;

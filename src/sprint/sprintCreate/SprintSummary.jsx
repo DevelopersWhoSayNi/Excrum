@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import { Button, Message } from 'semantic-ui-react';
+import { Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import CapacitySummery from './CapacitySummery';
-import { RemoveMembersPhoto } from '../Tools';
+import { GetTotalHours } from '../Tools';
+// import { RemoveMembersPhoto } from '../Tools';
 import Axios from 'axios';
 
 const CreateSprint = props => {
+  //using timestamp as unique ID (probably not a good idea)
+  var d = new Date();
+  props.sprintData.sprintId = d.valueOf().toString();
+  props.sprintData.capacity = GetTotalHours(props.sprintData.team.members);
   const url =
     'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/sprints';
 
+  const body = {
+    action: 'CreateNewSprint',
+    sprintDetails: props.sprintData
+  };
+
   //remove users profile photos as they are redundant.
-  const cleanedUpSprintData = RemoveMembersPhoto(props.sprintData);
-  return Axios.post(url, cleanedUpSprintData)
+  // const cleanedUpSprintData = RemoveMembersPhoto(props.sprintData);
+  return Axios.post(url, body)
     .then(response => {
       UpdateTeamsLastSprintId(
         props.sprintData.team.teamID,
@@ -46,19 +56,24 @@ class SprintSummary extends Component {
     super(props);
 
     this.state = {
-      sprintCreatedBanner: true
+      sprintCreatedBanner: true,
+      loading: false
     };
   }
 
   createSprint() {
+    this.setState({ loading: true });
     CreateSprint(this.props).then(() => {
-      this.setState({ sprintCreatedBanner: false });
+      this.setState({ sprintCreatedBanner: false, loading: false });
     });
   }
 
   render() {
     return (
       <div>
+        <Dimmer active={this.state.loading} inverted>
+          <Loader inverted>Loading</Loader>
+        </Dimmer>
         <Message positive hidden={this.state.sprintCreatedBanner}>
           <Message.Header>Sprint created successfully</Message.Header>
           <p>
@@ -73,7 +88,11 @@ class SprintSummary extends Component {
         <h4>Efforts planned:</h4>
 
         <Button onClick={() => this.props.handleNavigateTabs(2)}>Back</Button>
-        <Button primary onClick={() => this.createSprint()}>
+        <Button
+          disabled={!this.state.sprintCreatedBanner}
+          primary
+          onClick={() => this.createSprint()}
+        >
           Create
         </Button>
       </div>

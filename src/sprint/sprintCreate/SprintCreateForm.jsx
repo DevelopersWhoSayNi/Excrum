@@ -38,7 +38,6 @@ class CreateSprintForm extends Component {
         render: () => (
           <CapacityDetails
             sprintData={this.state.sprintData}
-            updateSprintDetails={this.updateSprintDetails}
             updateCapacityDetail={this.updateCapacityDetail}
             handleNavigateTabs={this.handleNavigateTabs}
           />
@@ -75,10 +74,10 @@ class CreateSprintForm extends Component {
     });
   };
 
-  updateCapacityDetail = capacity => {
+  updateCapacityDetail = team => {
     const newSprintData = {
       ...this.state.sprintData,
-      capacity: capacity
+      team: team
     };
 
     this.setState({
@@ -90,7 +89,7 @@ class CreateSprintForm extends Component {
     const { activeIndex } = this.state;
 
     return (
-      <Segment compact className="CreateSprint">
+      <Segment compact className="MainForm">
         <Tab
           panes={this.stepsTab()}
           activeIndex={activeIndex}
