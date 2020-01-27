@@ -14,18 +14,7 @@ const membersListOverview = membersList => {
 };
 
 class SprintCards extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isEditMode: this.props.isEditMode,
-      sprint: this.props.sprint
-    };
-  }
-
-  // componentDidUpdate() {
-  //   this.setState({ sprint: this.props.sprint });
-  // }
+  state = { sprint: this.props.sprint, isEditMode: this.props.isEditMode };
 
   openCapacityDetailsModal() {
     this.props.openCapacityDetailsModal();

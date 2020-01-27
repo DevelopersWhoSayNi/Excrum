@@ -171,12 +171,7 @@ class SprintsOverview extends Component {
               </Message>
             ) : null}
             <Button onClick={e => this.closeSprintModal()}>Cancel</Button>
-            <Button
-              primary
-              onClick={e => {
-                this.updateCapacity();
-              }}
-            >
+            <Button primary onClick={e => this.updateCapacity()}>
               Save
             </Button>
             <Button>Delete</Button>
