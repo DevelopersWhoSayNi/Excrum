@@ -143,8 +143,8 @@ class SprintDetails extends Component {
       validInput = false;
     }
 
-    if (this.state.sprintData.startDate < this.state.sprintData.endDate) {
-      errorMessage.push("End date can't be before Start date");
+    if (this.state.sprintData.startDate >= this.state.sprintData.endDate) {
+      errorMessage.push("End date can't be same or before the start date");
       validInput = false;
     }
 

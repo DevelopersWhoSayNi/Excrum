@@ -37,46 +37,80 @@ export class CapacityDetails extends Component {
     };
   }
 
-  componentDidUpdate() {
-    this.props.updateSprintData(this.state.sprintData);
-  }
-
   componentDidMount() {
-    if (this.refreshCapacityCalendar()) {
-      GetMembersCapacityList(this.state.sprintData.team.members).then(
-        response => {
-          const workDaysList = CreateMembersCapacityList(
-            response,
-            this.state.sprintData.startDate,
-            this.state.sprintData.endDate
-          );
-
-          let newSprintDetails = {
-            ...this.state.sprintData.team,
-            members: workDaysList
-          };
-
-          newSprintDetails = {
-            ...this.state.sprintData,
-            team: newSprintDetails
-          };
-
-          this.setState({
-            sprintData: newSprintDetails,
-            loading: false
-          });
-        }
-      );
+    if (this.shouldRefreshCapacityCalendar()) {
+      this.refreshCapacityCalendar();
     } else {
       this.setState({ sprintData: this.props.sprintData, loading: false });
     }
   }
 
-  refreshCapacityCalendar() {
+  componentDidUpdate() {
+    this.props.updateSprintData(this.state.sprintData);
+  }
+
+  shouldRefreshCapacityCalendar() {
     if (this.state.sprintData.team.members[0].capacityHours === undefined) {
       return true;
     }
+
+    const firsSprintDayDate = this.getFirsSprintDayDate(
+      this.state.sprintData.team.members[0].capacityHours
+    );
+
+    const lastSprintDayDate = this.state.sprintData.team.members[0]
+      .capacityHours[
+      this.state.sprintData.team.members[0].capacityHours.length - 1
+    ].date;
+
+    if (
+      firsSprintDayDate !== this.state.sprintData.startDate ||
+      lastSprintDayDate !== this.state.sprintData.endDate
+    ) {
+      return true;
+    }
+
     return false;
+  }
+
+  getFirsSprintDayDate(capacityHours) {
+    let result = '';
+
+    for (let i = 0; i < capacityHours.length; i++) {
+      if (capacityHours[i].date !== 'blank') {
+        result = capacityHours[i].date;
+        break;
+      }
+    }
+
+    return result;
+  }
+
+  refreshCapacityCalendar() {
+    GetMembersCapacityList(this.state.sprintData.team.members).then(
+      response => {
+        const workDaysList = CreateMembersCapacityList(
+          response,
+          this.state.sprintData.startDate,
+          this.state.sprintData.endDate
+        );
+
+        let newSprintDetails = {
+          ...this.state.sprintData.team,
+          members: workDaysList
+        };
+
+        newSprintDetails = {
+          ...this.state.sprintData,
+          team: newSprintDetails
+        };
+
+        this.setState({
+          sprintData: newSprintDetails,
+          loading: false
+        });
+      }
+    );
   }
 
   modifyDayHours = props => {

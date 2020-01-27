@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const UpdatedSprintDetails = sprintData => {
+const UpdateSprintDetails = sprintData => {
   const url =
     'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/sprints';
 
@@ -18,4 +18,4 @@ const UpdatedSprintDetails = sprintData => {
     });
 };
 
-export default UpdatedSprintDetails;
+export default UpdateSprintDetails;

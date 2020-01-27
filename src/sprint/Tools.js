@@ -85,7 +85,7 @@ const createCalendarDays = (workDaysList, startDate, endDate) => {
   const formatedStartDate = formatAndAdjustDate(startDate);
   const formatedEndDate = formatAndAdjustDate(endDate);
   const firstDayNumberOfSprint = formatedStartDate.getDay();
-  const sprintLength = datediff(formatedStartDate, formatedEndDate);
+  const sprintLength = datediff(formatedStartDate, formatedEndDate) + 1;
 
   for (let i = 1; i < firstDayNumberOfSprint; i++) {
     adjustedList.push({

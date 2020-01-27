@@ -38,3 +38,30 @@
 	grid-gap: 10px;
 	grid-auto-columns: 200px;
 }
+
+.SprintEditInput {
+	min-width: 220px;
+	padding: 2%;
+}
+
+.SprintEditInput .label {
+	min-width: 140px;
+}
+
+.SprintEditInput .SecondColumn {
+	padding-top: 2% !important;
+	padding-left: 75% !important;
+}
+
+.divider {
+	display: none;
+}
+
+.SecondRowSecondColumn {
+	padding-top: 24%;
+	padding-left: 75%;
+}
+
+.DirtyCapacity {
+	color: red;
+}
