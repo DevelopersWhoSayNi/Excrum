@@ -17,6 +17,7 @@ import { CreateMembersCapacityList } from '../Tools';
 import GetMembersCapacityList, {
   GroupMembersByRole
 } from './api/GetMembersCapacityList';
+import { GetTotalHours } from '../Tools';
 require('../Sprint.css');
 
 export class CapacityDetails extends Component {
@@ -275,13 +276,37 @@ const CapacityDetailsStep = props => {
     newSprintData = sprintData;
   };
 
+  const updateCapacityHours = () => {
+    const membersGroupedByRole = GroupMembersByRole(newSprintData.team.members);
+    let capacityDetails = [];
+
+    membersGroupedByRole.map(group => {
+      let groupName = newSprintData.team.teamName;
+      if (group.role !== undefined) {
+        groupName = group.role;
+      }
+
+      capacityDetails.push({
+        groupName: groupName,
+        capacityHours: GetTotalHours(group.members),
+        effortsSuggested: 0,
+        effortsPlanned: 0,
+        effortsAdded: 0,
+        effortsDelivered: 0
+      });
+      return 1;
+    });
+    newSprintData.capacityDetails = capacityDetails;
+    props.updateCapacityDetail(newSprintData);
+  };
+
   return (
     <div>
       <CapacityDetails {...props} updateSprintData={updateSprintData} />
       <Button onClick={() => props.handleNavigateTabs(0)}>Back</Button>
       <Button
         onClick={() => {
-          props.updateCapacityDetail(newSprintData.team);
+          updateCapacityHours();
           props.handleNavigateTabs(2);
         }}
       >

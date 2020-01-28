@@ -74,10 +74,11 @@ class CreateSprintForm extends Component {
     });
   };
 
-  updateCapacityDetail = team => {
+  updateCapacityDetail = sprintData => {
     const newSprintData = {
       ...this.state.sprintData,
-      team: team
+      team: sprintData.team,
+      capacityDetails: sprintData.capacityDetails
     };
 
     this.setState({
