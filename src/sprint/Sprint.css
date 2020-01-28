@@ -65,3 +65,22 @@
 .DirtyCapacity {
 	color: red;
 }
+
+.SprintSummaryBlocks {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.SprintSummaryBlocks .Rows {
+	display: inline-flex;
+}
+
+.SprintSummaryBlocks .InputText {
+	padding-top: 5%;
+}
+
+.SprintSummaryBlocks .InputBox {
+	min-width: 150px;
+	padding-left: 2%;
+}
+

@@ -7,11 +7,16 @@ const GetInitialSprintSetup = () => {
     iterationPath: null,
     sprintLength: 10,
     lastSprintId: null,
-    capacity: 0,
-    effortEstimated: 0,
-    effortDelivered: 0,
-    effortAdded: 0,
-    velocity: 0,
+    capacityDetails: [
+      {
+        groupName: null,
+        capacityHours: 0,
+        effortsSuggested: 0,
+        effortsPlanned: 0,
+        effortsAdded: 0,
+        effortsDelivered: 0
+      }
+    ],
     team: {
       teamID: null,
       teamName: null,

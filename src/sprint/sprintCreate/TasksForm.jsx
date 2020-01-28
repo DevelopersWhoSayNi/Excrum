@@ -1,30 +1,48 @@
-import React, { createRef } from 'react';
-import { Button, Ref, Rail, Sticky } from 'semantic-ui-react';
+import React, { Component, createRef } from 'react';
+import { Button, Ref, Rail, Sticky, Dimmer, Loader } from 'semantic-ui-react';
 import DragDropList from './DragDropList';
 import CapacitySummery from './CapacitySummery';
 
-const TasksForm = props => {
-  let contextRef = createRef();
+class TasksForm extends Component {
+  constructor(props) {
+    super(props);
+    this.canvasRef = createRef();
 
-  return (
-    <div>
-      <Ref innerRef={contextRef}>
-        <Rail position="right">
-          <Sticky bottomOffset={50} context={contextRef} offset={50} pushing>
-            <CapacitySummery membersList={props.sprintData.team.members} />
-          </Sticky>
-        </Rail>
-      </Ref>
+    this.state = { lastSprintData: null };
+  }
 
-      <div style={{ display: 'inline-flex' }}>
-        <DragDropList />
+  render() {
+    return (
+      <div>
+        <Dimmer active={this.state.loading} inverted>
+          <Loader inverted>Loading</Loader>
+        </Dimmer>
+        <Ref innerRef={this.canvasRef}>
+          <Rail position="right">
+            <Sticky
+              bottomOffset={50}
+              context={this.canvasRef}
+              offset={50}
+              pushing
+            >
+              <CapacitySummery
+                membersList={this.props.sprintData.team.members}
+              />
+            </Sticky>
+          </Rail>
+        </Ref>
+
+        <div style={{ display: 'inline-flex' }}>
+          <DragDropList />
+        </div>
+
+        <br />
+        <br />
+        <Button onClick={() => this.props.handleNavigateTabs(1)}>Back</Button>
+        <Button onClick={() => this.props.handleNavigateTabs(3)}>Next</Button>
       </div>
-      <br />
-      <br />
-      <Button onClick={() => props.handleNavigateTabs(1)}>Back</Button>
-      <Button onClick={() => props.handleNavigateTabs(3)}>Next</Button>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default TasksForm;

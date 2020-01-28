@@ -1,64 +1,53 @@
 import React, { Component } from 'react';
-import { Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import CapacitySummery from './CapacitySummery';
-import { GetTotalHours } from '../Tools';
+import {
+  Button,
+  Message,
+  Dimmer,
+  Loader,
+  Segment,
+  Input,
+  List
+} from 'semantic-ui-react';
+import CreateSprint from './api/CreateSprint';
+import GetTeamSprintStats from './api/GetTeamSprintStats';
+
+//TODO: create a class 'reactive', that pushes state change 'with API call result in it' as props to TaskForm
 // import { RemoveMembersPhoto } from '../Tools';
-import Axios from 'axios';
-
-const CreateSprint = props => {
-  //using timestamp as unique ID (probably not a good idea)
-  var d = new Date();
-  props.sprintData.sprintId = d.valueOf().toString();
-  props.sprintData.capacity = GetTotalHours(props.sprintData.team.members);
-  const url =
-    'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/sprints';
-
-  const body = {
-    action: 'CreateNewSprint',
-    sprintDetails: props.sprintData
-  };
-
-  //remove users profile photos as they are redundant.
-  // const cleanedUpSprintData = RemoveMembersPhoto(props.sprintData);
-  return Axios.post(url, body)
-    .then(response => {
-      UpdateTeamsLastSprintId(
-        props.sprintData.team.teamID,
-        response.data.body.sprintId
-      );
-      console.log('done' + response.data.body.sprintId);
-    })
-    .catch(error => {
-      console.log('Failed');
-    });
-};
-
-const UpdateTeamsLastSprintId = (teamId, lastSprintId) => {
-  const url =
-    'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/teams';
-  const body = {
-    action: 'UpdateLastSprint',
-    teamId: teamId,
-    lastSprintId: lastSprintId
-  };
-
-  Axios.post(url, body)
-    .then(response => {
-      console.log('done');
-    })
-    .catch(error => {
-      console.log('Failed');
-    });
-};
 
 class SprintSummary extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      newSprintData: this.props.sprintData,
+      lastSprintData: null,
       sprintCreatedBanner: true,
       loading: false
     };
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    GetTeamSprintStats(this.props.sprintData.lastSprintId).then(res => {
+      if (res === null) {
+        this.setState({
+          loading: false
+        });
+      } else {
+        ///
+        this.setState({
+          loading: false,
+          lastSprintData: {
+            sprintNumber: res.sprintNumber,
+            capacityHours: res.capacity,
+            effortsSuggested: res.effortsSuggested,
+            effortsPlanned: res.effortsPlanned,
+            effortsAdded: res.effortsAdded,
+            effortsDelivered: res.effortsDelivered
+          }
+        });
+      }
+    });
   }
 
   createSprint() {
@@ -66,6 +55,110 @@ class SprintSummary extends Component {
     CreateSprint(this.props).then(() => {
       this.setState({ sprintCreatedBanner: false, loading: false });
     });
+  }
+
+  getSuggestedEffort() {
+    if (this.state.lastSprintData === null) {
+      return 'Suggestions requires more data from previous sprints';
+    } else if (
+      this.state.lastSprintData.effortDelivered === null ||
+      this.state.lastSprintData.effortDelivered === 0
+    ) {
+      return 'Please fill in efforts delivered in last Sprint';
+    } else {
+      return (
+        (this.state.lastSprintData.effortDelivered /
+          this.state.lastSprintData.capacity) *
+        this.state.newSprintData.capacity
+      );
+    }
+  }
+
+  handleEffortPlannedChange(value) {
+    const newSprintDetails = {
+      ...this.state.newSprintData,
+      effortEstimated: value
+    };
+    this.setState({ newSprintData: newSprintDetails });
+  }
+
+  handleEffortDeliveredChange(value) {
+    const newSprintDetails = {
+      ...this.state.lastSprintData,
+      effortDelivered: value
+    };
+    this.setState({ lastSprintData: newSprintDetails });
+  }
+
+  getLastSprintCapacityDetail(groupName) {
+    // JS find group in lastSprint.capacity base in group name
+  }
+
+  renderCapacitySummaries() {
+    return this.state.newSprintData.capacityDetails.map(
+      (newSprintCapacityDetail, index) => {
+        const lastSprintCapacityDetail = this.getLastSprintCapacityDetail(
+          newSprintCapacityDetail.groupName
+        );
+        return (
+          <List.Item key={index}>
+            {this.renderCapacitySummary(
+              newSprintCapacityDetail,
+              lastSprintCapacityDetail
+            )}
+          </List.Item>
+        );
+      }
+    );
+  }
+
+  renderCapacitySummary(newSprintCapacityDetail, lastSprintCapacityDetail) {
+    return (
+      <div>
+        {this.state.lastSprintData ? (
+          <Segment className="SprintSummaryBlocks">
+            <h2>Last sprint: {this.state.lastSprintData.sprintNumber}</h2>
+            <h4>Capacity: {this.state.lastSprintData.capacity}</h4>
+            <h4>Suggested Effort: {this.state.lastSprintData.sprintNumber}</h4>
+            <h4>Effort Planned: {this.state.lastSprintData.effortEstimated}</h4>
+            <h4 className="Rows">
+              <p className="InputText">Efforts Added:</p>
+              <Input
+                className="InputBox"
+                fluid
+                placeholder={this.state.lastSprintData.effortAdded}
+                onChange={e => this.handleEffortPlannedChange(e.target.value)}
+              />
+            </h4>
+            <br />
+            <h4 className="Rows">
+              <p className="InputText">Efforts Delivered:</p>
+              <Input
+                className="InputBox"
+                fluid
+                placeholder={this.state.lastSprintData.effortDelivered}
+                onChange={e => this.handleEffortDeliveredChange(e.target.value)}
+              />
+            </h4>
+          </Segment>
+        ) : null}
+
+        <Segment className="SprintSummaryBlocks">
+          <h2>New sprint: {this.state.newSprintData.sprintNumber}</h2>
+          <h4>Capacity: {this.state.newSprintData.capacity}</h4>
+          <h4>Suggested Effort: {this.getSuggestedEffort()}</h4>
+          <h4 className="Rows">
+            <p className="InputText">Effort Planned:</p>
+            <Input
+              className="InputBox"
+              fluid
+              placeholder={0}
+              onChange={e => this.handleEffortPlannedChange(e.target.value)}
+            />
+          </h4>
+        </Segment>
+      </div>
+    );
   }
 
   render() {
@@ -81,11 +174,13 @@ class SprintSummary extends Component {
           </p>
         </Message>
 
-        <CapacitySummery membersList={this.props.sprintData.team.members} />
+        {/* <CapacitySummery membersList={this.props.sprintData.team.members} /> */}
+        {/* {JSON.stringify(this.state.lastSprintData)} */}
+        <List>{this.renderCapacitySummaries()}</List>
 
-        <h4>Capacity:</h4>
-        <h4>Estimated Effort:</h4>
-        <h4>Efforts planned:</h4>
+        <br />
+        <br />
+        <br />
 
         <Button onClick={() => this.props.handleNavigateTabs(2)}>Back</Button>
         <Button

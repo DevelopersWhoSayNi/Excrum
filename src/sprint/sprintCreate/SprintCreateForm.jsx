@@ -93,7 +93,7 @@ class CreateSprintForm extends Component {
         <Tab
           panes={this.stepsTab()}
           activeIndex={activeIndex}
-          onTabChange={(e, v) => this.handleNavigateTabs(v.activeIndex)}
+          // onTabChange={(e, v) => this.handleNavigateTabs(v.activeIndex)}
           menu={{ secondary: true, pointing: true }}
         />
       </Segment>
