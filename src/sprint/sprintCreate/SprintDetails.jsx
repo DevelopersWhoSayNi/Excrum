@@ -42,18 +42,36 @@ class SprintDetails extends Component {
   handleTeamChange(e) {
     GetTeamDefaultSprintData(e.value).then(response => {
       GetTeamSprintStats(response.lastSprintId).then(res => {
+        let lastSprintNumber = '#';
         let newSprintDetails = {
           ...this.state.sprintData,
           team: response.team,
-          lastSprintId: response.lastSprintId,
-          startDate: this.getNextWorkDate(res.endDate, 1),
-          endDate: this.getNextWorkDate(
-            res.endDate,
-            response.team.defaultSprintLength
-          )
+          lastSprintId: response.lastSprintId
         };
 
-        this.setState({ sprintData: newSprintDetails });
+        if (res === null) {
+          const defaultDates = this.getDefaultDates();
+          newSprintDetails = {
+            ...newSprintDetails,
+            startDate: defaultDates.startDate,
+            endDate: defaultDates.endDate
+          };
+        } else {
+          lastSprintNumber = 'last sprint: ' + res.sprintNumber;
+          newSprintDetails = {
+            ...newSprintDetails,
+            startDate: this.getNextWorkDate(res.endDate, 1),
+            endDate: this.getNextWorkDate(
+              res.endDate,
+              response.team.defaultSprintLength
+            )
+          };
+        }
+
+        this.setState({
+          sprintData: newSprintDetails,
+          lastSprintNumber: lastSprintNumber
+        });
         this.props.updateSprintDetails(newSprintDetails);
       });
     });
@@ -65,7 +83,7 @@ class SprintDetails extends Component {
     };
 
     var splitted = date.split('-');
-    var date = new Date(
+    var formatedDate = new Date(
       splitted[0],
       parseInt(splitted[1]) - 1,
       parseInt(splitted[2]) + addDays
@@ -73,9 +91,9 @@ class SprintDetails extends Component {
 
     var strDateTime = [
       [
-        date.getFullYear(),
-        AddZero(date.getMonth() + 1),
-        AddZero(date.getDate())
+        formatedDate.getFullYear(),
+        AddZero(formatedDate.getMonth() + 1),
+        AddZero(formatedDate.getDate())
       ].join('-')
     ].join(' ');
 
@@ -100,28 +118,26 @@ class SprintDetails extends Component {
     this.props.updateSprintDetails(newSprintDetails);
   }
 
-  setDefaultDates() {
+  getDefaultDates() {
     let now = new Date();
     let startDate = '';
     let endDate = '';
 
-    if (this.props.sprintData.startDate) {
-      startDate = this.props.sprintData.startDate;
-    } else {
-      startDate = FormatDate(now);
-    }
+    startDate = FormatDate(now);
 
-    if (this.props.sprintData.endDate) {
-      endDate = this.props.sprintData.endDate;
-    } else {
-      now.setDate(now.getDate() + this.props.sprintData.sprintLength);
-      endDate = FormatDate(now);
-    }
+    now.setDate(now.getDate() + this.props.sprintData.sprintLength);
+    endDate = FormatDate(now);
+
+    return { startDate: startDate, endDate: endDate };
+  }
+
+  setDefaultDates() {
+    const defaultDates = this.getDefaultDates();
 
     const newSprintDetails = {
       ...this.state.sprintData,
-      startDate: startDate,
-      endDate: endDate
+      startDate: defaultDates.startDate,
+      endDate: defaultDates.endDate
     };
     this.setState({ sprintData: newSprintDetails });
     this.props.updateSprintDetails(newSprintDetails);
@@ -205,7 +221,11 @@ class SprintDetails extends Component {
         <div style={{ width: '50%', marginBottom: '2%' }}>
           <Input
             label="Sprint Number"
-            placeholder="#"
+            placeholder={
+              this.state.lastSprintNumber === undefined
+                ? '#'
+                : this.state.lastSprintNumber
+            }
             fluid
             defaultValue={this.state.sprintData.sprintNumber}
             onChange={e => this.handleSprintNumberChange(e.target.value)}
