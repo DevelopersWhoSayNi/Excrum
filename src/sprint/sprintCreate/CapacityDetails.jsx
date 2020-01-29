@@ -9,7 +9,8 @@ import {
   Rail,
   Sticky,
   Dimmer,
-  Loader
+  Loader,
+  Divider
 } from 'semantic-ui-react';
 import MemberCapacityCalendar from './MemberCapacityCalendar';
 import CapacitySummery from './CapacitySummery';
@@ -206,6 +207,9 @@ export class CapacityDetails extends Component {
                 endDate={this.state.sprintData.endDate}
               />
             </List>
+            <br />
+            <Divider horizontal section />
+            <br />
           </div>
         );
       });
