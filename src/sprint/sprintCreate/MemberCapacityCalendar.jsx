@@ -67,17 +67,16 @@ export const Member = props => {
   };
 
   return (
-    <List.Item>
-      <Image
-        size="tiny"
-        avatar
-        src={props.member.photoSrc}
-        onClick={e => props.openMemberCard(props.member)}
-      />
+    <List.Item onClick={e => props.openMemberCard(e, props.member)}>
+      <Image size="tiny" avatar src={props.member.photoSrc} />
       <List.Content>
         <Segment>
           <List.Header>{props.member.name}</List.Header>
-          <Calendar member={props.member} modifyDayHours={modifyDayHours} />
+          <Calendar
+            id="memberCalendar"
+            member={props.member}
+            modifyDayHours={modifyDayHours}
+          />
         </Segment>
       </List.Content>
     </List.Item>

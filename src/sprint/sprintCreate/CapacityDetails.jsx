@@ -222,7 +222,31 @@ export class CapacityDetails extends Component {
     }
   }
 
-  openMemberCard(prop) {
+  memberOnLeave() {
+    const newMembers = this.state.sprintData.team.members;
+
+    for (let i = 0; i < newMembers.length; i++) {
+      if (newMembers[i].id === this.state.MemberModalContent.id) {
+        for (let j = 0; j < newMembers[i].capacityHours.length; j++) {
+          newMembers[i].capacityHours[j].hours = 0;
+        }
+        break;
+      }
+    }
+
+    const newState = {
+      ...this.state.sprintData,
+      members: newMembers
+    };
+    this.setState({ newState });
+    this.setState({ OpenMemberModal: false });
+  }
+
+  openMemberCard(event, prop) {
+    const target = event.target;
+    if (target.parentNode.parentNode.className === 'CalendarDays') {
+      return;
+    }
     this.setState({ OpenMemberModal: true, MemberModalContent: prop });
   }
 
@@ -278,12 +302,13 @@ export class CapacityDetails extends Component {
             <MemberCard MemberModalContent={this.state.MemberModalContent} />
           </Modal.Content>
           <Modal.Actions>
-            <Button negative content="Cancel" onClick={this.closeMemberModal} />
+            <Button content="Cancel" onClick={this.closeMemberModal} />
             <Button
               // disabled={!this.state.showValidationError}
-              positive
-              content="Update"
-              // onClick={this.updateDayHours}
+              icon="plane"
+              negative
+              content="On leave"
+              onClick={e => this.memberOnLeave()}
             />
           </Modal.Actions>
         </Modal>
