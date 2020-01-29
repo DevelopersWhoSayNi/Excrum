@@ -269,9 +269,13 @@ export class CapacityDetails extends Component {
           open={this.state.OpenMemberModal}
           onClose={this.closeMemberModal}
         >
-          <Modal.Header>Update Hours</Modal.Header>
+          <Modal.Header>
+            {this.state.MemberModalContent === null
+              ? null
+              : this.state.MemberModalContent.name}
+          </Modal.Header>
           <Modal.Content>
-            <MemberCard userImage={this.state.MemberModalContent}/>
+            <MemberCard MemberModalContent={this.state.MemberModalContent} />
           </Modal.Content>
           <Modal.Actions>
             <Button negative content="Cancel" onClick={this.closeMemberModal} />

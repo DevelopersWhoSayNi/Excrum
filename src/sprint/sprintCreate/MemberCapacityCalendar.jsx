@@ -72,7 +72,7 @@ export const Member = props => {
         size="tiny"
         avatar
         src={props.member.photoSrc}
-        onClick={e => props.openMemberCard(props.member.photoSrc)}
+        onClick={e => props.openMemberCard(props.member)}
       />
       <List.Content>
         <Segment>
