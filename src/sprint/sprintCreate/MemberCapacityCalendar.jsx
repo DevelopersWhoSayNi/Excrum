@@ -56,7 +56,7 @@ const Calendar = props => {
 };
 
 export const Member = props => {
-  function modifyDayHours(selectedNode) {
+  const modifyDayHours = selectedNode => {
     const modificationData = {
       date: selectedNode.day.date,
       CurrentValue: selectedNode.day.hours,
@@ -64,11 +64,16 @@ export const Member = props => {
     };
 
     props.modifyDayHours(modificationData);
-  }
+  };
 
   return (
     <List.Item>
-      <Image size="tiny" avatar src={props.member.photoSrc} />
+      <Image
+        size="tiny"
+        avatar
+        src={props.member.photoSrc}
+        onClick={e => props.openMemberCard(props.member.photoSrc)}
+      />
       <List.Content>
         <Segment>
           <List.Header>{props.member.name}</List.Header>
@@ -81,7 +86,12 @@ export const Member = props => {
 
 const MemberCapacityCalendar = props => {
   return props.members.map((member, index) => (
-    <Member key={index} member={member} modifyDayHours={props.modifyDayHours} />
+    <Member
+      key={index}
+      member={member}
+      modifyDayHours={props.modifyDayHours}
+      openMemberCard={props.openMemberCard}
+    />
   ));
 };
 

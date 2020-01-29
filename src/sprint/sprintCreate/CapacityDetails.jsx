@@ -19,6 +19,7 @@ import GetMembersCapacityList, {
   GroupMembersByRole
 } from './api/GetMembersCapacityList';
 import { GetTotalHours } from '../Tools';
+import MemberCard from './MemberCard';
 require('../Sprint.css');
 
 export class CapacityDetails extends Component {
@@ -30,6 +31,8 @@ export class CapacityDetails extends Component {
       showValidationError: true,
       sprintData: this.props.sprintData,
       OpenModal: false,
+      OpenMemberModal: false,
+      MemberModalContent: null,
       updateHours: {
         memberId: 0,
         DayToBeModified: null,
@@ -37,6 +40,8 @@ export class CapacityDetails extends Component {
         UpdatedValue: 0
       }
     };
+
+    this.openMemberCard = this.openMemberCard.bind(this);
   }
 
   componentDidMount() {
@@ -162,8 +167,6 @@ export class CapacityDetails extends Component {
     this.setState({ OpenModal: false });
   };
 
-  closeModal = () => this.setState({ OpenModal: false });
-
   handleHoursValueUpdate = value => {
     if (value > 24 || isNaN(value)) {
       this.setState({ showValidationError: false });
@@ -203,6 +206,7 @@ export class CapacityDetails extends Component {
                 groupName={group.role}
                 members={group.members}
                 modifyDayHours={this.modifyDayHours}
+                openMemberCard={this.openMemberCard}
                 startDate={this.state.sprintData.startDate}
                 endDate={this.state.sprintData.endDate}
               />
@@ -217,6 +221,13 @@ export class CapacityDetails extends Component {
       return result;
     }
   }
+
+  openMemberCard(prop) {
+    this.setState({ OpenMemberModal: true, MemberModalContent: prop });
+  }
+
+  closeModal = () => this.setState({ OpenModal: false });
+  closeMemberModal = () => this.setState({ OpenMemberModal: false });
 
   contextRef = createRef();
 
@@ -249,6 +260,26 @@ export class CapacityDetails extends Component {
               positive
               content="Update"
               onClick={this.updateDayHours}
+            />
+          </Modal.Actions>
+        </Modal>
+
+        <Modal
+          size="mini"
+          open={this.state.OpenMemberModal}
+          onClose={this.closeMemberModal}
+        >
+          <Modal.Header>Update Hours</Modal.Header>
+          <Modal.Content>
+            <MemberCard userImage={this.state.MemberModalContent}/>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button negative content="Cancel" onClick={this.closeMemberModal} />
+            <Button
+              // disabled={!this.state.showValidationError}
+              positive
+              content="Update"
+              // onClick={this.updateDayHours}
             />
           </Modal.Actions>
         </Modal>
