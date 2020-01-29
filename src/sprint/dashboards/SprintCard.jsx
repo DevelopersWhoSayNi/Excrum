@@ -58,6 +58,71 @@ class SprintCards extends Component {
     this.props.markCapacityDateUpdated();
   }
 
+  renderCapacityGroups() {
+    const capacityGroups = this.state.sprint.capacityDetails.map(
+      (capacityGroup, index) => {
+        return (
+          <List.Item key={index} className="CapacityListGroupColumn">
+            {this.renderCapacityGroup(capacityGroup)}
+          </List.Item>
+        );
+      }
+    );
+
+    return (
+      <List horizontal selection>
+        {capacityGroups}
+      </List>
+    );
+  }
+
+  renderCapacityGroup(capacityGroup) {
+    return (
+      <div>
+        {capacityGroup.groupName}<br/>
+        <h3
+          className={this.props.capacityIsDirty ? 'DirtyCapacity' : ''}
+          onClick={x => this.openCapacityDetailsModal()}
+        >
+          Capacity: {capacityGroup.capacityHours}
+        </h3>
+        {this.state.isEditMode ? (
+          <Input
+            className="SprintEditInput"
+            label="Efforts Planned:"
+            fluid
+            placeholder={capacityGroup.effortsPlanned}
+            onChange={e => this.handleEffortsPlannedChange(e.target.value)}
+          />
+        ) : (
+          <h3>Efforts Planned: {capacityGroup.effortsPlanned}</h3>
+        )}
+        {this.state.isEditMode ? (
+          <Input
+            className="SprintEditInput"
+            label="Efforts Added:"
+            fluid
+            placeholder={capacityGroup.effortsAdded}
+            onChange={e => this.handleEffortsAddedChange(e.target.value)}
+          />
+        ) : (
+          <h3>Efforts Added: {capacityGroup.effortsAdded}</h3>
+        )}
+        {this.state.isEditMode ? (
+          <Input
+            className="SprintEditInput"
+            label="Efforts Delivered:"
+            fluid
+            placeholder={capacityGroup.effortsDelivered}
+            onChange={e => this.handleEffortsDeliveredChange(e.target.value)}
+          />
+        ) : (
+          <h3>Efforts Delivered: {capacityGroup.effortsDelivered}</h3>
+        )}
+      </div>
+    );
+  }
+
   render() {
     return (
       <Segment className="SprintCard">
@@ -65,47 +130,7 @@ class SprintCards extends Component {
           <h3>{this.state.sprint.team.teamName}</h3>
           {membersListOverview(this.state.sprint.team.members)}
         </div>
-        <div>
-          <h3
-            className={this.props.capacityIsDirty ? 'DirtyCapacity' : ''}
-            onClick={x => this.openCapacityDetailsModal()}
-          >
-            Capacity: {this.props.sprint.capacity}
-          </h3>
-          {this.state.isEditMode ? (
-            <Input
-              className="SprintEditInput"
-              label="Efforts Planned:"
-              fluid
-              placeholder={this.state.sprint.effortEstimated}
-              onChange={e => this.handleEffortsPlannedChange(e.target.value)}
-            />
-          ) : (
-            <h3>Efforts Planned: {this.state.sprint.effortEstimated}</h3>
-          )}
-          {this.state.isEditMode ? (
-            <Input
-              className="SprintEditInput"
-              label="Efforts Added:"
-              fluid
-              placeholder={this.state.sprint.effortAdded}
-              onChange={e => this.handleEffortsAddedChange(e.target.value)}
-            />
-          ) : (
-            <h3>Efforts Added: {this.state.sprint.effortAdded}</h3>
-          )}
-          {this.state.isEditMode ? (
-            <Input
-              className="SprintEditInput"
-              label="Efforts Delivered:"
-              fluid
-              placeholder={this.state.sprint.effortDelivered}
-              onChange={e => this.handleEffortsDeliveredChange(e.target.value)}
-            />
-          ) : (
-            <h3>Efforts Delivered: {this.state.sprint.effortDelivered}</h3>
-          )}
-        </div>
+        {this.renderCapacityGroups()}
         <div>
           {this.state.isEditMode ? (
             <Input

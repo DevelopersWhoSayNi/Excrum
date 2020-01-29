@@ -34,9 +34,8 @@
 .SprintCards,
 .SprintCard {
 	display: grid;
-	grid-template-areas: 'a a';
+	grid-template-columns: 200px auto;
 	grid-gap: 10px;
-	grid-auto-columns: 200px;
 }
 
 .SprintEditInput {
@@ -58,8 +57,8 @@
 }
 
 .SecondRowSecondColumn {
-	padding-top: 24%;
-	padding-left: 75%;
+	padding-top: 6%;
+	padding-left: 22%;
 }
 
 .DirtyCapacity {
@@ -84,3 +83,11 @@
 	padding-left: 2%;
 }
 
+.ui.horizontal.list:not(.celled)>.item:first-child {
+    margin-left: 0.3em!important;
+    padding-left: 0.3em!important;
+}
+
+.CapacityListGroupColumn {
+	
+}
