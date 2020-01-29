@@ -72,7 +72,7 @@ class SprintSummary extends Component {
     lastCapacityHours
   ) => {
     const lastCapacityDetails = this.state.lastSprintData.capacityDetails;
-    for (let index = 0; index < 1; index++) {
+    for (let index = 0; index < lastCapacityDetails.length; index++) {
       if (
         lastCapacityDetails[index].groupName ===
         newSprintCapacityDetail.groupName
@@ -94,7 +94,7 @@ class SprintSummary extends Component {
     );
 
     const newCapacityDetails = this.state.newSprintData.capacityDetails;
-    for (let index = 0; index < 1; index++) {
+    for (let index = 0; index < newCapacityDetails.length; index++) {
       if (
         newCapacityDetails[index].groupName ===
         newSprintCapacityDetail.groupName
@@ -117,7 +117,7 @@ class SprintSummary extends Component {
 
   handleNewSprintCapacityChanges = (value, variable, groupName) => {
     const newCapacityDetails = this.state.newSprintData.capacityDetails;
-    for (let index = 0; index < 1; index++) {
+    for (let index = 0; index < newCapacityDetails.length; index++) {
       if (newCapacityDetails[index].groupName === groupName) {
         newCapacityDetails[index][variable] = value;
         break;
@@ -134,7 +134,7 @@ class SprintSummary extends Component {
 
   handleLastSprintCapacityChanges = (value, variable, groupName) => {
     const lastCapacityDetails = this.state.lastSprintData.capacityDetails;
-    for (let index = 0; index < 1; index++) {
+    for (let index = 0; index < lastCapacityDetails.length; index++) {
       if (lastCapacityDetails[index].groupName === groupName) {
         lastCapacityDetails[index][variable] = value;
         break;
@@ -229,10 +229,6 @@ class SprintSummary extends Component {
           <h4>Capacity: {newSprintCapacityDetail.capacityHours}</h4>
           <h4>
             Suggested Effort:{' '}
-            {/* {this.getSuggestedEffort(
-              newSprintCapacityDetail,
-              lastSprintCapacityDetail
-            )} */}
             {newSprintCapacityDetail.effortsSuggested}
           </h4>
           <h4 className="Rows">
@@ -240,7 +236,7 @@ class SprintSummary extends Component {
             <Input
               className="InputBox"
               fluid
-              placeholder={0}
+              placeholder={newSprintCapacityDetail.effortsPlanned}
               onChange={e =>
                 this.handleNewSprintCapacityChanges(
                   e.target.value,
