@@ -3,6 +3,7 @@ import { Button, Input, Segment, Dropdown, Message } from 'semantic-ui-react';
 import GetTeamDefaultSprintData from './api/GetSprintData';
 import { FormatDate } from '../Tools';
 import GetTeamsList from './api/GetTeamsList';
+import GetTeamSprintStats from './api/GetTeamSprintStats';
 
 class SprintDetails extends Component {
   constructor(props) {
@@ -40,15 +41,45 @@ class SprintDetails extends Component {
 
   handleTeamChange(e) {
     GetTeamDefaultSprintData(e.value).then(response => {
-      let newSprintDetails = {
-        ...this.state.sprintData,
-        team: response.team,
-        lastSprintId: response.lastSprintId
-      };
+      GetTeamSprintStats(response.lastSprintId).then(res => {
+        let newSprintDetails = {
+          ...this.state.sprintData,
+          team: response.team,
+          lastSprintId: response.lastSprintId,
+          startDate: this.getNextWorkDate(res.endDate, 1),
+          endDate: this.getNextWorkDate(
+            res.endDate,
+            response.team.defaultSprintLength
+          )
+        };
 
-      this.setState({ sprintData: newSprintDetails });
-      this.props.updateSprintDetails(newSprintDetails);
+        this.setState({ sprintData: newSprintDetails });
+        this.props.updateSprintDetails(newSprintDetails);
+      });
     });
+  }
+
+  getNextWorkDate(date, addDays) {
+    const AddZero = num => {
+      return num >= 0 && num < 10 ? '0' + num : num + '';
+    };
+
+    var splitted = date.split('-');
+    var date = new Date(
+      splitted[0],
+      parseInt(splitted[1]) - 1,
+      parseInt(splitted[2]) + addDays
+    );
+
+    var strDateTime = [
+      [
+        date.getFullYear(),
+        AddZero(date.getMonth() + 1),
+        AddZero(date.getDate())
+      ].join('-')
+    ].join(' ');
+
+    return strDateTime;
   }
 
   handleSprintNumberChange(value) {

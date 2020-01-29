@@ -43,6 +43,7 @@ const GetSprintData = teamId => {
           team: {
             teamID: teamResponse.teamID,
             teamName: teamResponse.teamName,
+            defaultSprintLength: teamResponse.defaultSprintLength,
             members: teamResponse.members
           }
         };
