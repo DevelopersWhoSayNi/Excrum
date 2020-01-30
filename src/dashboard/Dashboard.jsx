@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
 
 import './Dashboard.css';
 
 const Looper = props => {
   let cName = 'card';
-  if (props.day === '04') {
+  if (props.day === '30') {
     cName = 'activeCard';
   }
   return (
@@ -18,7 +19,37 @@ const Looper = props => {
 };
 
 const Calendar = () => {
+  // const sprintDays = [
+  //   '01',
+  //   '02',
+  //   '03',
+  //   '04',
+  //   '05',
+  //   '06',
+  //   '07',
+  //   '08',
+  //   '09',
+  //   '10',
+  //   '11',
+  //   '12',
+  //   '13',
+  //   '14',
+  //   '15'
+  // ];
+  
   const sprintDays = [
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
     '01',
     '02',
     '03',
@@ -53,20 +84,27 @@ class MainDashboard extends Component {
           <Calendar />
         </div>
 
-        <br />
+        {/* <br />
         <h2 className="text">{this.props.UserName}</h2>
-        <h2 className="text">{this.props.UserPassword}</h2>
+        <h2 className="text">{this.props.UserPassword}</h2> */}
         {/* <Link to="/profile">Profile (Protected)</Link> */}
         <br />
         <br />
         {/* <Link to="/login">Login</Link> */}
-        <Link to="/Sprints">Sprints overview</Link>
+        <Button basic >
+          <Link className="HomePageButton" to="/Sprints">Sprints overview</Link>
+        </Button>
+
         <br />
         <br />
-        <Link to="/CreateSprint">Create Sprint</Link>
+        <Button basic>
+          <Link className="HomePageButton" to="/CreateSprint">Create Sprint</Link>
+        </Button>
         <br />
         <br />
-        <Link to="/createTeam">Create Team</Link>
+        <Button basic>
+          <Link className="HomePageButton" to="/createTeam">Create Team</Link>
+        </Button>
         <br />
         <br />
         {/* <Link to="/logout">Logout</Link> */}

@@ -18,8 +18,14 @@
 .activeCard {
 	padding: 2em;
 	color: rgb(21, 185, 109);
+	text-decoration: underline
 }
 
 .scrolling-wrapper {
 	-webkit-overflow-scrolling: touch;
+}
+
+.HomePageButton {
+	font-size: 1.5rem;
+	color: rgb(21, 185, 109);
 }
