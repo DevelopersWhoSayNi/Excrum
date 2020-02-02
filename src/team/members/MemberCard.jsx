@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { UpdateUserAuthStatus } from '../UserActions';
 import { Modal, Header, Button, Form, Image } from 'semantic-ui-react';
-import BackgroundImage from '../ExactOfficeBG.jpg';
-import CreateUser from './CreateUser';
-import UserImageModal from './UserImageModal';
+import UserImageModal from '../../user/userCreate/UserImageModal';
 
-class UserCreateForm extends Component {
+class MemberCard extends Component {
   constructor() {
     super();
 
@@ -24,29 +19,32 @@ class UserCreateForm extends Component {
   }
 
   register = () => {
-    this.validateInput();
-    const userInfo = {
-      userID: this.state.userID,
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      photo: this.state.userImage
-    };
+    //   this.validateInput();
+    //   const userInfo = {
+    //     userID: this.state.userID,
+    //     name: this.state.name,
+    //     email: this.state.email,
+    //     password: this.state.password,
+    //     photo: this.state.userImage
+    //   };
 
-    CreateUser(userInfo)
-      .then(Response => {
-        this.props.UpdateUserAuthStatus(Response);
-        this.navigateTo('/profile');
-      })
-      .catch(response => {
-        console.log('failed to register' + response);
-      });
-    // this.props.UpdateUserAuthStatus(true);
-    // this.setState({ redirectToDashboard: true });
-  };
+    //   CreateUser(userInfo)
+    //     .then(Response => {
+    //       this.props.UpdateUserAuthStatus(Response);
+    //       this.navigateTo('/profile');
+    //     })
+    //     .catch(response => {
+    //       console.log('failed to register' + response);
+    //     });
 
-  validateInput = () => {
-    // if(this.state.userID)
+    //   // this.props.UpdateUserAuthStatus(true);
+    //   // this.setState({ redirectToDashboard: true });
+    // };
+
+    // validateInput = () => {
+    //   // if(this.state.userID)
+
+    console.log('registring');
   };
 
   navigateTo = routeName => this.setState({ navigateTo: routeName });
@@ -67,11 +65,6 @@ class UserCreateForm extends Component {
   };
 
   render() {
-    const { navigateTo } = this.state;
-    if (navigateTo) {
-      return <Redirect to={navigateTo} />;
-    }
-
     return (
       <div>
         <Modal
@@ -142,4 +135,4 @@ class UserCreateForm extends Component {
   }
 }
 
-export default connect(null, { UpdateUserAuthStatus })(UserCreateForm);
+export default MemberCard;

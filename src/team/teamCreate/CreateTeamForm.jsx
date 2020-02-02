@@ -9,23 +9,22 @@ class CreateTeamForm extends Component {
       <div className="MainForm">
         <Segment padded>
           <Form>
-            <label>Create Team: </label>
-            <Divider />
-
             <div className="Section">
               <label>Team Name:</label>
-              <Input transparent placeholder=" name" />
+              <Input transparent placeholder="name" />
 
-              <label>root iteration path: </label>
-              <Input transparent placeholder="ExactOnline\Fintech\Fintech\" />
+              {/* <label>root iteration path: </label>
+              <Input transparent placeholder="ExactOnline\Fintech\Fintech\" /> */}
               <br />
               <br />
-              <label>Number of weeks in one sprint</label>
-              <Input transparent placeholder=" 2" />
+              <label>Sprint's length (days): </label>
+              <Input transparent placeholder="14" />
             </div>
 
             <div className="Section">
               <label>Team members: </label>
+              <br />
+              <br />
               <TeamMembersList />
             </div>
 
