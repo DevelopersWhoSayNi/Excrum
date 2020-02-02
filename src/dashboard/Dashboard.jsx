@@ -6,68 +6,44 @@ import { Button } from 'semantic-ui-react';
 
 import './Dashboard.css';
 
-const Looper = props => {
-  let cName = 'card';
-  if (props.day === '30') {
-    cName = 'activeCard';
-  }
-  return (
-    <div className={cName}>
-      <h2>{props.day}</h2>
-    </div>
-  );
-};
-
 const Calendar = () => {
-  // const sprintDays = [
-  //   '01',
-  //   '02',
-  //   '03',
-  //   '04',
-  //   '05',
-  //   '06',
-  //   '07',
-  //   '08',
-  //   '09',
-  //   '10',
-  //   '11',
-  //   '12',
-  //   '13',
-  //   '14',
-  //   '15'
-  // ];
-  
-  const sprintDays = [
-    '20',
-    '21',
-    '22',
-    '23',
-    '24',
-    '25',
-    '26',
-    '27',
-    '28',
-    '29',
-    '30',
-    '31',
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15'
-  ];
+  const calendarRange = 10;
+  var date = new Date().toLocaleString();
+  var splitted = date.split(',')[0].split('/');
 
-  return sprintDays.map((day, index) => <Looper key={index} day={day} />);
+  var pastDays = new Date(
+    parseInt(splitted[2]),
+    parseInt(splitted[1]) - 1,
+    parseInt(splitted[0]) - calendarRange
+  );
+
+  let dateNow = new Date().getDate();
+  let calendarDays = [];
+  let className = '';
+  let dayNumber = 0;
+
+  for (let index = 0; index < calendarRange * 2; index++) {
+    pastDays.setDate(pastDays.getDate() + 1);
+    dayNumber = pastDays.getDate();
+
+    if (dayNumber === dateNow) {
+      className = 'activeCard';
+    } else {
+      className = 'card';
+    }
+
+    if (dayNumber < 10) {
+      dayNumber = '0' + dayNumber;
+    }
+
+    calendarDays.push(
+      <div key={index} className={className}>
+        <h2>{dayNumber}</h2>
+      </div>
+    );
+  }
+
+  return calendarDays;
 };
 
 class MainDashboard extends Component {
@@ -91,19 +67,25 @@ class MainDashboard extends Component {
         <br />
         <br />
         {/* <Link to="/login">Login</Link> */}
-        <Button basic >
-          <Link className="HomePageButton" to="/Sprints">Sprints overview</Link>
+        <Button basic>
+          <Link className="HomePageButton" to="/Sprints">
+            Sprints overview
+          </Link>
         </Button>
 
         <br />
         <br />
         <Button basic>
-          <Link className="HomePageButton" to="/CreateSprint">Create Sprint</Link>
+          <Link className="HomePageButton" to="/CreateSprint">
+            Create Sprint
+          </Link>
         </Button>
         <br />
         <br />
         <Button basic>
-          <Link className="HomePageButton" to="/createTeam">Create Team</Link>
+          <Link className="HomePageButton" to="/createTeam">
+            Create Team
+          </Link>
         </Button>
         <br />
         <br />
