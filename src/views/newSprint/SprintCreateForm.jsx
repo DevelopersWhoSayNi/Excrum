@@ -4,7 +4,7 @@ import SprintDetails from '../../components/sprints/SprintDetails';
 import CapacityDetails from '../../components/capacity/CapacityDetails';
 import TasksForm from '../../components/tasks/TasksForm';
 import SprintSummary from '../../components/sprints/SprintSummary';
-import GetInitialSprintSetup from '../../api/GetInitialSprintSetup';
+import GetInitialSprintSetup from '../../common/GetInitialSprintSetup';
 require('../../css/Sprint.css');
 
 class CreateSprintForm extends Component {
