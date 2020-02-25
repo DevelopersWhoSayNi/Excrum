@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './Header';
 import RouteProtected from './RouteProtected';
-import Dashboard from '../dashboard/Dashboard';
+import Dashboard from '../views/dashboard/Dashboard';
 // import Login from '../user/userLogin/Login';
 // import Logout from '../user/userLogin/Logout';
 // import UserCreateForm from '../user/userCreate/UserCreateForm';
-import Profile from '../user/userProfile/Profile';
-import CreateSprintForm from '../sprint/sprintCreate/SprintCreateForm';
-import CreateTeamForm from '../team/teamCreate/CreateTeamForm';
+// import Profile from '../views/';
+import CreateSprintForm from '../views/newSprint/SprintCreateForm';
+import CreateTeamForm from '../views/newTeam/CreateTeamForm';
+import SprintsOverview from '../views/sprintsOverview/SprintsOverview';
 
 const Routes = props => {
   return (
@@ -20,12 +21,18 @@ const Routes = props => {
         {/* <Route path="/login" component={Login} />
         <Route path="/register" component={UserCreateForm} />
         <Route path="/logout" component={Logout} /> */}
-        <RouteProtected
+        {/* <RouteProtected
           exact
           isAuthenticated={props.IsAuthenticated}
           token={props.Token}
           path="/profile"
           component={Profile}
+        /> */}
+        <RouteProtected
+          exact
+          accessToken={props.Token}
+          path="/Sprints"
+          component={SprintsOverview}
         />
         <RouteProtected
           exact
