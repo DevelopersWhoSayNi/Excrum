@@ -1,0 +1,93 @@
+.CalendarDays {
+	display: inline-table;
+	padding: 1%;
+	padding-right: 3%;
+}
+
+.CalendarBox {
+	width: 230px;
+}
+
+.WeekDayNames {
+	padding-block-end: 10%;
+	padding-block-start: 10%;
+}
+
+.day-of-week,
+.days {
+	padding: 3%;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-column-gap: 5%;
+	grid-row-gap: 5%;
+}
+
+.MembersList {
+	background-color: teal;
+}
+
+.MainForm {
+	width: 80%;
+	margin-left: 3% !important;
+}
+
+.SprintCards,
+.SprintCard {
+	display: grid;
+	grid-template-columns: 200px auto;
+	grid-gap: 10px;
+}
+
+.SprintEditInput {
+	min-width: 220px;
+	padding: 2%;
+}
+
+.SprintEditInput .label {
+	min-width: 140px;
+}
+
+.SprintEditInput .SecondColumn {
+	padding-top: 2% !important;
+	padding-left: 75% !important;
+}
+
+.divider {
+	display: none;
+}
+
+.SecondRowSecondColumn {
+	padding-top: 6%;
+	padding-left: 22%;
+}
+
+.DirtyCapacity {
+	color: red;
+}
+
+.SprintSummaryBlocks {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.SprintSummaryBlocks .Rows {
+	display: inline-flex;
+}
+
+.SprintSummaryBlocks .InputText {
+	padding-top: 5%;
+}
+
+.SprintSummaryBlocks .InputBox {
+	min-width: 150px;
+	padding-left: 2%;
+}
+
+.ui.horizontal.list:not(.celled)>.item:first-child {
+    margin-left: 0.3em!important;
+    padding-left: 0.3em!important;
+}
+
+.CapacityListGroupColumn {
+	
+}

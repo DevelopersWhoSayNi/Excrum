@@ -1,0 +1,31 @@
+.scrolling-wrapper {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	width: 50%;
+	margin-left: 26%;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+.card {
+	padding: 2em;
+	color: darkgrey;
+}
+
+.activeCard {
+	padding: 2em;
+	color: rgb(21, 185, 109);
+	text-decoration: underline
+}
+
+.scrolling-wrapper {
+	-webkit-overflow-scrolling: touch;
+}
+
+.HomePageButton {
+	font-size: 1.5rem;
+	color: rgb(21, 185, 109);
+}
