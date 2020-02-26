@@ -79,7 +79,8 @@ class SprintCards extends Component {
   renderCapacityGroup(capacityGroup) {
     return (
       <div>
-        {capacityGroup.groupName}<br/>
+        {capacityGroup.groupName}
+        <br />
         <h3
           className={this.props.capacityIsDirty ? 'DirtyCapacity' : ''}
           onClick={x => this.openCapacityDetailsModal()}
