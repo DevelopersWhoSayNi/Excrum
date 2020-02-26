@@ -67,8 +67,8 @@ export const Member = props => {
   };
 
   return (
-    <List.Item onClick={e => props.openMemberCard(e, props.member)}>
-      <Image size="tiny" avatar src={props.member.photoSrc} />
+    <List.Item>
+      <Image size="tiny" avatar src={props.member.photoSrc}  onClick={e => props.openMemberCard(e, props.member)}/>
       <List.Content>
         <Segment>
           <List.Header>{props.member.name}</List.Header>
