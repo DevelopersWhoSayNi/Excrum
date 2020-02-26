@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip
-} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
 import { GroupMembersByRole } from '../../api/GetMembersCapacityList';
 
@@ -89,17 +83,15 @@ const getChartData = (groupName, sprints) => {
       Suggested: groupCapacity[0].effortsSuggested
     };
 
-    debugger
-
-    if ((groupCapacity[0].effortsPlanned === 0)) {
+    if (groupCapacity[0].effortsPlanned === 0) {
       delete item.Planned;
     }
 
-    if ((groupCapacity[0].effortsDelivered === 0)) {
+    if (groupCapacity[0].effortsDelivered === 0) {
       delete item.Delivered;
     }
 
-    if ((groupCapacity[0].effortsSuggested === 0)) {
+    if (groupCapacity[0].effortsSuggested === 0) {
       delete item.Suggested;
     }
 
