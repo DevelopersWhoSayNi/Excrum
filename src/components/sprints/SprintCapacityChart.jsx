@@ -4,7 +4,6 @@ import {
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip
 } from 'recharts';
 
@@ -83,12 +82,28 @@ const getChartData = (groupName, sprints) => {
       s => s.groupName === groupName
     );
 
-    dataList.push({
+    var item = {
       name: sprint.sprintNumber,
       Planned: groupCapacity[0].effortsPlanned,
       Delivered: groupCapacity[0].effortsDelivered,
       Suggested: groupCapacity[0].effortsSuggested
-    });
+    };
+
+    debugger
+
+    if ((groupCapacity[0].effortsPlanned === 0)) {
+      delete item.Planned;
+    }
+
+    if ((groupCapacity[0].effortsDelivered === 0)) {
+      delete item.Delivered;
+    }
+
+    if ((groupCapacity[0].effortsSuggested === 0)) {
+      delete item.Suggested;
+    }
+
+    dataList.push(item);
   });
 
   return dataList;
