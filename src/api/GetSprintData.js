@@ -1,5 +1,7 @@
 import Axios from 'axios';
 
+//#TODO split
+
 const GetTeamDefaultInfo = teamId => {
   const url =
     'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/teams';
