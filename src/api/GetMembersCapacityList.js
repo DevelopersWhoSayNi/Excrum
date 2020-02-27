@@ -20,6 +20,8 @@ const GetMemberDefaultInfo = memberId => {
     });
 };
 
+//#TODO move to common 
+
 export const GroupMembersByRole = membersList => {
   let groupedByRole = [];
   const roles = [...new Set(membersList.map(x => x.role))];
