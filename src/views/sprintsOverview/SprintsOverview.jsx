@@ -15,6 +15,7 @@ import { CapacityDetails } from '../../components/capacity/CapacityDetails';
 import { GetTotalHours } from '../../common/Tools';
 import UpdateSprintDetails from '../../api/UpdateSprintDetails';
 import GetTeamsList from '../../api/GetTeamsList';
+import SprintCapacityChart from '../../components/sprints/SprintCapacityChart';
 
 let updatedSprintCapacityDetails = null;
 let updatedSprintDetails = null;
@@ -218,6 +219,7 @@ class SprintsOverview extends Component {
             }}
           />
 
+          <SprintCapacityChart sprints={this.state.sprintsList} />
           <List horizontal selection>
             {this.showSprintCards(this.state.sprintsList)}
           </List>

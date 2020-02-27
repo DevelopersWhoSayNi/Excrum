@@ -3,6 +3,8 @@ import { Segment, List, Image, Label } from 'semantic-ui-react';
 import { WeekdayNames } from '../../common/Tools';
 require('../../css/Sprint.css');
 
+//#TODO split day components
+
 const Day = props => {
   const dayColor = () => {
     if (props.day.hours === 0) {
@@ -14,6 +16,11 @@ const Day = props => {
     }
   };
 
+  const formatDate = date => {
+    var splitted = date.split('-');
+    return [splitted[2], splitted[1]].join('/');
+  };
+
   if (props.day.type === 0) {
     return <div></div>;
   } else {
@@ -22,6 +29,9 @@ const Day = props => {
         <Label circular size="big" color={dayColor()}>
           <h4 onClick={() => props.modifyDayHours(props)}>{props.day.hours}</h4>
         </Label>
+        <div style={{ fontSize: '12px', paddingLeft: '12%' }}>
+          {props.day.date === 'blank' ? null : formatDate(props.day.date)}
+        </div>
       </div>
     );
   }
@@ -67,8 +77,13 @@ export const Member = props => {
   };
 
   return (
-    <List.Item onClick={e => props.openMemberCard(e, props.member)}>
-      <Image size="tiny" avatar src={props.member.photoSrc} />
+    <List.Item>
+      <Image
+        size="tiny"
+        avatar
+        src={props.member.photoSrc}
+        onClick={e => props.openMemberCard(e, props.member)}
+      />
       <List.Content>
         <Segment>
           <List.Header>{props.member.name}</List.Header>

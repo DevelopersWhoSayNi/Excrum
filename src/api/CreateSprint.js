@@ -26,6 +26,8 @@ const CreateSprint = sprintData => {
     });
 };
 
+//#TODO split
+
 const UpdateTeamsLastSprintId = (teamId, lastSprintId) => {
   const url =
     'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/teams';
