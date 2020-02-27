@@ -77,6 +77,7 @@ class SprintDetails extends Component {
     });
   }
 
+  //#TODO move out
   getNextWorkDate(date, addDays) {
     const AddZero = num => {
       return num >= 0 && num < 10 ? '0' + num : num + '';
@@ -154,6 +155,7 @@ class SprintDetails extends Component {
     }
   }
 
+  //#TODO move out
   validateInput() {
     let errorMessage = [];
     let validInput = true;

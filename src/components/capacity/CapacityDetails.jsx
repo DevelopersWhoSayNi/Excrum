@@ -255,6 +255,9 @@ export class CapacityDetails extends Component {
 
   contextRef = createRef();
 
+  //#TODO move out modals
+  //#TODO move out rail
+
   render() {
     const validationErrorMessage =
       'Entered must be at leas one digit less than 24';
@@ -333,6 +336,8 @@ export class CapacityDetails extends Component {
     );
   }
 }
+
+//#TODO split / rename to something more understandable 
 
 const CapacityDetailsStep = props => {
   let newSprintData = null;

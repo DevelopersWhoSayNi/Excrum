@@ -3,6 +3,8 @@ import { Segment, List, Image, Label } from 'semantic-ui-react';
 import { WeekdayNames } from '../../common/Tools';
 require('../../css/Sprint.css');
 
+//#TODO split day components
+
 const Day = props => {
   const dayColor = () => {
     if (props.day.hours === 0) {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
-
 import { GroupMembersByRole } from '../../api/GetMembersCapacityList';
 
 class SprintCapacityChart extends Component {
@@ -67,6 +66,8 @@ const DrawCapacityDetailsChart = props => {
 };
 
 export default SprintCapacityChart;
+
+//#TODO move out
 
 const getChartData = (groupName, sprints) => {
   var dataList = [];

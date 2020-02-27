@@ -76,6 +76,8 @@ class SprintCards extends Component {
     );
   }
 
+  //#TODO move out
+
   renderCapacityGroup(capacityGroup) {
     return (
       <div>

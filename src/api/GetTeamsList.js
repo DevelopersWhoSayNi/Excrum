@@ -18,6 +18,8 @@ const GetTeamsList = userId => {
     });
 };
 
+//#TODO move out
+
 const GetTeamsDropDownOptionsList = teamsList => {
   let list = [];
   teamsList.forEach((team, index) => {

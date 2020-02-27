@@ -159,6 +159,7 @@ class SprintSummary extends Component {
     );
   }
 
+  //#TODO move out
   renderCapacitySummaries() {
     return this.state.newSprintData.capacityDetails.map(
       (newSprintCapacityDetail, index) => {
@@ -177,6 +178,7 @@ class SprintSummary extends Component {
     );
   }
 
+  //#TODO move-out
   renderCapacitySummary(newSprintCapacityDetail, lastSprintCapacityDetail) {
     // this.getSuggestedEffort(newSprintCapacityDetail, lastSprintCapacityDetail);
     return (
