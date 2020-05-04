@@ -1,8 +1,8 @@
 import React, { Component, createRef } from 'react';
-import { Segment, List, Image, Label } from 'semantic-ui-react';
 import {
   Button,
   List,
+  Label,
   Message,
   Modal,
   Input,
@@ -275,13 +275,26 @@ export class CapacityDetails extends Component {
             <Input
               id="hoursInput"
               placeholder={this.state.updateHours.CurrentValue}
+              value={this.state.updateHours.UpdatedValue}
               onChange={e => this.handleHoursValueUpdate(e.target.value)}
             />
             <Message color={'red'} hidden={this.state.showValidationError}>
               {validationErrorMessage}
             </Message>
             <Label circular size="big" color={'red'}>
-              <h4 onClick={() => this.handleHoursValueUpdate(0)}>"0"}</h4>
+              <h4 onClick={() => {
+                this.handleHoursValueUpdate(0);
+              }}>0</h4>
+            </Label>
+            <Label circular size="big" color={'yellow'}>
+              <h4 onClick={() => {
+                this.handleHoursValueUpdate(4);
+              }}>4</h4>
+            </Label>
+            <Label circular size="big" color={'green'}>
+              <h4 onClick={() => {
+                this.handleHoursValueUpdate(8);
+              }}>8</h4>
             </Label>
           </Modal.Content>
           <Modal.Actions>
