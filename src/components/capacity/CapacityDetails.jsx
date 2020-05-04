@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import Label from 'semantic-ui-react';
+import { Segment, List, Image, Label } from 'semantic-ui-react';
 import {
   Button,
   List,
