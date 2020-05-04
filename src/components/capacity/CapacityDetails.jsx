@@ -3,6 +3,7 @@ import {
   Button,
   List,
   Message,
+  Label,
   Modal,
   Input,
   Ref,
@@ -280,24 +281,24 @@ export class CapacityDetails extends Component {
             <Message color={'red'} hidden={this.state.showValidationError}>
               {validationErrorMessage}
             </Message>
-            <Button circular size="sm" color={'red'}
+            <Label circular size="big" color={'red'}
               onClick={async () => {
                 await this.handleHoursValueUpdate(0);
                 this.updateDayHours()
               }}>0
-            </Button>
-            <Button circular size="sm" color={'yellow'}
+            </Label>
+            <Label circular size="big" color={'yellow'}
               onClick={async () => {
                 await this.handleHoursValueUpdate(4);
                 this.updateDayHours()
               }}>4
-            </Button>
-            <Button circular size="sm" color={'green'}
+            </Label>
+            <Label circular size="big" color={'green'}
               onClick={async () => {
                 await this.handleHoursValueUpdate(8);
                 this.updateDayHours()
               }}>8
-            </Button>
+            </Label>
           </Modal.Content>
           <Modal.Actions>
             <Button negative content="Cancel" onClick={this.closeModal} />
