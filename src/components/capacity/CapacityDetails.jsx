@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import Label from 'semantic-ui-react';
 import {
   Button,
   List,
@@ -260,7 +261,7 @@ export class CapacityDetails extends Component {
 
   render() {
     const validationErrorMessage =
-      'Entered must be at leas one digit less than 24';
+      'Entered must be at least one digit less than 24';
     return (
       <div>
         <Modal
@@ -279,6 +280,9 @@ export class CapacityDetails extends Component {
             <Message color={'red'} hidden={this.state.showValidationError}>
               {validationErrorMessage}
             </Message>
+            <Label circular size="big" color={'red'}>
+              <h4 onClick={() => this.handleHoursValueUpdate(0)}>"0"}</h4>
+            </Label>
           </Modal.Content>
           <Modal.Actions>
             <Button negative content="Cancel" onClick={this.closeModal} />
