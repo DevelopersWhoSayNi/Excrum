@@ -2,7 +2,6 @@ import React, { Component, createRef } from 'react';
 import {
   Button,
   List,
-  Label,
   Message,
   Modal,
   Input,
@@ -281,21 +280,24 @@ export class CapacityDetails extends Component {
             <Message color={'red'} hidden={this.state.showValidationError}>
               {validationErrorMessage}
             </Message>
-            <Label circular size="big" color={'red'}>
-              <h4 onClick={() => {
-                this.handleHoursValueUpdate(0);
-              }}>0</h4>
-            </Label>
-            <Label circular size="big" color={'yellow'}>
-              <h4 onClick={() => {
-                this.handleHoursValueUpdate(4);
-              }}>4</h4>
-            </Label>
-            <Label circular size="big" color={'green'}>
-              <h4 onClick={() => {
-                this.handleHoursValueUpdate(8);
-              }}>8</h4>
-            </Label>
+            <Button circular size="sm" color={'red'}
+              onClick={async () => {
+                await this.handleHoursValueUpdate(0);
+                this.updateDayHours()
+              }}>0
+            </Button>
+            <Button circular size="sm" color={'yellow'}
+              onClick={async () => {
+                await this.handleHoursValueUpdate(4);
+                this.updateDayHours()
+              }}>4
+            </Button>
+            <Button circular size="sm" color={'green'}
+              onClick={async () => {
+                await this.handleHoursValueUpdate(8);
+                this.updateDayHours()
+              }}>8
+            </Button>
           </Modal.Content>
           <Modal.Actions>
             <Button negative content="Cancel" onClick={this.closeModal} />
