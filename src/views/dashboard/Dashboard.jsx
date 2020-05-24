@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
+import ML from './MembersList';
+
 import '../../css/Dashboard.css';
 
 const Calendar = () => {
@@ -90,21 +92,25 @@ class MainDashboard extends Component {
         <br />
         <br />
         {/* <Link to="/logout">Logout</Link> */}
+
+        <br />
+        <br />
+        <ML />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     UserName: state.UserReducer.UserName,
-    UserPassword: state.UserReducer.UserPassword
+    UserPassword: state.UserReducer.UserPassword,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    dispatcher: dispatch
+    dispatcher: dispatch,
   };
 };
 
