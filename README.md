@@ -2,5 +2,12 @@ Excrum - P.E.T project
 
 Mariane Diary Update - 15-04-20
 Cognito test:
-Created User App Pool (on DEV account) and linked it with test project (HEXAL following this tutorial https://www.youtube.com/watch?v=EaDMG4amEfk )
-Created API gateway with authorizer as cognito, works with postman, but not with the react test project (CORS - unauthorized)
+Created User App Pool (on DSCI DEV account) and linked it with test project (HEXAL following this tutorial https://www.youtube.com/watch?v=EaDMG4amEfk )
+Created API gateway with authorizer as cognito, works with postman.
+
+Mariane Diary Update - 23-06-20
+Check cognito and client side role management, found this video with this amazing overview: https://www.youtube.com/watch?v=kmVUbngCyOw&t=551s
+Came up with a plan on how to do it.
+1- Registration and login
+2- Tenancy (add custom attributes in cognito for role/scope, and dynamodb for linking tenant and role)
+3- Role management
