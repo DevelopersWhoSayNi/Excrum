@@ -1,5 +1,10 @@
 Excrum - P.E.T project
 
+Amir Diary
+Update all the APIs to work with newly adjusted Lambdas to read and write data from DynamoDB,
+Adjusted backend lambdas to cover all privious lambdas functionalities (lambdas that was working with mLab)
+Added sorting to the sprints list
+=============================================================================
 Amir Diary Update
 Created User App Pool (on DEV account) and linked it with test project (HEXAL following this tutorial https://www.youtube.com/watch?v=EaDMG4amEfk )
 Created API gateway with authorizer as cognito, works with postman, but not with the react test project (CORS - unauthorized)
