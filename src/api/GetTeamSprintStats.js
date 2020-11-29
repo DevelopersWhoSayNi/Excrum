@@ -1,8 +1,8 @@
 import Axios from 'axios';
-// import config from '../../ServerConfig.json';
+import config from '../ServerConfig.json';
 
 const GetTeamSprintStats = lastSprintId => {
-  const url = `https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/sprints?sprintID=${lastSprintId}`;
+  const url = `${config.EndpointUrl}/sprints?sprintID=${lastSprintId}`;
   
   return Axios.get(url)
     .then(response => {

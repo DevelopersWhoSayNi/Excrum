@@ -114,7 +114,7 @@ class SprintsOverview extends Component {
   handleTeamChange(e) {
     this.setState({ selectedTeam: e.value, sprintsList: [], loading: true });
 
-    GetSprints('', e.value).then(res => {
+    GetSprints('GetTeamSprints', e.value).then((res) => {
       this.setState({ sprintsList: res, loading: false });
     });
   }

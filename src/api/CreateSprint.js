@@ -1,13 +1,14 @@
 import Axios from 'axios';
 // import { GetTotalHours } from '../../Tools';
+import config from '../ServerConfig.json';
 
 const CreateSprint = sprintData => {
   //using timestamp as unique ID (probably not a good idea)
   var d = new Date();
   sprintData.sprintId = d.valueOf().toString();
   // sprintData.capacity = GetTotalHours(sprintData.team.members);
-  const url =
-    'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/sprints';
+
+  const url = `${config.EndpointUrl}/sprints`;
 
   const body = {
     action: 'CreateNewSprint',

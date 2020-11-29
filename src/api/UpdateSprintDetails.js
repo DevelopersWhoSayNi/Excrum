@@ -1,8 +1,8 @@
 import Axios from 'axios';
+import config from '../ServerConfig.json';
 
 const UpdateSprintDetails = sprintData => {
-  const url =
-    'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/sprints';
+  const url = `${config.EndpointUrl}/sprints`;
 
   const body = {
     action: 'UpdateSprintDetails',
