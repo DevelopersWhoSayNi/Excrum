@@ -9,7 +9,7 @@ import {
   List
 } from 'semantic-ui-react';
 import CreateSprint from '../../api/CreateSprint';
-import GetTeamSprintStats from '../../api/GetTeamSprintStats';
+import GetTeamSprintStats from '../../api/GetSprints';
 import UpdateLastSprintDetails from '../../api/UpdateSprintDetails';
 
 //TODO: create a class 'reactive', that pushes state change 'with API call result in it' as props to TaskForm
@@ -29,16 +29,19 @@ class SprintSummary extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    GetTeamSprintStats(this.props.sprintData.lastSprintId).then(res => {
+    GetTeamSprintStats(
+      'GetSprintBySprintID',
+      this.props.sprintData.lastSprintId
+    ).then((res) => {
       if (res === null) {
         this.setState({
-          loading: false
+          loading: false,
         });
       } else {
         ///
         this.setState({
           loading: false,
-          lastSprintData: res
+          lastSprintData: res,
         });
       }
     });

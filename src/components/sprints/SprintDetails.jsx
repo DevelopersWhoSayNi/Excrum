@@ -3,7 +3,7 @@ import { Button, Input, Segment, Dropdown, Message } from 'semantic-ui-react';
 import GetTeamDefaultSprintData from '../../api/GetSprintData';
 import { FormatDate } from '../../common/Tools';
 import GetTeamsList from '../../api/GetTeamsList';
-import GetTeamSprintStats from '../../api/GetTeamSprintStats';
+import GetTeamSprintStats from '../../api/GetSprints';
 
 class SprintDetails extends Component {
   constructor(props) {
@@ -41,39 +41,41 @@ class SprintDetails extends Component {
 
   handleTeamChange(e) {
     GetTeamDefaultSprintData(e.value).then(response => {
-      GetTeamSprintStats(response.lastSprintId).then(res => {
-        let lastSprintNumber = '#';
-        let newSprintDetails = {
-          ...this.state.sprintData,
-          team: response.team,
-          lastSprintId: response.lastSprintId
-        };
+      GetTeamSprintStats('GetSprintBySprintID', response.lastSprintId).then(
+        (res) => {
+          let lastSprintNumber = '#';
+          let newSprintDetails = {
+            ...this.state.sprintData,
+            team: response.team,
+            lastSprintId: response.lastSprintId,
+          };
 
-        if (res === null) {
-          const defaultDates = this.getDefaultDates();
-          newSprintDetails = {
-            ...newSprintDetails,
-            startDate: defaultDates.startDate,
-            endDate: defaultDates.endDate
-          };
-        } else {
-          lastSprintNumber = 'last sprint: ' + res.sprintNumber;
-          newSprintDetails = {
-            ...newSprintDetails,
-            startDate: this.getNextWorkDate(res.endDate, 1),
-            endDate: this.getNextWorkDate(
-              res.endDate,
-              response.team.defaultSprintLength
-            )
-          };
+          if (res === null) {
+            const defaultDates = this.getDefaultDates();
+            newSprintDetails = {
+              ...newSprintDetails,
+              startDate: defaultDates.startDate,
+              endDate: defaultDates.endDate,
+            };
+          } else {
+            lastSprintNumber = 'last sprint: ' + res.sprintNumber;
+            newSprintDetails = {
+              ...newSprintDetails,
+              startDate: this.getNextWorkDate(res.endDate, 1),
+              endDate: this.getNextWorkDate(
+                res.endDate,
+                response.team.defaultSprintLength
+              ),
+            };
+          }
+
+          this.setState({
+            sprintData: newSprintDetails,
+            lastSprintNumber: lastSprintNumber,
+          });
+          this.props.updateSprintDetails(newSprintDetails);
         }
-
-        this.setState({
-          sprintData: newSprintDetails,
-          lastSprintNumber: lastSprintNumber
-        });
-        this.props.updateSprintDetails(newSprintDetails);
-      });
+      );
     });
   }
 

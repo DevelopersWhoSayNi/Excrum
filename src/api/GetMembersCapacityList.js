@@ -1,8 +1,8 @@
 import Axios from 'axios';
+import config from '../ServerConfig.json';
 
 const GetMemberDefaultInfo = memberId => {
-  const url =
-    'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/members';
+  const url = `${config.EndpointUrl}/members`;
   const body = {
     id: memberId
   };
@@ -44,6 +44,7 @@ const GetTeamDefaultMembers = membersList => {
     group.members.forEach(member => {
       myPromises.push(
         GetMemberDefaultInfo(member.id).then(res => {
+          console.log({ res });
           res.role = group.role;
           updatedMembersList.push(res);
         })

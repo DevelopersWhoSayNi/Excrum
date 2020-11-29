@@ -1,24 +1,44 @@
 import Axios from 'axios';
+import config from '../ServerConfig.json';
 
 const GetSprints = (action, id) => {
-  let url =
-    'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/sprints';
+  let url = `${config.EndpointUrl}/sprints`;
+
+  let body = {};
+
   if (action === 'GetSprintBySprintID') {
-    url = `${url}?sprintID=${id}`;
+    body = {
+      action: 'GetSprint',
+      sprintID: id,
+    };
   } else {
-    url = `${url}?teamID=${id}`;
-  }
-  return Axios.get(url)
-    .then(response => {
+    body = {
+      action: 'GetTeamSprints',
+      teamId: id,
+    };
+  }  
+
+  return Axios.post(url, body)
+    .then((response) => {
       if (response.data !== 'null') {
-        return JSON.parse(response.data);
+        return orderBySprintDate(response.data);
       } else {
         return null;
       }
     })
-    .catch(error => {
+    .catch((error) => {
       // return Promise.reject(new Error('fail to get sprints: ', error.response));
     });
+};
+
+const orderBySprintDate = (sprints) => {
+  if (sprints.constructor === Array) {
+    var sortedList = sprints.sort(
+      (a, b) => new Date(b.startDate) - new Date(a.startDate)
+    );
+    return sortedList;
+  }
+  return sprints;
 };
 
 export default GetSprints;
