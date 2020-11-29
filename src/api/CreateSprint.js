@@ -5,7 +5,7 @@ import config from '../ServerConfig.json';
 const CreateSprint = sprintData => {
   //using timestamp as unique ID (probably not a good idea)
   var d = new Date();
-  sprintData.sprintId = d.valueOf().toString();
+  sprintData.id = d.valueOf().toString();
   // sprintData.capacity = GetTotalHours(sprintData.team.members);
 
   const url = `${config.EndpointUrl}/sprints`;
