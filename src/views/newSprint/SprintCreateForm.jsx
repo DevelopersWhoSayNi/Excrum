@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Tab } from 'semantic-ui-react';
 import SprintDetails from '../../components/sprints/SprintDetails';
 import CapacityDetails from '../../components/capacity/CapacityDetails';
-import TasksForm from '../../components/tasks/TasksForm';
+// import TasksForm from '../../components/tasks/TasksForm';
 import SprintSummary from '../../components/sprints/SprintSummary';
 import GetInitialSprintSetup from '../../common/GetInitialSprintSetup';
 require('../../css/Sprint.css');
@@ -31,7 +31,7 @@ class CreateSprintForm extends Component {
             updateSprintDetails={this.updateSprintDetails}
             handleNavigateTabs={this.handleNavigateTabs}
           />
-        )
+        ),
       },
       {
         menuItem: 'Capacity',
@@ -41,17 +41,17 @@ class CreateSprintForm extends Component {
             updateCapacityDetail={this.updateCapacityDetail}
             handleNavigateTabs={this.handleNavigateTabs}
           />
-        )
+        ),
       },
-      {
-        menuItem: 'Tasks',
-        render: () => (
-          <TasksForm
-            sprintData={this.state.sprintData}
-            handleNavigateTabs={this.handleNavigateTabs}
-          />
-        )
-      },
+      // {
+      //   menuItem: 'Tasks',
+      //   render: () => (
+      //     <TasksForm
+      //       sprintData={this.state.sprintData}
+      //       handleNavigateTabs={this.handleNavigateTabs}
+      //     />
+      //   )
+      // },
       {
         menuItem: 'Summary',
         render: () => (
@@ -59,8 +59,8 @@ class CreateSprintForm extends Component {
             sprintData={this.state.sprintData}
             handleNavigateTabs={this.handleNavigateTabs}
           />
-        )
-      }
+        ),
+      },
     ];
   };
 
