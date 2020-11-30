@@ -43,8 +43,7 @@ const GetTeamDefaultMembers = membersList => {
   groupedByRole.forEach(group => {
     group.members.forEach(member => {
       myPromises.push(
-        GetMemberDefaultInfo(member.id).then(res => {
-          console.log({ res });
+        GetMemberDefaultInfo(member.id).then((res) => {
           res.role = group.role;
           updatedMembersList.push(res);
         })

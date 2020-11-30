@@ -20,7 +20,6 @@ const CreateSprint = (sprintData) => {
   return Axios.post(url, body)
     .then((response) => {
       UpdateTeamsLastSprintId(sprintData.team.teamID, sprintData.id);
-      console.log('done, ID: ' + response.data.body.id);
     })
     .catch((error) => {
       console.log('Failed');

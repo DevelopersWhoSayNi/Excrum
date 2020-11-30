@@ -9,7 +9,7 @@ const GetTeamsList = (userId) => {
     action: 'getTeamData',
   };
 
-  return Axios.get(url, body)
+  return Axios.post(url, body)
     .then((response) => {
       if (response.data !== 'null') {
         const list = GetTeamsDropDownOptionsList(response.data);
