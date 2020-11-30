@@ -2,14 +2,14 @@ import Axios from 'axios';
 import config from '../ServerConfig.json';
 //#TODO split
 
-const GetTeamDefaultInfo = teamId => {
-  const url = `${config.EndpointUrl}/teams?teamId=${teamId}`;
+const GetTeamDefaultInfo = (teamId) => {
+  const url = `${config.EndpointUrl}/teams`;
   const body = {
-    id: teamId,
-    action: 'GetTeamDetails'
+    teamId: teamId,
+    action: 'getTeamData',
   };
 
-  return Axios.get(url, body)
+  return Axios.post(url, body)
     .then((response) => {
       if (response.data !== 'null') {
         return response.data;
@@ -22,7 +22,7 @@ const GetTeamDefaultInfo = teamId => {
     });
 };
 
-const GetSprintData = teamId => {
+const GetSprintData = (teamId) => {
   // Authenticate(userInfo)
   //     .then(Response => {
   //       if (Response.Authenticated === true) {
@@ -37,7 +37,7 @@ const GetSprintData = teamId => {
   //     });
 
   return GetTeamDefaultInfo(teamId)
-    .then(teamResponse => {
+    .then((teamResponse) => {
       if (teamResponse !== null) {
         return {
           lastSprintId: teamResponse.lastSprintId,
