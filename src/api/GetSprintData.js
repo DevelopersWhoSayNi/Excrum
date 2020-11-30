@@ -1,29 +1,28 @@
 import Axios from 'axios';
-
+import config from '../ServerConfig.json';
 //#TODO split
 
-const GetTeamDefaultInfo = teamId => {
-  const url =
-    'https://id2ph21bdc.execute-api.eu-west-1.amazonaws.com/dev/teams';
+const GetTeamDefaultInfo = (teamId) => {
+  const url = `${config.EndpointUrl}/teams`;
   const body = {
-    id: teamId,
-    action: 'GetTeamDetails'
+    teamId: teamId,
+    action: 'getTeamData',
   };
 
   return Axios.post(url, body)
-    .then(response => {
+    .then((response) => {
       if (response.data !== 'null') {
         return response.data;
       } else {
         return null;
       }
     })
-    .catch(error => {
+    .catch((error) => {
       return Promise.reject(new Error('fail to get Team: ', error.response));
     });
 };
 
-const GetSprintData = teamId => {
+const GetSprintData = (teamId) => {
   // Authenticate(userInfo)
   //     .then(Response => {
   //       if (Response.Authenticated === true) {
@@ -38,16 +37,16 @@ const GetSprintData = teamId => {
   //     });
 
   return GetTeamDefaultInfo(teamId)
-    .then(teamResponse => {
+    .then((teamResponse) => {
       if (teamResponse !== null) {
         return {
           lastSprintId: teamResponse.lastSprintId,
           team: {
-            teamID: teamResponse.teamID,
+            teamID: teamResponse.id,
             teamName: teamResponse.teamName,
             defaultSprintLength: teamResponse.defaultSprintLength,
-            members: teamResponse.members
-          }
+            members: teamResponse.members,
+          },
         };
 
         // return GetTeamDefaultMembers(teamResponse.members).then(
