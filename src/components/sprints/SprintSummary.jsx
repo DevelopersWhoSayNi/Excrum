@@ -6,7 +6,7 @@ import {
   Loader,
   Segment,
   Input,
-  List
+  List,
 } from 'semantic-ui-react';
 import CreateSprint from '../../api/CreateSprint';
 import GetTeamSprintStats from '../../api/GetSprints';
@@ -23,7 +23,7 @@ class SprintSummary extends Component {
       newSprintData: this.props.sprintData,
       lastSprintData: null,
       sprintCreatedBanner: true,
-      loading: false
+      loading: false,
     };
   }
 
@@ -87,7 +87,7 @@ class SprintSummary extends Component {
 
     const lastSprintStateDetails = {
       ...this.state.lastSprintData,
-      capacityDetails: lastCapacityDetails
+      capacityDetails: lastCapacityDetails,
     };
 
     const suggestedEffort = this.getSuggestedEffort(
@@ -109,12 +109,12 @@ class SprintSummary extends Component {
 
     const newSprintStateDetails = {
       ...this.state.newSprintData,
-      capacityDetails: newCapacityDetails
+      capacityDetails: newCapacityDetails,
     };
 
     this.setState({
       newSprintData: newSprintStateDetails,
-      lastSprintData: lastSprintStateDetails
+      lastSprintData: lastSprintStateDetails,
     });
   };
 
@@ -129,7 +129,7 @@ class SprintSummary extends Component {
 
     const newSprintStateDetails = {
       ...this.state.newSprintData,
-      capacityDetails: newCapacityDetails
+      capacityDetails: newCapacityDetails,
     };
 
     this.setState({ newSprintData: newSprintStateDetails });
@@ -146,7 +146,7 @@ class SprintSummary extends Component {
 
     const lastSprintStateDetails = {
       ...this.state.lastSprintData,
-      capacityDetails: lastCapacityDetails
+      capacityDetails: lastCapacityDetails,
     };
 
     this.setState({ lastSprintData: lastSprintStateDetails });
@@ -158,7 +158,7 @@ class SprintSummary extends Component {
     }
 
     return this.state.lastSprintData.capacityDetails.find(
-      g => g.groupName === groupName
+      (g) => g.groupName === groupName
     );
   }
 
@@ -201,7 +201,7 @@ class SprintSummary extends Component {
                 className="InputBox"
                 fluid
                 placeholder={lastSprintCapacityDetail.effortsAdded}
-                onChange={e =>
+                onChange={(e) =>
                   this.handleLastSprintCapacityChanges(
                     e.target.value,
                     'effortsAdded',
@@ -217,7 +217,7 @@ class SprintSummary extends Component {
                 className="InputBox"
                 fluid
                 placeholder={lastSprintCapacityDetail.effortsDelivered}
-                onChange={e =>
+                onChange={(e) =>
                   this.handleEffortsDeliveredChanges(
                     e.target.value,
                     newSprintCapacityDetail,
@@ -232,17 +232,14 @@ class SprintSummary extends Component {
         <Segment className="SprintSummaryBlocks">
           <h2>New sprint: {this.state.newSprintData.sprintNumber}</h2>
           <h4>Capacity: {newSprintCapacityDetail.capacityHours}</h4>
-          <h4>
-            Suggested Effort:{' '}
-            {newSprintCapacityDetail.effortsSuggested}
-          </h4>
+          <h4>Suggested Effort: {newSprintCapacityDetail.effortsSuggested}</h4>
           <h4 className="Rows">
             <p className="InputText">Effort Planned:</p>
             <Input
               className="InputBox"
               fluid
               placeholder={newSprintCapacityDetail.effortsPlanned}
-              onChange={e =>
+              onChange={(e) =>
                 this.handleNewSprintCapacityChanges(
                   e.target.value,
                   'effortsPlanned',
@@ -277,7 +274,7 @@ class SprintSummary extends Component {
         <br />
         <br />
 
-        <Button onClick={() => this.props.handleNavigateTabs(2)}>Back</Button>
+        <Button onClick={() => this.props.handleNavigateTabs(1)}>Back</Button>
         <Button
           disabled={!this.state.sprintCreatedBanner}
           primary
