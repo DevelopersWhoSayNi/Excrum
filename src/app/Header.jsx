@@ -4,16 +4,12 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <div className="App">
+    <div className="App-header-main">
       <header className="App-header">
         <Link to="/">
           <img src={logo} className="App-logo" alt="logo" />
         </Link>
-        <h1 className="App-title">Excrum!</h1>
-        <h4>
-          simple to use application combined with TFS, facilitating the scrum
-          teams of Exact.
-        </h4>
+        <p className="App-title"> &lt; Excrum / &gt;</p>
       </header>
     </div>
   );

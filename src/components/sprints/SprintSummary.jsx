@@ -15,6 +15,13 @@ import UpdateLastSprintDetails from '../../api/UpdateSprintDetails';
 //TODO: create a class 'reactive', that pushes state change 'with API call result in it' as props to TaskForm
 // import { RemoveMembersPhoto } from '../Tools';
 
+const Empty_Sprint_Capacity = {
+  capacityHours: 0,
+  effortsAdded: 0,
+  effortsDelivered: 0,
+  effortsPlanned: 0,
+  effortsSuggested: 0,
+};
 class SprintSummary extends Component {
   constructor(props) {
     super(props);
@@ -157,9 +164,19 @@ class SprintSummary extends Component {
       return null;
     }
 
-    return this.state.lastSprintData.capacityDetails.find(
+    var LastSprintCapacity = this.state.lastSprintData.capacityDetails.find(
       (g) => g.groupName === groupName
     );
+
+    if (
+      typeof LastSprintCapacity !== 'undefined' &&
+      LastSprintCapacity !== null
+    ) {
+      return LastSprintCapacity;
+    } else {
+      Empty_Sprint_Capacity.groupName = groupName;
+      return Empty_Sprint_Capacity;
+    }
   }
 
   //#TODO move out

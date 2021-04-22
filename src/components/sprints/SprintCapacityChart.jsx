@@ -26,7 +26,7 @@ class SprintCapacityChart extends Component {
   }
 }
 
-const DrawCapacityDetailsChart = props => {
+const DrawCapacityDetailsChart = (props) => {
   return (
     <div>
       <br />
@@ -72,16 +72,20 @@ export default SprintCapacityChart;
 const getChartData = (groupName, sprints) => {
   var dataList = [];
 
-  sprints.forEach(sprint => {
+  sprints.forEach((sprint) => {
     const groupCapacity = sprint.capacityDetails.filter(
-      s => s.groupName === groupName
+      (s) => s.groupName === groupName
     );
+
+    if (groupCapacity.length <= 0) {
+      return;
+    }
 
     var item = {
       name: sprint.sprintNumber,
       Planned: groupCapacity[0].effortsPlanned,
       Delivered: groupCapacity[0].effortsDelivered,
-      Suggested: groupCapacity[0].effortsSuggested
+      Suggested: groupCapacity[0].effortsSuggested,
     };
 
     if (groupCapacity[0].effortsPlanned === 0) {
