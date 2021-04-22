@@ -8,20 +8,26 @@ body {
 	text-align: center;
 }
 
+.App-header-main {
+	text-align: left;
+}
+
 .App-logo {
 	animation: App-logo-spin infinite 20s linear;
-	height: 80px;
+	height: 50px;
 }
 
 .App-header {
 	background-color: rgb(21, 185, 109);
 	height: 25%;
-	padding: 20px;
+	padding: 10px;
 	color: whitesmoke;
 }
 
 .App-title {
 	font-size: 1.5em;
+	margin-top: -43px;
+    padding-left: 66px;
 }
 
 .App-intro {
