@@ -56,9 +56,9 @@ class MainDashboard extends Component {
     return (
       <div className="App">
         <br />
-        <div className="scrolling-wrapper">
+        {/* <div className="scrolling-wrapper">
           <Calendar />
-        </div>
+        </div> */}
 
         {/* <br />
         <h2 className="text">{this.props.UserName}</h2>
@@ -95,16 +95,16 @@ class MainDashboard extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     UserName: state.UserReducer.UserName,
-    UserPassword: state.UserReducer.UserPassword
+    UserPassword: state.UserReducer.UserPassword,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    dispatcher: dispatch
+    dispatcher: dispatch,
   };
 };
 
