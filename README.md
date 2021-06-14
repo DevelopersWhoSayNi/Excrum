@@ -1,9 +1,5 @@
 # Excrum - P.E.T project
 
-&bull; Install packages and dependencies &rarr; `npm i`
-
-&bull; Dev environment run app &rarr; `npm start`
-
 ## PROJECT STRUCTURE
 
 ```
