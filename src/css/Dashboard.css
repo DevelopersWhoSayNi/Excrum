@@ -1,31 +1,54 @@
-.scrolling-wrapper {
-	display: flex;
-	flex-wrap: nowrap;
-	overflow-x: auto;
-	width: 50%;
-	margin-left: 26%;
-}
+/* .scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 50%;
+    margin-left: 26%;
+} */
 
 ::-webkit-scrollbar {
-	display: none;
+    display: none;
 }
 
 .card {
-	padding: 2em;
-	color: darkgrey;
+    padding: 2em;
+    color: darkgrey;
 }
 
 .activeCard {
-	padding: 2em;
-	color: rgb(21, 185, 109);
-	text-decoration: underline
+    padding: 2em;
+    color: rgb(21, 185, 109);
+    text-decoration: underline
 }
 
 .scrolling-wrapper {
-	-webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
+}
+
+Button {
+    outline: none;
+    text-align: center;
+    border: none;
+    font: 500 16px/1 "Helvetica", sans-serif !important;
+    padding: 20px;
+    margin: 10px !important;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.2s ease;
+    background-color: #15B96D !important;
+}
+
+Button:hover {
+    background-color: #279763 !important;
 }
 
 .HomePageButton {
-	font-size: 1.5rem;
-	color: rgb(21, 185, 109);
+    padding: 30px;
+    font-size: 2.2rem;
+    color: whitesmoke;
+}
+
+.HomePageButton:hover {
+    color: white;
+    font-weight: bolder;
 }

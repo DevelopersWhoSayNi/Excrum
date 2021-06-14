@@ -6,32 +6,36 @@ require('../../css/Team.css');
 class CreateTeamForm extends Component {
   render() {
     return (
+      
       <div className="MainForm">
+        <h1>Create Team</h1>
         <Segment padded>
-          <Form>
+          <Form action="" className="createTeam">
             <div className="Section">
-              <label>Team Name:</label>
-              <Input transparent placeholder="name" />
+              <div className="InputItems">
+                <label for="name" >Team Name:</label>
+                <Input id="name" type="text" transparent placeholder="Customer Intelligence Team" />
+              </div>
 
-              {/* <label>root iteration path: </label>
-              <Input transparent placeholder="ExactOnline\Fintech\Fintech\" /> */}
-              <br />
-              <br />
-              <label>Sprint's length (days): </label>
-              <Input transparent placeholder="14" />
+              
+              
+              <div className="InputItems">
+                <label for="days">Sprint's length (days): </label>
+                <Input id="days" type="number" transparent placeholder="14" />
+              </div>
             </div>
 
             <div className="Section">
               <label>Team members: </label>
-              <br />
-              <br />
+              
+              
               <TeamMembersList />
             </div>
 
-            <br />
-            <br />
-            <Divider />
-            <Form.Button>Create</Form.Button>
+            
+            
+            {/* <Divider /> */}
+            <Form.Button className="button">Create</Form.Button>
           </Form>
         </Segment>
       </div>

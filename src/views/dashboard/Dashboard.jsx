@@ -55,40 +55,39 @@ class MainDashboard extends Component {
   render() {
     return (
       <div className="App">
-        <br />
-        {/* <div className="scrolling-wrapper">
-          <Calendar />
-        </div> */}
 
+        {/* <div className="scrolling-wrapper">
         {/* <br />
         <h2 className="text">{this.props.UserName}</h2>
         <h2 className="text">{this.props.UserPassword}</h2> */}
         {/* <Link to="/profile">Profile (Protected)</Link> */}
-        <br />
-        <br />
-        {/* <Link to="/login">Login</Link> */}
-        <Button basic>
-          <Link className="HomePageButton" to="/Sprints">
-            Sprints overview
-          </Link>
-        </Button>
 
-        <br />
-        <br />
-        <Button basic>
-          <Link className="HomePageButton" to="/CreateSprint">
-            Create Sprint
-          </Link>
-        </Button>
-        <br />
-        <br />
-        <Button basic>
+
+        {/* <Link to="/login">Login</Link> */}
+
+        <Button>
           <Link className="HomePageButton" to="/createTeam">
             Create Team
           </Link>
         </Button>
-        <br />
-        <br />
+
+
+        <Button>
+          <Link className="HomePageButton" to="/CreateSprint">
+            Create Sprint
+          </Link>
+        </Button>
+
+        <Button>
+          <Link className="HomePageButton" to="/Sprints">
+            Sprints Overview
+          </Link>
+        </Button>
+
+
+
+
+
         {/* <Link to="/logout">Logout</Link> */}
       </div>
     );

@@ -123,6 +123,10 @@ EXCRUM
 └── yarn.lock
 ```
 
+Commands
+
+- `npm install` or `npm i` to install packages.json
+- `npm start` to start react application
 
 
 ## UPDATES

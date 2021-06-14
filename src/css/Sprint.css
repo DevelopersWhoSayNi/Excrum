@@ -1,86 +1,135 @@
 .CalendarDays {
-	display: inline-table;
-	padding: 1%;
-	padding-right: 3%;
+    display: inline-table;
+    padding: 1%;
+    padding-right: 3%;
 }
 
 .CalendarBox {
-	width: 230px;
+    width: 230px;
 }
 
 .WeekDayNames {
-	padding-block-end: 10%;
-	padding-block-start: 10%;
+    padding-block-end: 10%;
+    padding-block-start: 10%;
 }
 
 .day-of-week,
 .days {
-	padding: 3%;
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-column-gap: 2%;
-	grid-row-gap: 5%;
+    padding: 3%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 2%;
+    grid-row-gap: 5%;
 }
 
 .MembersList {
-	background-color: teal;
+    background-color: teal;
 }
 
 .MainForm {
-	width: 80%;
-	margin-left: 3% !important;
+    padding: 20px 0;
+    border-radius: 20px;
+    margin: auto;
+    width: 65%;
+}
+
+h1 {
+    margin: 20px;
+    font-size: 2.5em;
+    text-align: center;
+    color: #505050;
+}
+
+.Section .InputItems {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 1em 0.5em;
+}
+
+.Section .InputItems>label+* {
+    flex: 1 0 320px;
+}
+
+.InputItems label {
+    flex: 1 0 150px;
+    max-width: 320px;
+}
+
+.Section .InputItems {
+    height: 2em;
+    flex: 1;
+    max-width: 15em;
+}
+
+.button {
+    /* margin-left: auto; */
+    border: none;
+    color: #f2f2f2 !important;
+    letter-spacing: .09em;
+    border-radius: 2px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .SprintCards,
 .SprintCard {
-	display: grid;
-	grid-template-columns: 200px auto;
-	grid-gap: 10px;
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-gap: 10px;
 }
 
 .SprintEditInput {
-	min-width: 220px;
-	padding: 2%;
+    min-width: 220px;
+    padding: 2%;
 }
 
 .SprintEditInput .label {
-	min-width: 140px;
+    min-width: 140px;
 }
 
 .SprintEditInput .SecondColumn {
-	padding-top: 2% !important;
-	padding-left: 75% !important;
+    padding-top: 2% !important;
+    padding-left: 75% !important;
 }
 
 .divider {
-	display: none;
+    display: none;
 }
 
 .SecondRowSecondColumn {
-	padding-top: 6%;
-	padding-left: 22%;
+    padding-top: 6%;
+    padding-left: 22%;
 }
 
 .DirtyCapacity {
-	color: red;
+    color: red;
 }
 
 .SprintSummaryBlocks {
-	display: inline-block;
-	vertical-align: top;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .SprintSummaryBlocks .Rows {
-	display: inline-flex;
+    display: inline-flex;
 }
 
 .SprintSummaryBlocks .InputText {
-	padding-top: 5%;
+    padding-top: 5%;
 }
 
 .SprintSummaryBlocks .InputBox {
-	min-width: 150px;
-	padding-left: 2%;
+    min-width: 150px;
+    padding-left: 2%;
 }
 
 .ui.horizontal.list:not(.celled)>.item:first-child {
@@ -88,6 +137,4 @@
     padding-left: 0.3em!important;
 }
 
-.CapacityListGroupColumn {
-	
-}
+.CapacityListGroupColumn {}
