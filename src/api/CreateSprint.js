@@ -10,9 +10,11 @@ const CreateSprint = (sprintData) => {
 
   const url = `${config.EndpointUrl}/sprints`;
 
+  var sanitized_sprintData = Sanitize_userProfile_photo(sprintData);
+
   const body = {
     action: 'CreateNewSprint',
-    sprintDetails: sprintData,
+    sprintDetails: sanitized_sprintData,
   };
 
   //remove users profile photos as they are redundant.
@@ -43,6 +45,16 @@ const UpdateTeamsLastSprintId = (teamId, lastSprintId) => {
     .catch((error) => {
       console.log('Failed : ' + error);
     });
+};
+
+const Sanitize_userProfile_photo = (sprintDetails) => {
+  // the users profile photos are in base 64 and makes the json content huge,
+  //therefore (As a temporary solution) we remove all the values before storage.
+  sprintDetails.team.members.forEach((member, index) => {
+    member.photoSrc = '';
+  });
+
+  return sprintDetails;
 };
 
 export default CreateSprint;
