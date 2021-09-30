@@ -7,7 +7,6 @@ class MemberCard extends Component {
       <div>
         {/* {this.props.} */}
         <Image size="huge" src={this.props.MemberModalContent.photoSrc} />
-        <p>HERE!</p>
       </div>
     );
   }
