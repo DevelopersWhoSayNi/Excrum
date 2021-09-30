@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 // import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
+import Particles from 'react-particles-js';
+import particleConfig from '../../config/particle-config';
 
 import '../../css/Dashboard.css';
 
@@ -54,7 +56,9 @@ class MainDashboard extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div position="absolute" className="App">
+
+        
 
         {/* <div className="scrolling-wrapper">
         {/* <br />
@@ -65,24 +69,26 @@ class MainDashboard extends Component {
 
         {/* <Link to="/login">Login</Link> */}
 
-        <Button>
+        <Button id="CreateTeamButton">
           <Link className="HomePageButton" to="/createTeam">
             Create Team
           </Link>
         </Button>
 
 
-        <Button>
+        <Button id="CreateSprintButton">
           <Link className="HomePageButton" to="/CreateSprint">
             Create Sprint
           </Link>
         </Button>
 
-        <Button>
+        <Button id="SprintOverviewButton">
           <Link className="HomePageButton" to="/Sprints">
             Sprints Overview
           </Link>
         </Button>
+
+        <Particles id="particles" class="CountParticles" params={particleConfig}></Particles>
 
 
 

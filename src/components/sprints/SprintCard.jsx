@@ -87,7 +87,7 @@ class SprintCards extends Component {
           className={this.props.capacityIsDirty ? 'DirtyCapacity' : ''}
           onClick={x => this.openCapacityDetailsModal()}
         >
-          Capacity: {capacityGroup.capacityHours}
+        Capacity: {capacityGroup.capacityHours}
         </h3>
         {this.state.isEditMode ? (
           <Input

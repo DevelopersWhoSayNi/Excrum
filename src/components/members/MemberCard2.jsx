@@ -44,7 +44,7 @@ class MemberCard extends Component {
     // validateInput = () => {
     //   // if(this.state.userID)
 
-    console.log('registring');
+    console.log('registering');
   };
 
   navigateTo = routeName => this.setState({ navigateTo: routeName });
@@ -82,7 +82,7 @@ class MemberCard extends Component {
                   <UserImageModal
                     handleSave={this.SaveNewUserProfilePhoto}
                     currentImage={this.state.userImage}
-                    headerMessage="Select a new profile pictuer"
+                    headerMessage="Select a new profile picture"
                   />
                 }
               />

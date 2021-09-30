@@ -3,6 +3,10 @@
 	width: 50px;
 }
 
+.createTeamForm {
+	padding: 5rem !important;
+}
+
 .TeamMember {
 	display: inline-block;
 	width: 130px;
@@ -36,6 +40,22 @@
 .DateRangeInput {
 	width: 30%;
 	padding-top: 2%;
+}
+
+.form-label {
+	min-width:30%;
+	text-align: right;
+	font-family: Sans-serif;
+}
+
+.form-input {
+	min-width: 60%;
+	text-align: left;
+	font-family: Sans-serif;
+}
+
+.dashboardTitle {
+	color: #15B96D;
 }
 /* --------------------------------- */
 /* .MainFrame {

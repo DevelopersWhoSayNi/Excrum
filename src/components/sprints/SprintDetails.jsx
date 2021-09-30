@@ -208,8 +208,8 @@ class SprintDetails extends Component {
 
   render() {
     return (
-      <Segment style={{ width: '50%', marginLeft: '0.5%' }}>
-        <div style={{ width: '50%', marginBottom: '2%' }}>
+      <Segment style={{ width: '80%', marginLeft: '10%', paddingBottom: '8%' }}>
+        <div style={{ width: '80%', marginLeft: '10%', marginBottom: '5%' }}>
           <Dropdown
             placeholder="Select your team"
             search
@@ -222,20 +222,21 @@ class SprintDetails extends Component {
             }}
           />
         </div>
-        <div style={{ width: '50%', marginBottom: '2%' }}>
+        <div style={{ width: '50%', marginLeft: '25%', marginBottom: '3%' }}>
           <Input
-            label="Sprint Number"
+            label="Sprint No."
             placeholder={
               this.state.lastSprintNumber === undefined
-                ? '#'
+                ? '11'
                 : this.state.lastSprintNumber
             }
+            type="number"
             fluid
             defaultValue={this.state.sprintData.sprintNumber}
             onChange={e => this.handleSprintNumberChange(e.target.value)}
           />
         </div>
-        <div style={{ width: '50%', marginBottom: '2%' }}>
+        <div style={{ width: '50%', marginLeft: '25%', marginBottom: '2%'}}>
           <Input
             id="startDateInput"
             type="date"
@@ -244,10 +245,11 @@ class SprintDetails extends Component {
             defaultValue={this.state.sprintData.startDate}
             onChange={e => this.handleStartDateChange(e.target.value)}
           />
+          <br/>
           <Input
             id="endDateInput"
             type="date"
-            label="End  Date:"
+            label="End Date &nbsp;"
             fluid
             defaultValue={this.state.sprintData.endDate}
             onChange={e => this.handleEndDateChange(e.target.value)}
@@ -260,7 +262,7 @@ class SprintDetails extends Component {
           list={this.state.errorMessage}
           hidden={this.state.errorMessage.length > 0 ? false : true}
         />
-        <Button onClick={() => this.validateInput()}>Next</Button>
+        <Button onClick={() => this.validateInput()} floated="right">Next</Button>
       </Segment>
     );
   }

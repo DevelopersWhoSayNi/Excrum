@@ -1,7 +1,12 @@
-body {
+html,body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: Verdana;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Verdana;
 }
 
 .App {
@@ -10,7 +15,7 @@ body {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    margin-top: 20px !important;
+    flex: 1;
 }
 
 .App-header-main {
@@ -31,8 +36,11 @@ body {
 
 .App-title {
     font-size: 1.5em;
+    font-weight: bold;
+    font-family: Sans-serif;
     margin-top: -43px;
-    padding-left: 66px;
+    padding-left: 55px;
+    padding-bottom: 8px;
 }
 
 .App-intro {
@@ -42,6 +50,7 @@ body {
 .text {
     color: rgb(21, 185, 109);
 }
+
 
 @keyframes App-logo-spin {
     from {

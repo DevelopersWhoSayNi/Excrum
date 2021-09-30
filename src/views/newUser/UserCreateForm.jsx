@@ -89,7 +89,7 @@ class UserCreateForm extends Component {
                   <UserImageModal
                     handleSave={this.SaveNewUserProfilePhoto}
                     currentImage={this.state.userImage}
-                    headerMessage="Select a new profile pictuer"
+                    headerMessage="Select a new profile picture"
                   />
                 }
               />

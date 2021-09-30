@@ -9,7 +9,7 @@ const Header = () => {
         <Link to="/">
           <img src={logo} className="App-logo" alt="logo" />
         </Link>
-        <p className="App-title"> &lt; Excrum / &gt;</p>
+        <p className="App-title"> &lt;Excrum/&gt;</p>
       </header>
     </div>
   );

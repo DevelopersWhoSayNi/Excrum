@@ -30,8 +30,6 @@ Button {
     text-align: center;
     border: none;
     font: 500 16px/1 "Helvetica", sans-serif !important;
-    padding: 20px;
-    margin: 10px !important;
     cursor: pointer;
     border-radius: 6px;
     transition: 0.2s ease;
@@ -43,12 +41,45 @@ Button:hover {
 }
 
 .HomePageButton {
-    padding: 30px;
-    font-size: 2.2rem;
+    padding: 0px;
+    font-size: calc(16px + 0.4vw);
     color: whitesmoke;
 }
 
 .HomePageButton:hover {
     color: white;
     font-weight: bolder;
+}
+
+#CreateTeamButton {
+    text-align: center;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#CreateSprintButton {
+    text-align: center;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#SprintOverviewButton {
+    text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#particles {
+	width: 100vw;
+	height: 100vh;
+}
+
+canvas {	
+	display: block;
 }

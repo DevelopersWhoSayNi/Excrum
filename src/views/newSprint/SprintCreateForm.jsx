@@ -90,7 +90,9 @@ class CreateSprintForm extends Component {
     const { activeIndex } = this.state;
 
     return (
-      <Segment compact className="MainForm">
+      <div className="MainForm">
+        <h1 className="dashboardTitle">Create Sprint</h1>
+      <Segment compact className="MainForm" style={{ width: '80%', marginLeft: '10%' }}>
         <Tab
           panes={this.stepsTab()}
           activeIndex={activeIndex}
@@ -98,6 +100,7 @@ class CreateSprintForm extends Component {
           menu={{ secondary: true, pointing: true }}
         />
       </Segment>
+      </div>
     );
   }
 }

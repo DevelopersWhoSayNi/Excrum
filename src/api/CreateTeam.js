@@ -9,9 +9,11 @@ const CreateTeam = teamInfo => {
     settings: teamInfo.settings,
     teamMembers: teamInfo.teamMembers
   };
+  console.log({url, body})
 
   return Axios.post(url, body)
     .then(response => {
+      console.log({response})
       if (response.data.message === 'Team created') {
         localStorage.setItem('token', response.data.token);
         return {

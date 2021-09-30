@@ -281,19 +281,19 @@ export class CapacityDetails extends Component {
             <Message color={'red'} hidden={this.state.showValidationError}>
               {validationErrorMessage}
             </Message>
-            <Label circular size="big" color={'red'}
+            <Label circular as='a' size="big" color={'red'}
               onClick={async () => {
                 await this.handleHoursValueUpdate(0);
                 this.updateDayHours()
               }}>0
             </Label>
-            <Label circular size="big" color={'yellow'}
+            <Label circular as='a' size="big" color={'yellow'}
               onClick={async () => {
                 await this.handleHoursValueUpdate(4);
                 this.updateDayHours()
               }}>4
             </Label>
-            <Label circular size="big" color={'green'}
+            <Label circular as='a' size="big" color={'green'}
               onClick={async () => {
                 await this.handleHoursValueUpdate(8);
                 this.updateDayHours()
