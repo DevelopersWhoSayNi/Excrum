@@ -149,7 +149,8 @@ class SprintsOverview extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ paddingBottom: '2%'}}>
+      <h1 className="dashboardTitle">Sprint Overview</h1>
         <Modal
           open={this.state.openSprintModal}
           onClose={e => this.closeSprintModal()}
@@ -201,13 +202,13 @@ class SprintsOverview extends Component {
           </Modal.Content>
         </Modal>
 
-        <Segment compact className="MainForm">
+        <Segment compact className="MainForm" style={{ width: '70%', marginLeft: '15%', paddingTop: '2%'}}>
           <Dimmer active={this.state.loading} inverted>
             <Loader inverted>Loading</Loader>
           </Dimmer>
 
           <Dropdown
-            style={{ width: '20%' }}
+            style={{ width: '50%', marginLeft: '25%'}}
             placeholder="Select your team"
             search
             selection

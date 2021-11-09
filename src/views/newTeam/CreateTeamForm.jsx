@@ -8,34 +8,37 @@ class CreateTeamForm extends Component {
     return (
       
       <div className="MainForm">
-        <h1>Create Team</h1>
-        <Segment padded>
+        <h1 className="dashboardTitle">Create Team</h1>
+        <Segment padded className="createTeamForm">
           <Form action="" className="createTeam">
             <div className="Section">
-              <div className="InputItems">
-                <label for="name" >Team Name:</label>
-                <Input id="name" type="text" transparent placeholder="Customer Intelligence Team" />
-              </div>
 
-              
-              
-              <div className="InputItems">
-                <label for="days">Sprint's length (days): </label>
-                <Input id="days" type="number" transparent placeholder="14" />
-              </div>
+              <Form.Field inline>
+                <label className="form-label" >Team Name:</label>
+                <Input className="form-input" id="name" type="text" placeholder="Customer Intelligence Team" />
+              </Form.Field>
+
+              <br/>
+              <br/>
+
+              <Form.Field inline>
+                <label className="form-label">Sprint's length (days): </label>
+                <Input className="form-input" id="days" type="number" placeholder="14" />
+              </Form.Field>
+
             </div>
 
+            <Form.Field inline>
             <div className="Section">
-              <label>Team members: </label>
-              
+              <label className="form-label">Team members: </label>
+                          
               
               <TeamMembersList />
             </div>
-
-            
+            </Form.Field>
             
             {/* <Divider /> */}
-            <Form.Button className="button">Create</Form.Button>
+            <Form.Button className="button" floated="right">Sumbit</Form.Button>
           </Form>
         </Segment>
       </div>

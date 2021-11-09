@@ -39,6 +39,7 @@ const GetSprintData = (teamId) => {
   return GetTeamDefaultInfo(teamId)
     .then((teamResponse) => {
       if (teamResponse !== null) {
+        console.log({teamResponse})
         return {
           lastSprintId: teamResponse.lastSprintId,
           team: {
