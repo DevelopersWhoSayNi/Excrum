@@ -29,8 +29,8 @@
 .MainForm {
     padding: 20px 0;
     border-radius: 20px;
-    margin: auto;
-    width: 65%;
+    margin: 0 auto;
+    max-width: 65%;
 }
 
 h1 {
@@ -87,6 +87,15 @@ input[type=number] {
     grid-gap: 10px;
 }
 
+
+/* .SprintCard {
+    align-items: start;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: repeat(200px, auto-fit);
+	justify-content: center;
+} */
+
 .SprintEditInput {
     min-width: 220px;
     padding: 2%;
@@ -138,3 +147,23 @@ input[type=number] {
 }
 
 .CapacityListGroupColumn {}
+
+.cancelButton{
+    color: #646464 !important;
+    background-color: #f2f2f2 !important;
+}
+
+.cancelButton:hover {
+    color: #ffffff !important;
+    background-color: #b1b1b1 !important;
+}
+
+.deleteButton{
+    color: #fff !important;
+    background-color: #fc7575 !important;
+}
+
+.deleteButton:hover {
+    color: #fff !important;
+    background-color: #fd5353 !important;
+}

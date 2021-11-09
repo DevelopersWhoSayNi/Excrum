@@ -17,6 +17,8 @@ import UpdateSprintDetails from '../../api/UpdateSprintDetails';
 import GetTeamsList from '../../api/GetTeamsList';
 import SprintCapacityChart from '../../components/sprints/SprintCapacityChart';
 
+import '../../css/Sprint.css';
+
 let updatedSprintCapacityDetails = null;
 let updatedSprintDetails = null;
 
@@ -172,11 +174,15 @@ class SprintsOverview extends Component {
                 <p>{this.state.validationError}</p>
               </Message>
             ) : null}
-            <Button onClick={e => this.closeSprintModal()}>Cancel</Button>
+            <Button className="cancelButton" onClick={e => this.closeSprintModal()}>
+              Cancel
+            </Button>
             <Button primary onClick={e => this.updateCapacity()}>
               Save
             </Button>
-            <Button>Delete</Button>
+            <Button className="deleteButton">
+              Delete
+            </Button>
           </Modal.Content>
         </Modal>
 

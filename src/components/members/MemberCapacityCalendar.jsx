@@ -82,6 +82,8 @@ export const Member = props => {
         size="tiny"
         avatar
         src={props.member.photoSrc}
+        onError={(e)=>{e.target.onerror = null; 
+        e.target.src="https://res.cloudinary.com/ddv4pkrv0/image/upload/v1636351811/default_user_blzleq.png"}}
         onClick={e => props.openMemberCard(e, props.member)}
       />
       <List.Content>
