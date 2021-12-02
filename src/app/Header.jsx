@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Container, Image, Menu, Sidebar } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Container, Image, Menu } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -12,9 +12,9 @@ const Header = () => {
           &lt;Excrum/&gt;
           </Menu.Item>
         
-        <Menu.Item as={Link} className="menu-item" activeClassName='active' to="/createTeam">Create Team</Menu.Item>
-        <Menu.Item as={Link} className="menu-item" activeClassName='active' to="/createSprint">Create Sprint</Menu.Item>
-        <Menu.Item as={Link} className="menu-item" activeClassName='active' to="/Sprints">Sprint Overview</Menu.Item>
+        <Menu.Item as={NavLink} className="menu-item" activeClassName='active' to="/createTeam">Create Team</Menu.Item>
+        <Menu.Item as={NavLink} className="menu-item" activeClassName='active' to="/createSprint">Create Sprint</Menu.Item>
+        <Menu.Item as={NavLink} className="menu-item" activeClassName='active' to="/Sprints">Sprint Overview</Menu.Item>
       </Container>
     </Menu>
   );
