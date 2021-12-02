@@ -52,8 +52,13 @@ html,body {
 }
 
 .header.item,
-.item {
+.menu-item {
     color: whitesmoke !important;
+}
+
+.item > a:not(.ui) {
+    color: whitesmoke !important;
+    line-height: 0.8 !important;
 }
 
 
