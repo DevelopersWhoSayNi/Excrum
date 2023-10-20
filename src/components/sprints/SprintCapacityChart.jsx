@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { GroupMembersByRole } from '../../api/GetMembersCapacityList';
 
 class SprintCapacityChart extends Component {
@@ -31,16 +31,15 @@ const DrawCapacityDetailsChart = (props) => {
     <div>
       <br />
       <h3>{props.group.role}</h3>
+      <ResponsiveContainer width="95%" height={400}>
       <LineChart
-        width={800}
-        height={200}
         data={getChartData(props.group.role, props.sprints)}
         syncId="anyId"
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
         <XAxis dataKey="name" />
         <YAxis />
-        <Tooltip />
+        <Tooltip position="right"/>
         <Line
           type="monotone"
           dataKey="Delivered"
@@ -61,6 +60,7 @@ const DrawCapacityDetailsChart = (props) => {
           strokeDasharray="5 5"
         />
       </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };

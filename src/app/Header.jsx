@@ -1,17 +1,22 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Link } from 'react-router-dom';
+import { Container, Image, Menu } from 'semantic-ui-react';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <div className="App-header-main">
-      <header className="App-header">
-        <Link to="/">
-          <img src={logo} className="App-logo" alt="logo" />
-        </Link>
-        <p className="App-title"> &lt;Excrum/&gt;</p>
-      </header>
-    </div>
+    <Menu fixed='top'>
+      <Container className="App-header">
+        <Menu.Item as={Link} to="/" header>
+          <Image size='mini' src={logo} className="App-logo" style={{ marginRight: '0.5em' }} />
+          &lt;Excrum/&gt;
+          </Menu.Item>
+        
+        <Menu.Item as={NavLink} className="menu-item" activeClassName='active' to="/createTeam">Create Team</Menu.Item>
+        <Menu.Item as={NavLink} className="menu-item" activeClassName='active' to="/createSprint">Create Sprint</Menu.Item>
+        <Menu.Item as={NavLink} className="menu-item" activeClassName='active' to="/Sprints">Sprint Overview</Menu.Item>
+      </Container>
+    </Menu>
   );
 };
 

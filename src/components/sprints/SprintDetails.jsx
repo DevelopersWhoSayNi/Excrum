@@ -227,7 +227,7 @@ class SprintDetails extends Component {
             label="Sprint No."
             placeholder={
               this.state.lastSprintNumber === undefined
-                ? '11'
+                ? '#'
                 : this.state.lastSprintNumber
             }
             type="number"

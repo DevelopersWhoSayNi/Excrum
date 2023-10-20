@@ -27,10 +27,9 @@ html,body {
     height: 50px;
 }
 
-.App-header {
+.App-header,
+.ui.fixed.menu {
     background-color: #15b96d;
-    height: 25%;
-    padding: 10px;
     color: whitesmoke;
 }
 
@@ -41,6 +40,7 @@ html,body {
     margin-top: -43px;
     padding-left: 55px;
     padding-bottom: 8px;
+    color: whitesmoke;
 }
 
 .App-intro {
@@ -49,6 +49,16 @@ html,body {
 
 .text {
     color: rgb(21, 185, 109);
+}
+
+.header.item,
+.menu-item {
+    color: whitesmoke !important;
+}
+
+.item > a:not(.ui) {
+    color: whitesmoke !important;
+    line-height: 0.8 !important;
 }
 
 

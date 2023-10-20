@@ -38,7 +38,7 @@ class CreateTeamForm extends Component {
             </Form.Field>
             
             {/* <Divider /> */}
-            <Form.Button className="button" floated="right">Sumbit</Form.Button>
+            <Form.Button className="button" floated="right">Submit</Form.Button>
           </Form>
         </Segment>
       </div>

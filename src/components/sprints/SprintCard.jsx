@@ -5,7 +5,9 @@ const membersListOverview = membersList => {
   const members = membersList.map((member, i) => {
     return (
       <List.Item key={i}>
-        <Image avatar src={member.photoSrc} />
+        <Image avatar src={member.photoSrc} 
+          onError={(e)=>{e.target.onerror = null; 
+          e.target.src="https://res.cloudinary.com/ddv4pkrv0/image/upload/v1636351811/default_user_blzleq.png"}} />
       </List.Item>
     );
   });
@@ -80,7 +82,7 @@ class SprintCards extends Component {
 
   renderCapacityGroup(capacityGroup) {
     return (
-      <div>
+      <div class="">
         {capacityGroup.groupName}
         <br />
         <h3
